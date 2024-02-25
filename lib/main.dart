@@ -22,11 +22,9 @@ class GP_Pharmacy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
         locale: const Locale('ar'),
-      debugShowCheckedModeBanner: false,
-        locale: const Locale('ar'),
+        debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -36,6 +34,5 @@ class GP_Pharmacy extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         title: 'Flutter Demo',
         home: const HomeView());
-        home:  AddAccountView())
   }
 }
