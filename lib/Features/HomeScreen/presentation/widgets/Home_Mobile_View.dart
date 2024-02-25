@@ -19,7 +19,6 @@ class HomeMobileView extends StatefulWidget {
 }
 
 class _HomeMobileViewState extends State<HomeMobileView> {
-  late ScrollController _scrollController;
   int selectedItem = 0;
   @override
   @override

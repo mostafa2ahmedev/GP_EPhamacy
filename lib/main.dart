@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:gppharmacy/Features/HomeScreen/presentation/Home_View.dart';
-import 'package:gppharmacy/Features/AddAccount/Presentation/AddAccountView.dart';
+
 import 'package:gppharmacy/generated/l10n.dart';
 
 void main() {
