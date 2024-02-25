@@ -2,6 +2,11 @@
 "AuthUsername":"اسم المستخدم",
 "AuthPassword":"كلمة المرور ",
 "AuthSignIn":"تسجيل الدخول",
-"AuthForgotPassword":"هل نسيت كلمه المرور ؟"
+"AuthForgotPassword":"هل نسيت كلمه المرور ؟",
+"AddAccount" : "إضافة حساب جديد",
+"FullName":"الاسم ثلاثى",
+"PhoneNumber" : "رقم الهاتف",
+"NationalNumber" : "الرقم القومى",
+"RoleDegree" : "الدرجة فى النظام"
 
 }

@@ -1,6 +1,11 @@
 {
-"AuthUsername":"Username",
-"AuthPassword":"Password",
-"AuthSignIn":"Sign In",
-"AuthForgotPassword":"Forgot Passowrd ?"
+"AuthUsername": "Username",
+"AuthPassword": "Password",
+"AuthSignIn": "Sign In",
+"AuthForgotPassword": "Forgot Password?",
+"AddAccount": "Add New Account",
+"FullName": "Full Name",
+"PhoneNumber": "Phone Number",
+"NationalNumber": "National Number",
+"RoleDegree": "Role Degree"
 }

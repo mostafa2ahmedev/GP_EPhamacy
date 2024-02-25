@@ -79,6 +79,15 @@ class S {
       args: [],
     );
   }
+  /// add account
+  String get AddAccount {
+    return Intl.message(
+      'Add Account',
+      name: 'AddAccount',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Forgot Passowrd ?`
   String get AuthForgotPassword {
