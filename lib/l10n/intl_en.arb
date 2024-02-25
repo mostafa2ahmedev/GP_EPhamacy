@@ -1,1 +1,6 @@
-{}
+{
+"AuthUsername":"Username",
+"AuthPassword":"Password",
+"AuthSignIn":"Sign In",
+"AuthForgotPassword":"Forgot Passowrd ?"
+}

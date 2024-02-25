@@ -49,6 +49,46 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Username`
+  String get AuthUsername {
+    return Intl.message(
+      'Username',
+      name: 'AuthUsername',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get AuthPassword {
+    return Intl.message(
+      'Password',
+      name: 'AuthPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In`
+  String get AuthSignIn {
+    return Intl.message(
+      'Sign In',
+      name: 'AuthSignIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot Passowrd ?`
+  String get AuthForgotPassword {
+    return Intl.message(
+      'Forgot Passowrd ?',
+      name: 'AuthForgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
