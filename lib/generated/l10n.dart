@@ -89,6 +89,76 @@ class S {
       args: [],
     );
   }
+
+  /// `D A S H B O A R D`
+  String get HomeDashboard {
+    return Intl.message(
+      'D A S H B O A R D',
+      name: 'HomeDashboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `S T O R E S `
+  String get HomeStores {
+    return Intl.message(
+      'S T O R E S ',
+      name: 'HomeStores',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `P A T I E N T S`
+  String get HomePatients {
+    return Intl.message(
+      'P A T I E N T S',
+      name: 'HomePatients',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A D D A C C O U N T`
+  String get AddAccount {
+    return Intl.message(
+      'A D D A C C O U N T',
+      name: 'AddAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get Resgistarion {
+    return Intl.message(
+      'Log out',
+      name: 'Resgistarion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Student Phamacy`
+  String get SidalyaEltlba {
+    return Intl.message(
+      'Student Phamacy',
+      name: 'SidalyaEltlba',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mode`
+  String get Mode {
+    return Intl.message(
+      'Mode',
+      name: 'Mode',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

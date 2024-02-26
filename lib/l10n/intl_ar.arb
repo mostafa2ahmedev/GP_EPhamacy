@@ -2,6 +2,13 @@
 "AuthUsername":"اسم المستخدم",
 "AuthPassword":"كلمة المرور ",
 "AuthSignIn":"تسجيل الدخول",
-"AuthForgotPassword":"هل نسيت كلمه المرور ؟"
+"AuthForgotPassword":"هل نسيت كلمه المرور ؟",
+"HomeDashboard":"الأحصائيات",
+"HomeStores":"المخازن",
+"HomePatients":"المرضي",
+"AddAccount":"اضافه حساب",
+"Resgistarion":"تسجيل الخروج", 
+"SidalyaEltlba":"صيدلية الطلبه",
+"Mode":"الوضع"
 
 }

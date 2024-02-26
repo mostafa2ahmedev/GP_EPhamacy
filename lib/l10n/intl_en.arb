@@ -2,5 +2,13 @@
 "AuthUsername":"Username",
 "AuthPassword":"Password",
 "AuthSignIn":"Sign In",
-"AuthForgotPassword":"Forgot Passowrd ?"
+"AuthForgotPassword":"Forgot Passowrd ?",
+"HomeDashboard":"D A S H B O A R D",
+"HomeStores":"S T O R E S ",
+"HomePatients":"P A T I E N T S",
+"AddAccount":"A D D A C C O U N T",
+"Resgistarion":"Log out",
+"SidalyaEltlba":"Student Phamacy",
+"Mode":"Mode"
+
 }

@@ -5,6 +5,7 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Background.da
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
+import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class AuthMobileBody extends StatefulWidget {
@@ -25,7 +26,9 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const AuthBackground(),
+              const AuthBackground(
+                borderColor: ColorManeger.primaryColor,
+              ),
               const SizedBox(
                 height: 24,
               ),

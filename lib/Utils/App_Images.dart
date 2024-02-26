@@ -25,8 +25,24 @@ class Assets {
   /// assets/images/menu-burger.svg
   static const String imagesMenuBurger = "assets/images/menu-burger.svg";
 
+  /// Assets for imagesPharmacySvgrepoCom
+  /// assets/images/pharmacy-svgrepo-com.svg
+  static const String imagesPharmacySvgrepoCom = "assets/images/pharmacy-svgrepo-com.svg";
+
+  /// Assets for imagesReportsSvgrepoCom
+  /// assets/images/reports-svgrepo-com.svg
+  static const String imagesReportsSvgrepoCom = "assets/images/reports-svgrepo-com.svg";
+
+  /// Assets for imagesStoresStoreSvgrepoCom
+  /// assets/images/stores-store-svgrepo-com.svg
+  static const String imagesStoresStoreSvgrepoCom = "assets/images/stores-store-svgrepo-com.svg";
+
   /// Assets for imagesUser
   /// assets/images/user.svg
   static const String imagesUser = "assets/images/user.svg";
+
+  /// Assets for imagesUserAddAccountProfileSvgrepoCom
+  /// assets/images/user-add-account-profile-svgrepo-com.svg
+  static const String imagesUserAddAccountProfileSvgrepoCom = "assets/images/user-add-account-profile-svgrepo-com.svg";
 }
 

@@ -7,7 +7,7 @@ abstract class AppSytles {
 
   static TextStyle styleRegular16(BuildContext context) {
     return TextStyle(
-      color: const Color(0xff064060),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 16),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400,
@@ -23,7 +23,7 @@ abstract class AppSytles {
 
   static TextStyle styleBold16(BuildContext context) {
     return TextStyle(
-      color: const Color(0xff4E87F2),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 16),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w700,
@@ -32,7 +32,7 @@ abstract class AppSytles {
 
   static TextStyle styleMeduim16(BuildContext context) {
     return TextStyle(
-      color: const Color(0xff064060),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 16),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w500,
@@ -41,7 +41,7 @@ abstract class AppSytles {
 
   static TextStyle styleMeduim20(BuildContext context) {
     return TextStyle(
-      color: const Color(0xffffffff),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 20),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w500,
@@ -50,7 +50,7 @@ abstract class AppSytles {
 
   static TextStyle styleSemiBold16(BuildContext context) {
     return TextStyle(
-      color: const Color(0xff064060),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 16),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w600,
@@ -59,7 +59,7 @@ abstract class AppSytles {
 
   static TextStyle styleSemiBold20(BuildContext context) {
     return TextStyle(
-      color: const Color(0xff064060),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 20),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w600,
@@ -68,7 +68,7 @@ abstract class AppSytles {
 
   static TextStyle styleRegular12(BuildContext context) {
     return TextStyle(
-      color: const Color(0xffaaaaaa),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 12),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400,
@@ -77,7 +77,7 @@ abstract class AppSytles {
 
   static TextStyle styleSemiBold24(BuildContext context) {
     return TextStyle(
-      color: const Color(0xff4E87F2),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 24),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ abstract class AppSytles {
 
   static TextStyle styleRegular14(BuildContext context) {
     return TextStyle(
-      color: const Color(0xffaaaaaa),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 14),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400,
@@ -95,7 +95,7 @@ abstract class AppSytles {
 
   static TextStyle styleSemiBold18(BuildContext context) {
     return TextStyle(
-      color: const Color(0xffFFFFFF),
+      color: Colors.white,
       fontSize: getResponsiveFontSize(context, fontSize: 18),
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w600,

@@ -4,8 +4,9 @@ import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 
 class AuthBackground extends StatelessWidget {
-  const AuthBackground({super.key});
-
+  const AuthBackground({super.key, required this.borderColor, this.backColor});
+  final Color borderColor;
+  final Color? backColor;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -13,10 +14,11 @@ class AuthBackground extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(left: 14, right: 14, bottom: 14),
         decoration: BoxDecoration(
+          color: backColor,
           shape: BoxShape.circle,
           border: Border.all(
-            width: 10,
-            color: ColorManeger.primaryColor,
+            width: backColor == null ? 10 : 0,
+            color: borderColor,
           ),
         ),
         child: const Image(
