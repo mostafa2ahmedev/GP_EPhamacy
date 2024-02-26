@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/AddAccount/Presentation/AddAccountView.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
 
@@ -22,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
     const StatisticsBody(),
     const StoresBody(),
     const StoresBody(),
-    const StoresBody(),
+    const AddAccountView(),
   ];
 
   int selectedIndex = 0;
