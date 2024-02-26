@@ -27,9 +27,7 @@ class _DrawerListViewState extends State<DrawerListView> {
       DrawerItemModel(
           image: Assets.imagesReportsSvgrepoCom,
           title: S.of(context).HomePatients),
-      DrawerItemModel(
-          image: Assets.imagesUserAddAccountProfileSvgrepoCom,
-          title: S.of(context).AddAccount)
+      DrawerItemModel(image: Assets.imagesBell, title: S.of(context).AddAccount)
     ];
     return BlocConsumer<DrawerCubit, DrawerStates>(
       listener: (context, state) {},

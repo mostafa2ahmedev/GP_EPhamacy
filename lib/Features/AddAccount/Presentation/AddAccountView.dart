@@ -9,6 +9,8 @@ import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class AddAccountView extends StatefulWidget {
+  const AddAccountView({super.key});
+
   @override
   State<AddAccountView> createState() => _AddAccountViewState();
 }
@@ -21,26 +23,32 @@ class _AddAccountViewState extends State<AddAccountView> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-
       drawer: Drawer(
-        child: Container(color: PrimaryColor,),
+        child: Container(
+          color: PrimaryColor,
+        ),
       ),
       appBar: HomeAppBar(
         scafoldKey: scaffoldKey,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: PrimaryPaddingWidth , vertical: PrimaryPaddingHight),
-        child:  Form(
+        padding: EdgeInsets.symmetric(
+            horizontal: PrimaryPaddingWidth, vertical: PrimaryPaddingHight),
+        child: Form(
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Row(
                   children: [
-                    Text(S.of(context).AddAccount 
-                    ,style: AppSytles.styleBold28(context),),
+                    Text(
+                      S.of(context).AddAccount,
+                      style: AppSytles.styleBold28(context),
+                    ),
                   ],
                 ),
-                SizedBox(height:20 ,),
+                const SizedBox(
+                  height: 20,
+                ),
                 AuthTextField(
                   hintText: S.of(context).AuthUsername,
                   hintStyle: AppSytles.styleMeduim16(context),
@@ -51,7 +59,9 @@ class _AddAccountViewState extends State<AddAccountView> {
                     });
                   },
                 ),
-                SizedBox(height:16 ,),
+                const SizedBox(
+                  height: 16,
+                ),
                 //////////////2
                 AuthTextField(
                   hintText: S.of(context).AuthPassword,
@@ -63,19 +73,23 @@ class _AddAccountViewState extends State<AddAccountView> {
                     });
                   },
                 ),
-                SizedBox(height:18 ,),
+                const SizedBox(
+                  height: 18,
+                ),
                 //////////////3
                 AuthTextField(
                   hintText: S.of(context).PhoneNumber,
                   hintStyle: AppSytles.styleMeduim16(context),
-                  icon: isSelected ? Assets.imagesEye : Assets.imagesEyeCrossed  ,
+                  icon: isSelected ? Assets.imagesEye : Assets.imagesEyeCrossed,
                   ontap: () {
                     setState(() {
                       isSelected = !isSelected;
                     });
                   },
                 ),
-                SizedBox(height:18 ,),
+                const SizedBox(
+                  height: 18,
+                ),
                 /////////////4
                 AuthTextField(
                   hintText: "الإسم",
@@ -87,7 +101,9 @@ class _AddAccountViewState extends State<AddAccountView> {
                     });
                   },
                 ),
-                SizedBox(height:18 ,),
+                const SizedBox(
+                  height: 18,
+                ),
                 ///////////5
                 AuthTextField(
                   hintText: "الإسم",
@@ -99,7 +115,9 @@ class _AddAccountViewState extends State<AddAccountView> {
                     });
                   },
                 ),
-                SizedBox(height:18 ,),
+                const SizedBox(
+                  height: 18,
+                ),
                 /////////////6
                 AuthTextField(
                   hintText: "الإسم",
@@ -111,10 +129,11 @@ class _AddAccountViewState extends State<AddAccountView> {
                     });
                   },
                 ),
-                SizedBox(height:32 ,),
+                const SizedBox(
+                  height: 32,
+                ),
                 ////////////submit button
-                AddAccountButton()
-              
+                const AddAccountButton()
               ],
             ),
           ),

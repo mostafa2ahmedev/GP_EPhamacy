@@ -7,7 +7,6 @@ import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Custom_Drawe
 import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_App_Bar.dart';
 import 'package:gppharmacy/Features/Statistics/presentation/StatisticsBody.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Stores_Body.dart';
-import 'package:gppharmacy/Utils/AdaptiveLayout.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

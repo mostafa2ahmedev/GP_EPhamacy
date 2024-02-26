@@ -89,6 +89,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Statistics`
+  String get HomeDashboard {
+    return Intl.message(
+      'Statistics',
+      name: 'HomeDashboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stores`
+  String get HomeStores {
+    return Intl.message(
+      'Stores',
+      name: 'HomeStores',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Patients`
+  String get HomePatients {
+    return Intl.message(
+      'Patients',
+      name: 'HomePatients',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AddAccount`
+  String get AddAccount {
+    return Intl.message(
+      'AddAccount',
+      name: 'AddAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In`
+  String get Resgistarion {
+    return Intl.message(
+      'Sign In',
+      name: 'Resgistarion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SidalyaEltlba`
+  String get SidalyaEltlba {
+    return Intl.message(
+      'SidalyaEltlba',
+      name: 'SidalyaEltlba',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mode`
+  String get Mode {
+    return Intl.message(
+      'Mode',
+      name: 'Mode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PhoneNumber`
+  String get PhoneNumber {
+    return Intl.message(
+      'PhoneNumber',
+      name: 'PhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 
-import 'package:gppharmacy/Utils/Color_Maneger.dart';
-
 class AuthBackground extends StatelessWidget {
   const AuthBackground({super.key, required this.borderColor, this.backColor});
   final Color borderColor;

@@ -2,5 +2,13 @@
 "AuthUsername":"Username",
 "AuthPassword":"Password",
 "AuthSignIn":"Sign In",
-"AuthForgotPassword":"Forgot Passowrd ?"
+"AuthForgotPassword":"Forgot Passowrd ?",
+"HomeDashboard":"Statistics",
+"HomeStores":"Stores",
+"HomePatients":"Patients",
+"AddAccount":"AddAccount",
+"Resgistarion":"Sign In",
+"SidalyaEltlba":"SidalyaEltlba",
+"Mode":"Mode",
+"PhoneNumber":"PhoneNumber"
 }
