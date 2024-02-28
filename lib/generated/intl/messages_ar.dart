@@ -28,12 +28,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "AuthPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور "),
         "AuthSignIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "AuthUsername": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
+        "H3ohdeElm5zn": MessageLookupByLibrary.simpleMessage("عهدة المخزن"),
         "HomeDashboard": MessageLookupByLibrary.simpleMessage("الاحصائيات"),
         "HomePatients": MessageLookupByLibrary.simpleMessage("المرضي"),
         "HomeStores": MessageLookupByLibrary.simpleMessage("المخازن"),
+        "HsrElkolyat": MessageLookupByLibrary.simpleMessage("حصر الكليات"),
+        "HsrElmbe3at": MessageLookupByLibrary.simpleMessage("حصر المبيعات"),
+        "Language": MessageLookupByLibrary.simpleMessage("اللغه"),
+        "LogOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "Medicines": MessageLookupByLibrary.simpleMessage("الادويه"),
         "Mode": MessageLookupByLibrary.simpleMessage("الوضع"),
         "PhoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "Resgistarion": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "Search": MessageLookupByLibrary.simpleMessage("بحث"),
         "SidalyaEltlba": MessageLookupByLibrary.simpleMessage("صيدليه الطلبه")
       };
 }

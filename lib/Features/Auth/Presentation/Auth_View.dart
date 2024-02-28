@@ -9,7 +9,7 @@ class AuthView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManeger.primaryScaffold,
+      backgroundColor: ColorManeger.lightPrimaryColor,
       body: AdaptiveLayout(
         mobileDashboard: (context) => const AuthMobileBody(),
         tabletDashboard: (context) => const SizedBox(),

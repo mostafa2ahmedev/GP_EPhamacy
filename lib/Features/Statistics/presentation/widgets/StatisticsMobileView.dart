@@ -22,8 +22,8 @@ class StatisticsMobileBody extends StatelessWidget {
             ),
             Text(
               S.of(context).HomeDashboard,
-              style: AppSytles.styleSemiBold24(context)
-                  .copyWith(color: ColorManeger.primaryColor),
+              style: AppStyles.styleSemiBold24(context)
+                  .copyWith(color: ColorManeger.lightPrimaryColor),
             ),
             const SizedBox(
               height: 30,

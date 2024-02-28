@@ -169,6 +169,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Sales inventory`
+  String get HsrElmbe3at {
+    return Intl.message(
+      'Sales inventory',
+      name: 'HsrElmbe3at',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Colleges inventory`
+  String get HsrElkolyat {
+    return Intl.message(
+      'Colleges inventory',
+      name: 'HsrElkolyat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3ohdeElm5zn`
+  String get H3ohdeElm5zn {
+    return Intl.message(
+      '3ohdeElm5zn',
+      name: 'H3ohdeElm5zn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get Search {
+    return Intl.message(
+      'Search',
+      name: 'Search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lagnuage`
+  String get Language {
+    return Intl.message(
+      'Lagnuage',
+      name: 'Language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log Out`
+  String get LogOut {
+    return Intl.message(
+      'Log Out',
+      name: 'LogOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Medicines`
+  String get Medicines {
+    return Intl.message(
+      'Medicines',
+      name: 'Medicines',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

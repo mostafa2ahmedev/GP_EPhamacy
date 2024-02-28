@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gppharmacy/Utils/ResFontSize.dart';
 
-abstract class AppSytles {
+abstract class AppStyles {
   // بعد ما ضيفت الميديا كويري انا محتاج  كل مره استدعي الستايل  يديني الكونتكست عشان اترجر الميديا كويري ف يعمل ريبلد
   //ف انا ممكن انشا فانشكن هنا بدل ما هي اوبجكت كدا   ف هنشا فانكشن بترجع الستايل الي انا مهتم بيه
 
@@ -102,7 +102,7 @@ abstract class AppSytles {
     );
   }
 
-    static TextStyle styleBold28(BuildContext context) {
+  static TextStyle styleBold28(BuildContext context) {
     return TextStyle(
       color: const Color(0xff064060),
       fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -110,5 +110,4 @@ abstract class AppSytles {
       fontWeight: FontWeight.w700,
     );
   }
-
 }

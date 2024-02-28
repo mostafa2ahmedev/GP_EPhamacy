@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gppharmacy/Features/Auth/Presentation/widgets/AuthButton.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Background.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
+import 'package:gppharmacy/Features/HomeScreen/presentation/Home_View.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class AuthMobileBody extends StatefulWidget {
@@ -27,33 +30,48 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
           child: Column(
             children: [
               const AuthBackground(
-                borderColor: ColorManeger.primaryColor,
+                borderColor: ColorManeger.lightPrimaryColor,
               ),
               const SizedBox(
                 height: 24,
               ),
               AuthTextField(
-                hintText: S.of(context).AuthUsername,
-                hintStyle: AppSytles.styleRegular16(context),
-                icon: Assets.imagesUser,
-              ),
+                  hintText: S.of(context).AuthUsername,
+                  hintStyle: AppStyles.styleRegular16(context),
+                  icon: Assets.imagesUser,
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: SvgPicture.asset(Assets.imagesUser),
+                  )),
               const SizedBox(
                 height: 24,
               ),
               AuthTextField(
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isSelected = !isSelected;
+                      });
+                    },
+                    child: SvgPicture.asset(
+                      isSelected ? Assets.imagesEye : Assets.imagesEyeCrossed,
+                    ),
+                  ),
+                ),
                 hintText: S.of(context).AuthPassword,
-                hintStyle: AppSytles.styleMeduim16(context),
-                icon: isSelected ? Assets.imagesEye : Assets.imagesEyeCrossed,
+                hintStyle: AppStyles.styleMeduim16(context),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              CustomButton(
+                text: S.of(context).AuthSignIn,
                 ontap: () {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
+                  MethodHelper.navigateTo(context, const HomeView());
                 },
               ),
-              const SizedBox(
-                height: 24,
-              ),
-              const AuthButton(),
               const SizedBox(
                 height: 12,
               ),
@@ -61,7 +79,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                 onPressed: () {},
                 child: Text(
                   S.of(context).AuthForgotPassword,
-                  style: AppSytles.styleMeduim16(context),
+                  style: AppStyles.styleMeduim16(context),
                 ),
               )
             ],

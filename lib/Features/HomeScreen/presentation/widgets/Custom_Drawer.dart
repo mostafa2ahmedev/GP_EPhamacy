@@ -8,23 +8,24 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Background.da
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
 import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Drawer_List_View.dart';
+import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Lower_Part_Of_Drawer.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/Utils/App_Images.dart';
+
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
+
 import 'package:gppharmacy/generated/l10n.dart';
 
-class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
+class CustomMobileDrawer extends StatelessWidget {
+  const CustomMobileDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DrawerCubit, DrawerStates>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
+        var cubit = BlocProvider.of<DrawerCubit>(context);
         return Container(
-          color: ColorManeger.primaryColor,
+          color: Theme.of(context).drawerTheme.backgroundColor,
           width: MediaQuery.sizeOf(context).width * 0.7,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
@@ -32,10 +33,10 @@ class CustomDrawer extends StatelessWidget {
               slivers: [
                 const SliverToBoxAdapter(
                     child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  padding: EdgeInsets.only(right: 60, left: 60, top: 60),
                   child: AuthBackground(
                     backColor: Colors.white,
-                    borderColor: ColorManeger.primaryColor,
+                    borderColor: ColorManeger.lightPrimaryColor,
                   ),
                 )),
                 const SliverToBoxAdapter(
@@ -48,7 +49,7 @@ class CustomDrawer extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       S.of(context).SidalyaEltlba,
-                      style: AppSytles.styleMeduim20(context)
+                      style: AppStyles.styleMeduim20(context)
                           .copyWith(color: Colors.white),
                     ),
                   ),
@@ -59,49 +60,7 @@ class CustomDrawer extends StatelessWidget {
                   ),
                 ),
                 const DrawerListView(),
-                SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: const Icon(
-                          Icons.sunny,
-                          color: Colors.white,
-                        ),
-                        title: Text(
-                          S.of(context).Mode,
-                          style: AppSytles.styleMeduim16(context),
-                        ),
-                        trailing: Switch(
-                          value: BlocProvider.of<DrawerCubit>(context)
-                              .selectedMode,
-                          onChanged: (value) {
-                            BlocProvider.of<DrawerCubit>(context).changeMode();
-                          },
-                        ),
-                      ),
-                      const Expanded(
-                        child: SizedBox(
-                          height: 12,
-                        ),
-                      ),
-                      ListTile(
-                        leading: SvgPicture.asset(
-                          Assets.imagesBell,
-                          colorFilter: const ColorFilter.mode(
-                              Colors.white, BlendMode.srcIn),
-                        ),
-                        title: Text(
-                          S.of(context).Resgistarion,
-                          style: AppSytles.styleRegular16(context),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                    ],
-                  ),
-                ),
+                const LowerPartOfDrawer(),
               ],
             ),
           ),

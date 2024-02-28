@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:gppharmacy/Features/Auth/Presentation/widgets/AuthButton.dart';
+import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
@@ -28,7 +28,7 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
                 children: [
                   Text(
                     S.of(context).AddAccount,
-                    style: AppSytles.styleBold28(context),
+                    style: AppStyles.styleBold28(context),
                   ),
                 ],
               ),
@@ -37,13 +37,8 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
               ),
               AuthTextField(
                 hintText: S.of(context).AuthUsername,
-                hintStyle: AppSytles.styleMeduim16(context),
+                hintStyle: AppStyles.styleMeduim16(context),
                 icon: isSelected ? Assets.imagesEye : Assets.imagesUser,
-                ontap: () {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
-                },
               ),
               const SizedBox(
                 height: 16,
@@ -51,13 +46,8 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
               //////////////2
               AuthTextField(
                 hintText: S.of(context).AuthPassword,
-                hintStyle: AppSytles.styleMeduim16(context),
+                hintStyle: AppStyles.styleMeduim16(context),
                 icon: isSelected ? Assets.imagesEye : Assets.imagesLock,
-                ontap: () {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
-                },
               ),
               const SizedBox(
                 height: 18,
@@ -65,13 +55,8 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
               //////////////3
               AuthTextField(
                 hintText: S.of(context).PhoneNumber,
-                hintStyle: AppSytles.styleMeduim16(context),
+                hintStyle: AppStyles.styleMeduim16(context),
                 icon: isSelected ? Assets.imagesEye : Assets.imagesEyeCrossed,
-                ontap: () {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
-                },
               ),
               const SizedBox(
                 height: 18,
@@ -79,13 +64,8 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
               /////////////4
               AuthTextField(
                 hintText: "الإسم",
-                hintStyle: AppSytles.styleMeduim16(context),
+                hintStyle: AppStyles.styleMeduim16(context),
                 icon: isSelected ? Assets.imagesEye : Assets.imagesUser,
-                ontap: () {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
-                },
               ),
               const SizedBox(
                 height: 18,
@@ -93,13 +73,8 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
               ///////////5
               AuthTextField(
                 hintText: "الإسم",
-                hintStyle: AppSytles.styleMeduim16(context),
+                hintStyle: AppStyles.styleMeduim16(context),
                 icon: isSelected ? Assets.imagesEye : Assets.imagesUser,
-                ontap: () {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
-                },
               ),
               const SizedBox(
                 height: 18,
@@ -107,13 +82,8 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
               /////////////6
               AuthTextField(
                 hintText: "الإسم",
-                hintStyle: AppSytles.styleMeduim16(context),
+                hintStyle: AppStyles.styleMeduim16(context),
                 icon: isSelected ? Assets.imagesEye : Assets.imagesUser,
-                ontap: () {
-                  setState(() {
-                    isSelected = !isSelected;
-                  });
-                },
               ),
               const SizedBox(
                 height: 32,

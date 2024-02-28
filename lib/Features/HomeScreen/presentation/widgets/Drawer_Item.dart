@@ -23,13 +23,13 @@ class DrawerItem extends StatelessWidget {
             ),
             title: Text(item.title,
                 style: isSelected
-                    ? AppSytles.styleBold16(context)
-                    : AppSytles.styleRegular16(context)),
+                    ? AppStyles.styleBold16(context)
+                    : AppStyles.styleRegular16(context)),
             trailing: isSelected
                 ? AnimatedContainer(
                     duration: const Duration(milliseconds: 700),
                     width: 4,
-                    color: ColorManeger.primaryScaffold,
+                    color: ColorManeger.lightPrimaryColor,
                   )
                 : null),
       ),

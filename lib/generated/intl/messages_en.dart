@@ -28,12 +28,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "AuthPassword": MessageLookupByLibrary.simpleMessage("Password"),
         "AuthSignIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "AuthUsername": MessageLookupByLibrary.simpleMessage("Username"),
+        "H3ohdeElm5zn": MessageLookupByLibrary.simpleMessage("3ohdeElm5zn"),
         "HomeDashboard": MessageLookupByLibrary.simpleMessage("Statistics"),
         "HomePatients": MessageLookupByLibrary.simpleMessage("Patients"),
         "HomeStores": MessageLookupByLibrary.simpleMessage("Stores"),
+        "HsrElkolyat":
+            MessageLookupByLibrary.simpleMessage("Colleges inventory"),
+        "HsrElmbe3at": MessageLookupByLibrary.simpleMessage("Sales inventory"),
+        "Language": MessageLookupByLibrary.simpleMessage("Lagnuage"),
+        "LogOut": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "Medicines": MessageLookupByLibrary.simpleMessage("Medicines"),
         "Mode": MessageLookupByLibrary.simpleMessage("Mode"),
         "PhoneNumber": MessageLookupByLibrary.simpleMessage("PhoneNumber"),
         "Resgistarion": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "Search": MessageLookupByLibrary.simpleMessage("Search"),
         "SidalyaEltlba": MessageLookupByLibrary.simpleMessage("SidalyaEltlba")
       };
 }

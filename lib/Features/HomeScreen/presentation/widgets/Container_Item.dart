@@ -16,12 +16,12 @@ class ContainerItem extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(26),
           color: isSelected
-              ? ColorManeger.primaryColor
+              ? ColorManeger.lightPrimaryColor
               : const Color(0xff9dadbc).withOpacity(0.6)),
       child: Center(
           child: Text(
         containerItemModel.text,
-        style: AppSytles.styleSemiBold24(context).copyWith(color: Colors.white),
+        style: AppStyles.styleSemiBold24(context).copyWith(color: Colors.white),
       )),
     );
   }

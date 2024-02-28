@@ -8,10 +8,12 @@ class AddAccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveLayout(
-      mobileDashboard: (context) => const MobileAddAccountView(),
-      tabletDashboard: (context) => const SizedBox(),
-      desktopDashboard: (context) => const SizedBox(),
+    return Scaffold(
+      body: AdaptiveLayout(
+        mobileDashboard: (context) => const MobileAddAccountView(),
+        tabletDashboard: (context) => const SizedBox(),
+        desktopDashboard: (context) => const SizedBox(),
+      ),
     );
   }
 }

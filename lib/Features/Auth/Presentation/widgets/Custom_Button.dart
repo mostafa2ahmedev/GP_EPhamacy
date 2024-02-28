@@ -5,27 +5,26 @@ import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
-class AuthButton extends StatelessWidget {
-  const AuthButton({super.key});
-
+class CustomButton extends StatelessWidget {
+  const CustomButton({super.key, required this.text, required this.ontap});
+  final String text;
+  final VoidCallback ontap;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 55,
       width: 200,
       child: ElevatedButton(
-        onPressed: () {
-          MethodHelper.navigateTo(context, const HomeView());
-        },
+        onPressed: ontap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorManeger.primaryColor,
+          backgroundColor: ColorManeger.lightPrimaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
         ),
         child: Text(
-          S.of(context).AuthSignIn,
-          style: AppSytles.styleMeduim16(context).copyWith(color: Colors.white),
+          text,
+          style: AppStyles.styleMeduim16(context).copyWith(color: Colors.white),
         ),
       ),
     );
@@ -46,14 +45,14 @@ class AddAccountButton extends StatelessWidget {
           MethodHelper.navigateTo(context, const HomeView());
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorManeger.primaryColor,
+          backgroundColor: ColorManeger.lightPrimaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
         ),
         child: Text(
           S.of(context).AddAccount,
-          style: AppSytles.styleMeduim16(context).copyWith(color: Colors.white),
+          style: AppStyles.styleMeduim16(context).copyWith(color: Colors.white),
         ),
       ),
     );

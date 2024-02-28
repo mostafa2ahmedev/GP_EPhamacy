@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 
 class AuthTextField extends StatelessWidget {
@@ -9,28 +10,23 @@ class AuthTextField extends StatelessWidget {
     required this.hintStyle,
     this.validator,
     this.onSubmitted,
-    required this.icon,
-    this.ontap,
+    this.icon,
+    this.suffixIcon,
   });
   final String hintText;
   final TextStyle hintStyle;
   final Function(String)? onSubmitted;
   final String? Function(String?)? validator;
-  final String icon;
-  final VoidCallback? ontap;
+  final String? icon;
+  final Widget? suffixIcon;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validator,
       onFieldSubmitted: onSubmitted,
       decoration: InputDecoration(
-        suffixIcon: Padding(
-          padding: const EdgeInsets.all(16),
-          child: GestureDetector(
-            onTap: ontap,
-            child: SvgPicture.asset(icon),
-          ),
-        ),
+        suffixIcon: suffixIcon,
         hintText: hintText,
         hintStyle: hintStyle,
         enabledBorder: BuildBorder(true),
@@ -43,7 +39,7 @@ class AuthTextField extends StatelessWidget {
     return OutlineInputBorder(
       borderSide: isEnabled
           ? const BorderSide(color: Colors.grey)
-          : const BorderSide(color: ColorManeger.primaryColor),
+          : const BorderSide(color: ColorManeger.lightPrimaryColor),
       borderRadius: BorderRadius.circular(12),
     );
   }
