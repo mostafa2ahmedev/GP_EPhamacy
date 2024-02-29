@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
+import 'package:gppharmacy/Utils/Constant.dart';
 import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerCubit extends Cubit<DrawerStates> {
   DrawerCubit() : super(DrawerStatesInitial());
@@ -9,8 +9,8 @@ class DrawerCubit extends Cubit<DrawerStates> {
   int outerSelectedIndex = 0;
   String? data1;
   String? data2;
-  bool? selectedMode;
-  bool? selectedLang;
+  bool selectedMode = false;
+  bool selectedLang = false;
 
   void changeIndexAndData(String? value, int outerIndex) {
     if (outerIndex == 0) {
@@ -23,23 +23,14 @@ class DrawerCubit extends Cubit<DrawerStates> {
   }
 
   void changeMode() async {
-    selectedMode != selectedMode;
-    await SharedPref.saveData(key: 'Mode', value: selectedMode!);
-
+    selectedMode = !selectedMode;
+    await SharedPref.saveData(key: Constant.themeConst, value: selectedMode);
     emit(DrawerSelectedModeChange());
   }
 
-  Future<bool> getMode() async {
-    return await SharedPref.getData(key: 'Mode');
-  }
-
   void changeLang() async {
-    selectedLang != selectedLang;
-    await SharedPref.saveData(key: 'Lang', value: selectedLang!);
+    selectedLang = !selectedLang;
+    await SharedPref.saveData(key: Constant.langConst, value: selectedLang);
     emit(DrawerSelectedLangChange());
-  }
-
-  Future<bool> getLang() async {
-    return await SharedPref.getData(key: 'Lang');
   }
 }

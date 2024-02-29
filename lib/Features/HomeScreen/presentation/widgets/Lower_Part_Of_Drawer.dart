@@ -5,7 +5,7 @@ import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
-import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
+
 import 'package:gppharmacy/generated/l10n.dart';
 
 class LowerPartOfDrawer extends StatelessWidget {
@@ -50,11 +50,9 @@ class LowerPartOfDrawer extends StatelessWidget {
                         ),
                         trailing: Switch(
                           activeColor: Theme.of(context).cardColor,
-                          value: BlocProvider.of<DrawerCubit>(context)
-                                  .selectedMode ??
-                              false,
+                          value: cubit.selectedMode,
                           onChanged: (value) {
-                            BlocProvider.of<DrawerCubit>(context).changeMode();
+                            cubit.changeMode();
                           },
                         ),
                       ),
@@ -76,11 +74,9 @@ class LowerPartOfDrawer extends StatelessWidget {
                         ),
                         trailing: Switch(
                           activeColor: Theme.of(context).cardColor,
-                          value: BlocProvider.of<DrawerCubit>(context)
-                                  .selectedLang ??
-                              false,
+                          value: cubit.selectedLang,
                           onChanged: (value) {
-                            BlocProvider.of<DrawerCubit>(context).changeLang();
+                            cubit.changeLang();
                           },
                         ),
                       ),
