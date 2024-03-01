@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
+import 'package:gppharmacy/Utils/Themes.dart';
 
 class CustomDropDownButton extends StatelessWidget {
   const CustomDropDownButton(
@@ -24,7 +25,9 @@ class CustomDropDownButton extends StatelessWidget {
       ),
       child: DropdownButton(
         borderRadius: BorderRadius.circular(12),
-        focusColor: Colors.grey.withOpacity(0.3),
+        style: TextStyle(color: Colors.white),
+        focusColor: Theme.of(context).cardColor,
+        dropdownColor: Theme.of(context).appBarTheme.backgroundColor,
         iconEnabledColor: Colors.black,
         elevation: 1,
         menuMaxHeight: 400,
@@ -32,7 +35,9 @@ class CustomDropDownButton extends StatelessWidget {
         value: value,
         underline: const SizedBox(),
         isExpanded: isExpanded,
-        hint: Text(hint),
+        hint: Text(hint , style: TextStyle(color: Theme.of(context).hintColor),),
+        
+
         items: MethodHelper.getDropDownItems(items),
         onChanged: onChanged,
       ),
