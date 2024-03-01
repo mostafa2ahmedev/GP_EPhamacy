@@ -20,7 +20,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           width: 12,
         ),
       ],
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: AppBarTheme.of(context).backgroundColor,
       leading: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: InkWell(

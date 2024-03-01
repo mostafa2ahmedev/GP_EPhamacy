@@ -19,7 +19,7 @@ void main() async {
   bool lang = await SharedPref.getData(key: Constant.langConst);
   runApp(
     DevicePreview(
-      enabled: false,
+      enabled: true,
       builder: (context) {
         return GP_Pharmacy(
           mode: mode,
