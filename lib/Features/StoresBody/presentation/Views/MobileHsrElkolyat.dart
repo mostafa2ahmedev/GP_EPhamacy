@@ -94,7 +94,12 @@ class _MobileHsrElkolyatState extends State<MobileHsrElkolyat> {
           ),
           Center(
             child: CustomButton(
-              ontap: () {},
+              buttonColor: (monthValue != null && yearValue != null)
+                  ? Theme.of(context).drawerTheme.backgroundColor!
+                  : ColorManeger.colorDisabled,
+              ontap: () {
+                if (monthValue != null && yearValue != null) {}
+              },
               text: S.of(context).Search,
             ),
           ),

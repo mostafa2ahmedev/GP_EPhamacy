@@ -13,4 +13,7 @@ abstract class ColorManeger {
   static const darkPrimaryColor = Color(0xff121212); //for scaffold
   static const darkSeconrdyColor = Color(0xff1E1E1E); // for drawer
   static const darkItemsColor = Color(0xff0B86FF); // for items
+
+  //
+  static Color colorDisabled = Colors.grey.shade400;
 }

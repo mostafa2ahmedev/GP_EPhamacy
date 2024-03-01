@@ -6,9 +6,14 @@ import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.text, required this.ontap});
+  const CustomButton(
+      {super.key,
+      required this.text,
+      required this.ontap,
+      required this.buttonColor});
   final String text;
   final VoidCallback ontap;
+  final Color buttonColor;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,7 +22,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: ontap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorManeger.lightPrimaryColor,
+          backgroundColor: buttonColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

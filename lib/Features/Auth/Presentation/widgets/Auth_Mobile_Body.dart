@@ -67,6 +67,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                 height: 24,
               ),
               CustomButton(
+                buttonColor: Colors.red,
                 text: S.of(context).AuthSignIn,
                 ontap: () {
                   MethodHelper.navigateTo(context, const HomeView());

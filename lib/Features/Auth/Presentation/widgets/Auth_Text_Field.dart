@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 
 class AuthTextField extends StatelessWidget {
-  const AuthTextField({
-    super.key,
-    required this.hintText,
-    required this.hintStyle,
-    this.validator,
-    this.onSubmitted,
-    this.icon,
-    this.suffixIcon,
-  });
+  const AuthTextField(
+      {super.key,
+      required this.hintText,
+      required this.hintStyle,
+      this.validator,
+      this.onSubmitted,
+      this.icon,
+      this.suffixIcon,
+      this.controller,
+      this.onChanged});
   final String hintText;
   final TextStyle hintStyle;
   final Function(String)? onSubmitted;
   final String? Function(String?)? validator;
   final String? icon;
   final Widget? suffixIcon;
+  final TextEditingController? controller;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
+      controller: controller,
       validator: validator,
       onFieldSubmitted: onSubmitted,
       decoration: InputDecoration(

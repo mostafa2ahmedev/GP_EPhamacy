@@ -17,6 +17,7 @@ class MobileHsrElmabe3at extends StatefulWidget {
 class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
   String? monthValue;
   String? yearValue;
+  Color buttonColor = Colors.blueGrey;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -94,7 +95,12 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
           ),
           Center(
             child: CustomButton(
-              ontap: () {},
+              buttonColor: (monthValue != null && yearValue != null)
+                  ? Theme.of(context).drawerTheme.backgroundColor!
+                  : ColorManeger.colorDisabled,
+              ontap: () {
+                if (monthValue != null && yearValue != null) {}
+              },
               text: S.of(context).Search,
             ),
           ),
@@ -105,7 +111,7 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
               decoration: BoxDecoration(
-                color: ColorManeger.lightPrimaryColor,
+                color: ColorManeger.colorDisabled,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(

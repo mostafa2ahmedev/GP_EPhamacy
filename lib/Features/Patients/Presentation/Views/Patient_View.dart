@@ -16,6 +16,17 @@ class PatientView extends StatefulWidget {
 class _PatientViewState extends State<PatientView> {
   String wayOfSearch = 'الرقم القومي للطالب';
   String? typeOfDisease;
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = TextEditingController();
+    controller.addListener(() {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +84,7 @@ class _PatientViewState extends State<PatientView> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: AuthTextField(
+                controller: controller,
                 hintText: 'ادخل $wayOfSearch',
                 hintStyle: AppStyles.styleRegular16(context)
                     .copyWith(color: Colors.grey)),
@@ -82,7 +94,12 @@ class _PatientViewState extends State<PatientView> {
           ),
           Center(
             child: CustomButton(
-              ontap: () {},
+              buttonColor: (typeOfDisease != null && controller.text.isNotEmpty)
+                  ? Theme.of(context).drawerTheme.backgroundColor!
+                  : ColorManeger.colorDisabled,
+              ontap: () {
+                if (controller.text.isNotEmpty && typeOfDisease != null) {}
+              },
               text: S.of(context).Search,
             ),
           ),

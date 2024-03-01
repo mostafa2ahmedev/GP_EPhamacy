@@ -15,8 +15,8 @@ import 'package:gppharmacy/generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
-  bool mode = await SharedPref.getData(key: Constant.themeConst);
-  bool lang = await SharedPref.getData(key: Constant.langConst);
+  bool? mode = SharedPref.getData(key: Constant.themeConst);
+  bool? lang = SharedPref.getData(key: Constant.langConst);
   runApp(
     DevicePreview(
       enabled: false,
@@ -29,21 +29,23 @@ void main() async {
     ),
   );
 }
-// 1- cache data
-// 2- themes
-// 3- validations
-// 4- complete container ui
+// 1- cache data //
+// 2- themes //
+// 3- validations //
+// 4- complete container ui```
 // 5- retreive data ui
 // 6- add
 
 class GP_Pharmacy extends StatelessWidget {
   const GP_Pharmacy({super.key, required this.mode, required this.lang});
-  final bool mode;
-  final bool lang;
+  final bool? mode;
+  final bool? lang;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DrawerCubit(),
+      create: (context) => DrawerCubit()
+        ..changeMode(mode: mode)
+        ..changeLang(lang: lang),
       child: BlocConsumer<DrawerCubit, DrawerStates>(
         listener: (context, state) {},
         builder: (context, state) {

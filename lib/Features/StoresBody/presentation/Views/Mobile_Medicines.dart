@@ -16,6 +16,19 @@ class MobileMedicines extends StatefulWidget {
 class _MobileMedicinesState extends State<MobileMedicines> {
   String wayOfSearch = 'اسم الدواء';
   String? typeValue;
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    controller = TextEditingController();
+    controller.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -74,6 +87,7 @@ class _MobileMedicinesState extends State<MobileMedicines> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: AuthTextField(
+                controller: controller,
                 hintText: 'ادخل $wayOfSearch',
                 hintStyle: AppStyles.styleRegular16(context)
                     .copyWith(color: Colors.grey)),
@@ -83,7 +97,12 @@ class _MobileMedicinesState extends State<MobileMedicines> {
           ),
           Center(
             child: CustomButton(
-              ontap: () {},
+              buttonColor: (typeValue != null && controller.text.isNotEmpty)
+                  ? Theme.of(context).drawerTheme.backgroundColor!
+                  : ColorManeger.colorDisabled,
+              ontap: () {
+                if (controller.text.isNotEmpty && typeValue != null) {}
+              },
               text: S.of(context).Search,
             ),
           ),

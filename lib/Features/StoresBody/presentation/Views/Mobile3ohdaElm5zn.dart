@@ -15,6 +15,16 @@ class Mobile3ohdaElm5zn extends StatefulWidget {
 
 class _Mobile3ohdaElm5znState extends State<Mobile3ohdaElm5zn> {
   String wayOfSearch = 'الباركود الخاص بالدواء';
+  late TextEditingController controller;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = TextEditingController();
+    controller.addListener(() {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +44,7 @@ class _Mobile3ohdaElm5znState extends State<Mobile3ohdaElm5zn> {
             children: [
               Expanded(
                   child: AuthTextField(
+                controller: controller,
                 hintText: 'ادخل $wayOfSearch',
                 hintStyle: AppStyles.styleRegular16(context)
                     .copyWith(color: Colors.grey),
@@ -61,9 +72,13 @@ class _Mobile3ohdaElm5znState extends State<Mobile3ohdaElm5zn> {
           ),
           Center(
             child: CustomButton(
-              ontap: () {},
-              text: S.of(context).Search,
-            ),
+                text: S.of(context).Search,
+                buttonColor: (controller.text.isNotEmpty)
+                    ? Theme.of(context).drawerTheme.backgroundColor!
+                    : ColorManeger.colorDisabled,
+                ontap: () {
+                  if (controller.text.isNotEmpty) {}
+                }),
           ),
           const SizedBox(
             height: 24,

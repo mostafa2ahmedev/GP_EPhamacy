@@ -16,6 +16,18 @@ class MobileSrfEladwya extends StatefulWidget {
 class _MobileSrfEladwyaState extends State<MobileSrfEladwya> {
   String wayOfSearch = 'رقم الطالب القومي';
   String? typeOfRosheta;
+
+  late TextEditingController controller;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = TextEditingController();
+    controller.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -78,6 +90,7 @@ class _MobileSrfEladwyaState extends State<MobileSrfEladwya> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: AuthTextField(
+                controller: controller,
                 hintText: 'ادخل $wayOfSearch',
                 hintStyle: AppStyles.styleRegular16(context)
                     .copyWith(color: Colors.grey)),
@@ -87,7 +100,12 @@ class _MobileSrfEladwyaState extends State<MobileSrfEladwya> {
           ),
           Center(
             child: CustomButton(
-              ontap: () {},
+              buttonColor: (typeOfRosheta != null && controller.text.isNotEmpty)
+                  ? Theme.of(context).drawerTheme.backgroundColor!
+                  : ColorManeger.colorDisabled,
+              ontap: () {
+                if (controller.text.isNotEmpty && controller.text.isNotEmpty) {}
+              },
               text: S.of(context).Search,
             ),
           ),
