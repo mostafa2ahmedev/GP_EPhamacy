@@ -11,8 +11,10 @@ class StoresCubit extends Cubit<StoresCubitState> {
   StoresCubit() : super(StoresCubitInitial());
   late List<SalesInventoryModel> salesInventoryList;
   late SalesInventoryModel salesInventoryModel;
+
   void getSalesInventory({required Map<String, dynamic> query}) async {
-    var response = await DioService.getDate(url: 'url', query: query);
+    var response = await DioService.getDate(
+        url: '/pharmacy/inventory/sales', query: query);
 
     log(response.data);
 

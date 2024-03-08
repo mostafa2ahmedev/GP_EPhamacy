@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,8 +7,9 @@ import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/Auth_View.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
+import 'package:gppharmacy/Features/StoresBody/data/DioService.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/cubit/stores_cubit_cubit.dart';
 
-import 'package:gppharmacy/Features/HomeScreen/presentation/Home_View.dart';
 import 'package:gppharmacy/Utils/Constant.dart';
 import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
 import 'package:gppharmacy/Utils/Themes.dart';
@@ -17,6 +19,7 @@ import 'package:gppharmacy/generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
+  DioService.init();
   bool? mode = SharedPref.getData(key: Constant.themeConst);
   bool? lang = SharedPref.getData(key: Constant.langConst);
   runApp(
@@ -52,7 +55,7 @@ class GP_Pharmacy extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AuthCubit(),
-        )
+        ),
       ],
       child: BlocConsumer<DrawerCubit, DrawerStates>(
         listener: (context, state) {},
