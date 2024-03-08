@@ -14,6 +14,7 @@ class AuthCubit extends Cubit<AuthCubitState> {
     try {
       Response response = await dio
           .post(loginURL, data: {'username': username, 'password': password});
+
       user = UserModel.fromJson(response.data);
       emit(SuccessAuthState());
     } on DioException catch (e) {
