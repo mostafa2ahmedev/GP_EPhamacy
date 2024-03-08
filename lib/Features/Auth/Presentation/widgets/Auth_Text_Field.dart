@@ -14,10 +14,12 @@ class AuthTextField extends StatelessWidget {
       this.controller,
       this.onChanged,
       this.keyboardType,
-      this.label});
+      this.label,
+      this.onSaved});
   final String? hintText;
   final TextStyle? hintStyle;
   final Function(String)? onSubmitted;
+  final Function(String?)? onSaved;
   final String? Function(String?)? validator;
   final String? icon;
   final Widget? suffixIcon;
@@ -33,6 +35,7 @@ class AuthTextField extends StatelessWidget {
       controller: controller,
       validator: validator,
       onFieldSubmitted: onSubmitted,
+      onSaved: onSaved,
       decoration: InputDecoration(
         label: Text(
           label ?? '',

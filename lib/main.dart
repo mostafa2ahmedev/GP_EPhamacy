@@ -2,6 +2,8 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
+import 'package:gppharmacy/Features/Auth/Presentation/Auth_View.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
 
@@ -41,10 +43,17 @@ class GP_Pharmacy extends StatelessWidget {
   final bool? lang;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DrawerCubit()
-        ..changeMode(mode: mode)
-        ..changeLang(lang: lang),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => DrawerCubit()
+            ..changeMode(mode: mode)
+            ..changeLang(lang: lang),
+        ),
+        BlocProvider(
+          create: (context) => AuthCubit(),
+        )
+      ],
       child: BlocConsumer<DrawerCubit, DrawerStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -65,11 +74,10 @@ class GP_Pharmacy extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             title: 'Flutter Demo',
-            home: const HomeView(),
+            home: const AuthView(),
           );
         },
       ),
     );
   }
 }
-//test
