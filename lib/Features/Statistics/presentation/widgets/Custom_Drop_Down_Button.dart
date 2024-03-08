@@ -47,7 +47,7 @@ class _CustomDrawerDropDownButtonState
                   iconEnabledColor: Theme.of(context).iconTheme.color,
                   elevation: 0,
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+                  icon: const Icon(Icons.arrow_drop_down),
                   underline: const SizedBox(),
                   hint: Text(
                     widget.hint,
@@ -61,7 +61,7 @@ class _CustomDrawerDropDownButtonState
                   onChanged: (value) {
                     if (cubit.data1 != value || cubit.data2 != value) {
                       MethodHelper.checkForTheIndex(widget.outerIndex, value,
-                          context.read<DrawerCubit>());
+                          context.read<DrawerCubit>(), context);
                     }
                   },
                 ),

@@ -11,35 +11,33 @@ class DrawerCubit extends Cubit<DrawerStates> {
   int outerSelectedIndex = 0;
   String? data1;
   String? data2;
-  bool selectedMode = false;
-  bool selectedLang = false;
+  bool selectedMode = true;
+  bool selectedLang = true;
 
   void changeMode({bool? mode}) async {
     if (mode != null) {
       selectedMode = mode;
-      log("mode${mode.toString()}");
-
-      return;
+      log("cachemode $mode 'cacheselectedMode' $selectedMode");
+    } else {
+      selectedMode = !selectedMode;
+      log("Togglemode $mode 'ToggleselectedMode' $selectedMode");
+      await SharedPref.saveData(key: Constant.themeConst, value: selectedMode);
+      emit(DrawerSelectedModeChange());
     }
-    emit(DrawerLoadingIndicator());
-    log("mode2${mode.toString()}");
-
-    selectedMode = !selectedMode;
-    await SharedPref.saveData(key: Constant.themeConst, value: selectedMode);
-    emit(DrawerSelectedModeChange());
   }
 
   void changeLang({bool? lang}) async {
     if (lang != null) {
       selectedLang = lang;
-      log("lang${lang.toString()}");
-      return;
+    } else {
+      data1 = null;
+      data2 = null;
+      innerFirstSelectedIndex = 0;
+      outerSelectedIndex = 0;
+      selectedLang = !selectedLang;
+      await SharedPref.saveData(key: Constant.langConst, value: selectedLang);
+      emit(DrawerSelectedLangChange());
     }
-    emit(DrawerLoadingIndicator());
-    log("lang2${lang.toString()}");
-    selectedLang = !selectedLang;
-    await SharedPref.saveData(key: Constant.langConst, value: selectedLang);
-    emit(DrawerSelectedLangChange());
   }
 
   void changeIndexAndData(String? value, int outerIndex) {

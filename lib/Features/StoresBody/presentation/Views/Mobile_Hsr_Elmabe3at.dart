@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/widgets/Custom_Bottom_Sheet.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
@@ -121,6 +122,37 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
                 ),
               ),
             ),
+          ),
+          const CustomBottomSheetItem(),
+          FloatingActionButton(
+            onPressed: () {
+              showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: SizedBox(
+                      height: 200,
+                      child: SimpleDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        title: const Text('Flutter'),
+                        children: const [
+                          Text('Flutter'),
+                          Text('Flutter'),
+                          Text('Flutter'),
+                          Text('Flutter'),
+                          Text('Flutter'),
+                          Text('Flutter'),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
           )
         ],
       ),

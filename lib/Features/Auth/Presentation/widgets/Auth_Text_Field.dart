@@ -1,34 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 
 class AuthTextField extends StatelessWidget {
   const AuthTextField(
       {super.key,
-      required this.hintText,
-      required this.hintStyle,
-      this.validator,
+      this.hintText,
+      this.hintStyle,
       this.onSubmitted,
+      this.validator,
       this.icon,
       this.suffixIcon,
       this.controller,
-      this.onChanged});
-  final String hintText;
-  final TextStyle hintStyle;
+      this.onChanged,
+      this.keyboardType,
+      this.label});
+  final String? hintText;
+  final TextStyle? hintStyle;
   final Function(String)? onSubmitted;
   final String? Function(String?)? validator;
   final String? icon;
   final Widget? suffixIcon;
   final TextEditingController? controller;
   final Function(String)? onChanged;
-
+  final TextInputType? keyboardType;
+  final String? label;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       onChanged: onChanged,
       controller: controller,
       validator: validator,
       onFieldSubmitted: onSubmitted,
       decoration: InputDecoration(
+        label: Text(
+          label ?? '',
+          style: AppStyles.styleMeduim16(context),
+        ),
         suffixIcon: suffixIcon,
         hintText: hintText,
         hintStyle: hintStyle,

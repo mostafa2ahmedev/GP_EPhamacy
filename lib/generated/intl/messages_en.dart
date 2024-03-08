@@ -23,6 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AddAccount": MessageLookupByLibrary.simpleMessage("AddAccount"),
+        "AddNewPatient":
+            MessageLookupByLibrary.simpleMessage("Add New Patient"),
+        "AllPatient": MessageLookupByLibrary.simpleMessage("All Patient"),
         "AuthForgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Passowrd ?"),
         "AuthPassword": MessageLookupByLibrary.simpleMessage("Password"),
@@ -35,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "HsrElkolyat":
             MessageLookupByLibrary.simpleMessage("Colleges inventory"),
         "HsrElmbe3at": MessageLookupByLibrary.simpleMessage("Sales inventory"),
+        "Imports": MessageLookupByLibrary.simpleMessage("Imports"),
         "Language": MessageLookupByLibrary.simpleMessage("Lagnuage"),
         "LogOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "Medicines": MessageLookupByLibrary.simpleMessage("Medicines"),
@@ -42,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "PhoneNumber": MessageLookupByLibrary.simpleMessage("PhoneNumber"),
         "Resgistarion": MessageLookupByLibrary.simpleMessage("Sign In"),
         "Search": MessageLookupByLibrary.simpleMessage("Search"),
-        "SidalyaEltlba": MessageLookupByLibrary.simpleMessage("SidalyaEltlba")
+        "SidalyaEltlba": MessageLookupByLibrary.simpleMessage("SidalyaEltlba"),
+        "SrfEladwya": MessageLookupByLibrary.simpleMessage("SrfEladwya"),
+        "ViewOldOrders": MessageLookupByLibrary.simpleMessage("View old orders")
       };
 }

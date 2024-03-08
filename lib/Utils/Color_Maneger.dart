@@ -8,7 +8,8 @@ abstract class ColorManeger {
   static const greenColor = Colors.green;
   static const greyColor = Colors.grey;
   static const lightItemsColor = Color(0xff1D3242);
-
+  static const Color PrimaryColor = Color(0xff28465C);
+  static const Color darkSecondryColor = Color(0xff1D3242);
 //dark
   static const darkPrimaryColor = Color(0xff121212); //for scaffold
   static const darkSeconrdyColor = Color(0xff1E1E1E); // for drawer

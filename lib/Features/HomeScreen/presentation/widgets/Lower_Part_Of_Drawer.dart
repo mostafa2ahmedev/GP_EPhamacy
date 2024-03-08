@@ -1,10 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
+import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/SwitchTile.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/Utils/App_Images.dart';
+import 'package:gppharmacy/Utils/Color_Maneger.dart';
 
 import 'package:gppharmacy/generated/l10n.dart';
 
@@ -39,67 +41,51 @@ class LowerPartOfDrawer extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      ListTile(
-                        leading: const Icon(
-                          Icons.sunny,
-                          color: Colors.white,
-                        ),
-                        title: Text(
-                          S.of(context).Mode,
-                          style: AppStyles.styleMeduim16(context),
-                        ),
-                        trailing: Switch(
-                          activeColor: Theme.of(context).cardColor,
-                          value: cubit.selectedMode,
-                          onChanged: (value) {
-                            cubit.changeMode();
-                          },
-                        ),
+                      SwitchWithListTile(
+                        value: cubit.selectedMode,
+                        onChanged: (value) {
+                          cubit.changeMode();
+                        },
+                        text: S.of(context).Mode,
                       ),
                       const SizedBox(
                         height: 5,
                       ),
-                      ListTile(
-                        subtitle: Text(
-                          'E / A',
-                          style: AppStyles.styleMeduim16(context),
-                        ),
-                        leading: const Icon(
-                          Icons.language,
-                          color: Colors.white,
-                        ),
-                        title: Text(
-                          S.of(context).Language,
-                          style: AppStyles.styleMeduim16(context),
-                        ),
-                        trailing: Switch(
-                          activeColor: Theme.of(context).cardColor,
-                          value: cubit.selectedLang,
-                          onChanged: (value) {
-                            cubit.changeLang();
-                          },
-                        ),
+                      SwitchWithListTile(
+                        value: cubit.selectedLang,
+                        onChanged: (value) {
+                          cubit.changeLang();
+                        },
+                        text: S.of(context).Language,
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      ListTile(
-                        leading: SvgPicture.asset(
-                          Assets.imagesUser,
-                          colorFilter: const ColorFilter.mode(
-                              Colors.white, BlendMode.srcIn),
-                        ),
-                        title: Text(
-                          S.of(context).LogOut,
-                          style: AppStyles.styleRegular16(context),
-                        ),
+                      Align(
+                        alignment: AlignmentDirectional.center,
+                        child: TextButton.icon(
+                            style: TextButton.styleFrom(
+                                backgroundColor: Colors.white),
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.logout,
+                              color: ColorManeger.darkPrimaryColor,
+                            ),
+                            label: Text(
+                              S.of(context).LogOut,
+                              style: AppStyles.styleMeduim16(context).copyWith(
+                                  color: ColorManeger.darkPrimaryColor),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                     ],
                   ),
                 ),
               ),
               const SizedBox(
-                height: 24,
+                height: 12,
               ),
             ],
           ),

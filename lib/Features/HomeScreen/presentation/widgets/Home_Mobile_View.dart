@@ -14,6 +14,8 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileImports.
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileSrfEladwya.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Mobile_Hsr_Elmabe3at.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Mobile_Medicines.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/widgets/Custom_Bottom_Sheet.dart';
+import 'package:gppharmacy/generated/l10n.dart';
 
 class MobileHomeView extends StatefulWidget {
   const MobileHomeView({super.key});
@@ -58,9 +60,10 @@ class _MobileHomeViewState extends State<MobileHomeView> {
                 ? bodyWidgets[cubit.outerSelectedIndex]
                     [cubit.innerFirstSelectedIndex]
                 : bodyWidgets[cubit.outerSelectedIndex]
-                    [cubit.innerFirstSelectedIndex]
-            // bodyWidgets[BlocProvider.of<DrawerCubit>(context).selectedIndex],
-            );
+                    [cubit.innerFirstSelectedIndex],
+            floatingActionButton: cubit.data1 == S.of(context).Imports
+                ? const CustomBottomSheetItem()
+                : null);
       },
     );
   }

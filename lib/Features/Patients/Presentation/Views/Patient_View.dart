@@ -36,7 +36,7 @@ class _PatientViewState extends State<PatientView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            S.of(context).HsrElkolyat,
+            S.of(context).AllPatient,
             style: AppStyles.styleBold28(context),
           ),
           const SizedBox(

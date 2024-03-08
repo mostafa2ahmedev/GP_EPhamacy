@@ -29,9 +29,8 @@ void main() async {
     ),
   );
 }
-// 1- cache data //
+
 // 2- themes //
-// 3- validations //
 // 4- complete container ui```
 // 5- retreive data ui
 // 6- add
@@ -52,21 +51,22 @@ class GP_Pharmacy extends StatelessWidget {
           var cubit = BlocProvider.of<DrawerCubit>(context);
 
           return MaterialApp(
-              themeMode: cubit.selectedMode ? ThemeMode.dark : ThemeMode.light,
-              theme: Themes.lightThemeData,
-              darkTheme: Themes.darkThemeData,
-              locale:
-                  cubit.selectedLang ? const Locale('en') : const Locale('ar'),
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              title: 'Flutter Demo',
-              home: const HomeView());
+            themeMode: cubit.selectedMode ? ThemeMode.dark : ThemeMode.light,
+            theme: Themes.lightThemeData,
+            darkTheme: Themes.darkThemeData,
+            locale:
+                cubit.selectedLang ? const Locale('en') : const Locale('ar'),
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            title: 'Flutter Demo',
+            home: const HomeView(),
+          );
         },
       ),
     );

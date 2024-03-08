@@ -170,11 +170,51 @@ class S {
     );
   }
 
+  /// `Search`
+  String get Search {
+    return Intl.message(
+      'Search',
+      name: 'Search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lagnuage`
+  String get Language {
+    return Intl.message(
+      'Lagnuage',
+      name: 'Language',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sales inventory`
   String get HsrElmbe3at {
     return Intl.message(
       'Sales inventory',
       name: 'HsrElmbe3at',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Medicines`
+  String get Medicines {
+    return Intl.message(
+      'Medicines',
+      name: 'Medicines',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Imports`
+  String get Imports {
+    return Intl.message(
+      'Imports',
+      name: 'Imports',
       desc: '',
       args: [],
     );
@@ -200,21 +240,31 @@ class S {
     );
   }
 
-  /// `Search`
-  String get Search {
+  /// `SrfEladwya`
+  String get SrfEladwya {
     return Intl.message(
-      'Search',
-      name: 'Search',
+      'SrfEladwya',
+      name: 'SrfEladwya',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lagnuage`
-  String get Language {
+  /// `All Patient`
+  String get AllPatient {
     return Intl.message(
-      'Lagnuage',
-      name: 'Language',
+      'All Patient',
+      name: 'AllPatient',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add New Patient`
+  String get AddNewPatient {
+    return Intl.message(
+      'Add New Patient',
+      name: 'AddNewPatient',
       desc: '',
       args: [],
     );
@@ -230,11 +280,11 @@ class S {
     );
   }
 
-  /// `Medicines`
-  String get Medicines {
+  /// `View old orders`
+  String get ViewOldOrders {
     return Intl.message(
-      'Medicines',
-      name: 'Medicines',
+      'View old orders',
+      name: 'ViewOldOrders',
       desc: '',
       args: [],
     );

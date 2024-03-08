@@ -11,12 +11,16 @@
 "SidalyaEltlba":"SidalyaEltlba",
 "Mode":"Mode",
 "PhoneNumber":"PhoneNumber",
-"HsrElmbe3at":"Sales inventory",
-"HsrElkolyat":"Colleges inventory",
-"H3ohdeElm5zn":"3ohdeElm5zn",
 "Search":"Search",
 "Language":"Lagnuage",
+"HsrElmbe3at":"Sales inventory",
+"Medicines":"Medicines",
+"Imports":"Imports",
+"HsrElkolyat":"Colleges inventory",
+"H3ohdeElm5zn":"3ohdeElm5zn",
+"SrfEladwya":"SrfEladwya",
+"AllPatient":"All Patient",
+"AddNewPatient":"Add New Patient",
 "LogOut":"Log Out",
-"Medicines":"Medicines"
-
+"ViewOldOrders":"View old orders"
 }

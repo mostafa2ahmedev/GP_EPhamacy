@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gppharmacy/Utils/AppStyles.dart';
+import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/Utils/Themes.dart';
 
@@ -18,26 +20,22 @@ class CustomDropDownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: Border.all(width: 1, color: Colors.grey),
       ),
       child: DropdownButton(
         borderRadius: BorderRadius.circular(12),
-        style: TextStyle(color: Colors.white),
-        focusColor: Theme.of(context).cardColor,
-        dropdownColor: Theme.of(context).appBarTheme.backgroundColor,
-        iconEnabledColor: Colors.black,
         elevation: 1,
         menuMaxHeight: 400,
         padding: const EdgeInsets.symmetric(horizontal: 12),
         value: value,
         underline: const SizedBox(),
         isExpanded: isExpanded,
-        hint: Text(hint , style: TextStyle(color: Theme.of(context).hintColor),),
-        
-
+        hint: Text(
+          hint,
+          style: AppStyles.styleRegular14(context).copyWith(color: Colors.grey),
+        ),
         items: MethodHelper.getDropDownItems(items),
         onChanged: onChanged,
       ),
