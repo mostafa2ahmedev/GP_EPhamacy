@@ -43,6 +43,12 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                   height: 24,
                 ),
                 AuthTextField(
+                    validator: (value) {
+                      if (value?.isEmpty ?? true) {
+                        return "Field is Required";
+                      }
+                      return null;
+                    },
                     onSaved: (value) {
                       username = value;
                     },
@@ -57,6 +63,12 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                   height: 24,
                 ),
                 AuthTextField(
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return "Field is Required";
+                    }
+                    return null;
+                  },
                   onSaved: (value) {
                     password = value;
                   },
