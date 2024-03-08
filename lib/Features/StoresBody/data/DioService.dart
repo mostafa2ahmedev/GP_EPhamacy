@@ -17,12 +17,14 @@ class DioService {
   }
 
   static Future<Response> getDate(
-      {required String url, required Map<String, dynamic> query}) async {
+      {required String url,
+      required Map<String, dynamic> query,
+      required String token}) async {
     return await dio.get(
       url,
       queryParameters: query,
       options: Options(
-        headers: {"authorization": 'Bearer ${AuthCubit().user.token}'},
+        headers: {"authorization": 'Bearer $token'},
       ),
     );
   }

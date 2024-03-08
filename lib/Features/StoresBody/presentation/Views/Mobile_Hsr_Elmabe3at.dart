@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Sales%20inventory.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/cubit/stores_cubit_cubit.dart';
@@ -33,6 +36,7 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
       },
       builder: (context, state) {
         var cubit = BlocProvider.of<StoresCubit>(context);
+        var authCubit = BlocProvider.of<AuthCubit>(context);
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           child: Column(
@@ -113,11 +117,14 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
                       : ColorManeger.colorDisabled,
                   ontap: () {
                     if (monthValue != null && yearValue != null) {
+                      log(monthValue.toString());
+                      log(authCubit.user.token.toString());
+
                       cubit.getSalesInventory(
-                        query: {
-                          'month': monthValue,
-                          'year': yearValue,
-                        },
+                        month: monthValue!,
+                        year: yearValue!,
+                        query: {'month': monthValue, 'year': yearValue},
+                        token: authCubit.user.token,
                       );
                     }
                   },

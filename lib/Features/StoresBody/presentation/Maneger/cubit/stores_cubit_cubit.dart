@@ -12,11 +12,17 @@ class StoresCubit extends Cubit<StoresCubitState> {
   late List<SalesInventoryModel> salesInventoryList;
   late SalesInventoryModel salesInventoryModel;
 
-  void getSalesInventory({required Map<String, dynamic> query}) async {
+  void getSalesInventory(
+      {required Map<String, dynamic> query,
+      required String token,
+      required String month,
+      required String year}) async {
     var response = await DioService.getDate(
-        url: '/pharmacy/inventory/sales', query: query);
+        url: '/pharmacy/inventory/sales?month=3&year=2024',
+        query: query,
+        token: token);
 
-    log(response.data);
+    print(response.data);
 
     // salesInventoryModel = SalesInventoryModel.fromJson(json: response.data[0]);
   }
