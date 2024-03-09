@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/generated/l10n.dart';
 
 class SwitchWithListTile extends StatelessWidget {
   const SwitchWithListTile({
