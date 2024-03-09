@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/ListViewForView.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/ListTileForSalesInventory.dart';
 
 class ListViewOfSalesInventory extends StatelessWidget {
   const ListViewOfSalesInventory({super.key});
@@ -20,7 +20,7 @@ class ListViewOfSalesInventory extends StatelessWidget {
           child: ListView.builder(
             itemCount: storeCubit.salesInventoryList.length,
             itemBuilder: (context, index) {
-              return ListTileForView(
+              return ListTileForSalesInventory(
                 salesInventoryModel: storeCubit.salesInventoryList[index],
               );
             },

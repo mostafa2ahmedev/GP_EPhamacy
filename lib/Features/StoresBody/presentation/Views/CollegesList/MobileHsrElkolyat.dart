@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/CollegesListCubit/colleges_cubit.dart';
 
-import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/ListViewOfSalesInventory.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/CollegesList/widgets/ListViewOfCollegesList.dart';
 
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
-class MobileHsrElmabe3at extends StatefulWidget {
-  const MobileHsrElmabe3at({super.key});
+class MobileHsrElkolyat extends StatefulWidget {
+  const MobileHsrElkolyat({super.key});
 
   @override
-  State<MobileHsrElmabe3at> createState() => _MobileHsrElmabe3atState();
+  State<MobileHsrElkolyat> createState() => _MobileHsrElkolyatState();
 }
 
-class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
+class _MobileHsrElkolyatState extends State<MobileHsrElkolyat> {
   String? monthValue;
   int? intMonthValue;
   String? yearValue;
@@ -41,12 +41,12 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SalesInventoryCubit, SalesInventoryStates>(
+    return BlocConsumer<CollegesCubit, CollegesState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var storCubit = BlocProvider.of<SalesInventoryCubit>(context);
+        var collegesCubit = BlocProvider.of<CollegesCubit>(context);
         var authCubit = BlocProvider.of<AuthCubit>(context);
-        if (state is getSalesInventoryLoadingState) {
+        if (state is getCollegesListLoadingState) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -57,7 +57,7 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                S.of(context).HsrElmbe3at,
+                S.of(context).HsrElkolyat,
                 style: AppStyles.styleBold28(context),
               ),
               const SizedBox(
@@ -74,7 +74,6 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
                         setState(() {
                           monthValue = value;
                           intMonthValue = items.indexOf(value!) + 1;
-                          print(intMonthValue);
                         });
                       },
                       value: monthValue,
@@ -120,7 +119,7 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
                       : ColorManeger.colorDisabled,
                   ontap: () {
                     if (monthValue != null && yearValue != null) {
-                      storCubit.getSalesInventory(
+                      collegesCubit.getCollegesList(
                           query: {"month": intMonthValue, "year": yearValue},
                           token: authCubit.user!.token);
                     }
@@ -131,7 +130,7 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
               const SizedBox(
                 height: 24,
               ),
-              storCubit.salesInventoryList.isEmpty
+              collegesCubit.collegesList.isEmpty
                   ? Expanded(
                       child: Container(
                         margin: const EdgeInsets.symmetric(
@@ -148,7 +147,7 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
                         ),
                       ),
                     )
-                  : const ListViewOfSalesInventory(),
+                  : const ListViewOfCollegesList(),
             ],
           ),
         );
@@ -156,47 +155,3 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // const CustomBottomSheetItem(),
-  //         FloatingActionButton(
-  //           onPressed: () {
-  //             showDialog(
-  //               barrierDismissible: false,
-  //               context: context,
-  //               builder: (context) {
-  //                 return Dialog(
-  //                   insetPadding: const EdgeInsets.symmetric(horizontal: 20),
-  //                   child: SizedBox(
-  //                     height: 200,
-  //                     child: SimpleDialog(
-  //                       shape: RoundedRectangleBorder(
-  //                         borderRadius: BorderRadius.circular(8),
-  //                       ),
-  //                       title: const Text('Flutter'),
-  //                       children: const [
-  //                         Text('Flutter'),
-  //                         Text('Flutter'),
-  //                         Text('Flutter'),
-  //                         Text('Flutter'),
-  //                         Text('Flutter'),
-  //                         Text('Flutter'),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                 );
-  //               },
-  //             );
-  //           },
-  //         )
