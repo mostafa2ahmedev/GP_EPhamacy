@@ -122,7 +122,7 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
                     if (monthValue != null && yearValue != null) {
                       storCubit.getSalesInventory(
                           query: {"month": intMonthValue, "year": yearValue},
-                          token: authCubit.user.token);
+                          token: authCubit.user!.token);
                     }
                   },
                   text: S.of(context).Search,

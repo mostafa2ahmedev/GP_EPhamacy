@@ -26,7 +26,7 @@ class ListTileForView extends StatelessWidget {
           onTap: () async {
             await storeCubit.getSalesInventoryItemDetails(
               barcode: salesInventoryModel.barcode.toString(),
-              token: authCubit.user.token,
+              token: authCubit.user!.token,
             );
             MethodHelper.showDetailsItem(context,
                 salesInventoryModelDetails:
