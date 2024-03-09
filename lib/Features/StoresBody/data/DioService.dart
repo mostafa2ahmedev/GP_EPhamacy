@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Utils/Constant.dart';
 
@@ -22,7 +21,7 @@ class DioService {
       url,
       queryParameters: query,
       options: Options(
-        headers: {"authorization": 'Bearer ${AuthCubit().user.token}'},
+        headers: {"authorization": 'Bearer ${AuthCubit().user!.token}'},
       ),
     );
   }

@@ -7,7 +7,8 @@ import 'package:gppharmacy/Utils/Constant.dart';
 
 class AuthCubit extends Cubit<AuthCubitState> {
   AuthCubit() : super(InitialAuthState());
-  late final UserModel user;
+
+  late UserModel? user;
 
   signIn(String username, String password) async {
     try {
@@ -15,9 +16,14 @@ class AuthCubit extends Cubit<AuthCubitState> {
           url: Constant.SignIn,
           data: {'username': username, 'password': password});
       user = UserModel.fromJson(response.data);
-      emit(SuccessAuthState());
+      emit(SuccessAuthState(user: user!.name));
     } on DioException catch (e) {
-      emit(FaulierAuthState());
+      emit(FaulierAuthState(errorMsg: e.response?.data['message'] ?? "Error"));
     }
+  }
+
+  signOut() {
+    user = null;
+    emit(InitialAuthState());
   }
 }

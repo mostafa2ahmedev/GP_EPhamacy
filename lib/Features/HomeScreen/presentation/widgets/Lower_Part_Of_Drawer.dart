@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
+import 'package:gppharmacy/Features/Auth/Presentation/Auth_View.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
 import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/SwitchTile.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
 
 import 'package:gppharmacy/generated/l10n.dart';
 
@@ -66,7 +67,11 @@ class LowerPartOfDrawer extends StatelessWidget {
                         child: TextButton.icon(
                             style: TextButton.styleFrom(
                                 backgroundColor: Colors.white),
-                            onPressed: () {},
+                            onPressed: () {
+                              BlocProvider.of<AuthCubit>(context).signOut();
+                              MethodHelper.navigateTo(
+                                  context, const AuthView());
+                            },
                             icon: const Icon(
                               Icons.logout,
                               color: ColorManeger.darkPrimaryColor,

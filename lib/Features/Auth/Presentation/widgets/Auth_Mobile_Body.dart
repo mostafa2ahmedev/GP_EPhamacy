@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit_State.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
@@ -94,9 +95,26 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                 BlocConsumer<AuthCubit, AuthCubitState>(
                   listener: (context, state) {
                     if (state is SuccessAuthState) {
+                      Fluttertoast.showToast(
+                        msg: 'Welcome ${state.user}',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.greenAccent[400],
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
                       MethodHelper.navigateTo(context, const HomeView());
                     } else if (state is FaulierAuthState) {
-                      //show Toaster
+                      Fluttertoast.showToast(
+                        msg: state.errorMsg,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
                     }
                   },
                   builder: (context, state) {
