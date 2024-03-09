@@ -15,7 +15,7 @@ import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
 import 'package:gppharmacy/Utils/Themes.dart';
 
 import 'package:gppharmacy/generated/l10n.dart';
-
+//
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
