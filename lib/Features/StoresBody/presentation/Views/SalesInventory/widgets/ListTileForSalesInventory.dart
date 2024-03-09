@@ -5,8 +5,8 @@ import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/Sales%20inven
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
 
-class ListTileForView extends StatelessWidget {
-  const ListTileForView({
+class ListTileForSalesInventory extends StatelessWidget {
+  const ListTileForSalesInventory({
     super.key,
     required this.salesInventoryModel,
   });

@@ -9,7 +9,7 @@ import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_App_Bar
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Add_New_Patient.dart';
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Patient_View.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Mobile3ohdaElm5zn.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileHsrElkolyat.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/CollegesList/MobileHsrElkolyat.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileImports.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileSrfEladwya.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/Mobile_Hsr_Elmabe3at.dart';

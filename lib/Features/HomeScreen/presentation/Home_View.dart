@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_Mobile_View.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/CollegesListCubit/colleges_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
 import 'package:gppharmacy/Utils/AdaptiveLayout.dart';
 
@@ -9,8 +10,15 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SalesInventoryCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SalesInventoryCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CollegesCubit(),
+        )
+      ],
       child: AdaptiveLayout(
           mobileDashboard: (context) => const MobileHomeView(),
           tabletDashboard: (context) => const SizedBox(),
