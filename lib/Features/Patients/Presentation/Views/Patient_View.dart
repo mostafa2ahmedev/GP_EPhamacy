@@ -89,6 +89,8 @@ class _PatientViewState extends State<PatientView> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: AuthTextField(
+                onChanged: (value) =>
+                    BlocProvider.of<PateintCubit>(context).searchByName(value),
                 controller: controller,
                 hintText: 'ادخل $wayOfSearch',
                 hintStyle: AppStyles.styleRegular16(context)
@@ -131,8 +133,7 @@ class _PatientViewState extends State<PatientView> {
                     ),
                   ),
                 );
-              } else if (state is PatientSuccessState ||
-                  state is PatientSearchingState) {
+              } else if (state is PatientSuccessState) {
                 return ListViewOfPatient(
                   patients: BlocProvider.of<PateintCubit>(context).searched,
                 );

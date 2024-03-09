@@ -22,9 +22,19 @@ class PateintCubit extends Cubit<PateintCubitState> {
       }
       searched = pateints;
       emit(PatientSuccessState());
-      print(response.data);
     } on DioException catch (e) {
       emit(PatientFaliureState(errMsq: e.message ?? 'Error'));
     }
+  }
+
+  searchByName(String name) {
+    searched = [];
+    for (var element in pateints) {
+      if (element.name.toLowerCase().contains(name.toLowerCase())) {
+        searched.add(element);
+      }
+    }
+
+    emit(PatientSuccessState());
   }
 }
