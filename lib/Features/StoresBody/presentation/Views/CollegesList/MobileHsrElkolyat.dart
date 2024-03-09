@@ -121,7 +121,7 @@ class _MobileHsrElkolyatState extends State<MobileHsrElkolyat> {
                     if (monthValue != null && yearValue != null) {
                       collegesCubit.getCollegesList(
                           query: {"month": intMonthValue, "year": yearValue},
-                          token: authCubit.user.token);
+                          token: authCubit.user!.token);
                     }
                   },
                   text: S.of(context).Search,
