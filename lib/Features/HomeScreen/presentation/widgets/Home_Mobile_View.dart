@@ -12,9 +12,9 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Views/Mobile3ohdaElm
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileHsrElkolyat.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileImports.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileSrfEladwya.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/Mobile_Hsr_Elmabe3at.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/Mobile_Hsr_Elmabe3at.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Mobile_Medicines.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/widgets/Custom_Bottom_Sheet.dart';
+import 'package:gppharmacy/Utils/Custom_Bottom_Sheet.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class MobileHomeView extends StatefulWidget {

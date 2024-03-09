@@ -3,7 +3,7 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
-import 'package:gppharmacy/Utils/Constants.dart';
+
 import 'package:gppharmacy/generated/l10n.dart';
 
 class MobileAddAccountView extends StatefulWidget {
@@ -18,8 +18,7 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: PrimaryPaddingWidth, vertical: PrimaryPaddingHight),
+      padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 3),
       child: Form(
         child: SingleChildScrollView(
           child: Column(

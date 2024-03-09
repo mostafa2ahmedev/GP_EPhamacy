@@ -21,7 +21,6 @@ class CustomMobileDrawer extends StatelessWidget {
     return BlocConsumer<DrawerCubit, DrawerStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = BlocProvider.of<DrawerCubit>(context);
         return Container(
           color: Theme.of(context).drawerTheme.backgroundColor,
           width: MediaQuery.sizeOf(context).width * 0.7,
