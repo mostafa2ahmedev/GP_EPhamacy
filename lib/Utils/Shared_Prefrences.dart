@@ -12,6 +12,15 @@ class SharedPref {
     return await sharedPreferences.setBool(key, value);
   }
 
+  static Future<bool> saveString(
+      {required String key, required String value}) async {
+    return await sharedPreferences.setString(key, value);
+  }
+
+  static String? getString({required String key}) {
+    return sharedPreferences.getString(key);
+  }
+
   static bool? getData({required String key}) {
     return sharedPreferences.getBool(key);
   }

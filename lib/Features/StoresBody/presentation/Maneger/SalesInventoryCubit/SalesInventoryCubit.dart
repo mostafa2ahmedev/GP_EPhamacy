@@ -13,7 +13,6 @@ class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
 
 // get salesInventoryList
   void getSalesInventory({
-    required String token,
     required Map<String, dynamic> query,
   }) async {
     //
@@ -24,7 +23,6 @@ class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
       var response = await DioService.getDate(
         query: query,
         url: '/pharmacy/inventory/sales',
-        token: token,
       );
       for (Map<String, dynamic> element in response.data) {
         salesInventoryList.add(SalesInventoryModel.fromJson(json: element));
@@ -42,8 +40,8 @@ class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
   }) async {
     try {
       emit(getDetailsSalesInventoryLoadingState());
-      var response = await DioService.getDate(
-          url: '/pharmacy/medicines/$barcode', token: token);
+      var response =
+          await DioService.getDate(url: '/pharmacy/medicines/$barcode');
 
       salesInventoryModelDetails =
           SalesInventoryModelDetails.fromjson(json: response.data);

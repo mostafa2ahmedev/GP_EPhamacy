@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Utils/Constant.dart';
+import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
 
 class DioService {
   static late Dio dio;
@@ -15,15 +16,17 @@ class DioService {
     );
   }
 
-  static Future<Response> getDate(
-      {required String url,
-      Map<String, dynamic>? query,
-      required String token}) async {
+  static Future<Response> getDate({
+    required String url,
+    Map<String, dynamic>? query,
+  }) async {
     return await dio.get(
       url,
       queryParameters: query,
       options: Options(
-        headers: {"authorization": 'Bearer $token'},
+        headers: {
+          "authorization": 'Bearer ${SharedPref.getString(key: 'token')}'
+        },
       ),
     );
   }

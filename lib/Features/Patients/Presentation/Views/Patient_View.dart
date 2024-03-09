@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
+import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
+import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit_State.dart';
+import 'package:gppharmacy/Features/Patients/Presentation/widgets/ListViewOfPatient.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
@@ -22,6 +26,7 @@ class _PatientViewState extends State<PatientView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    BlocProvider.of<PateintCubit>(context).fetchAllPateint();
     controller = TextEditingController();
     controller.addListener(() {
       setState(() {});
@@ -106,20 +111,47 @@ class _PatientViewState extends State<PatientView> {
           const SizedBox(
             height: 24,
           ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-              decoration: BoxDecoration(
-                color: ColorManeger.lightPrimaryColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(
-                child: Text(
-                  'عذرا حدث خطا ما يرجي المحاوله لاحقا',
-                  style: AppStyles.styleBold16(context),
-                ),
-              ),
-            ),
+          BlocConsumer<PateintCubit, PateintCubitState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              if (state is PatientFaliureState) {
+                return Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 24),
+                    decoration: BoxDecoration(
+                      color: ColorManeger.lightPrimaryColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Text(
+                        state.errMsq,
+                        style: AppStyles.styleBold16(context),
+                      ),
+                    ),
+                  ),
+                );
+              } else if (state is PatientSuccessState ||
+                  state is PatientSearchingState) {
+                return ListViewOfPatient(
+                  patients: BlocProvider.of<PateintCubit>(context).searched,
+                );
+              } else {
+                return Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 24),
+                    decoration: BoxDecoration(
+                      color: ColorManeger.lightPrimaryColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              }
+            },
           )
         ],
       ),

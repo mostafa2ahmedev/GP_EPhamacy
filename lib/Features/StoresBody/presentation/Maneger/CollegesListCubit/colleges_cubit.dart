@@ -21,7 +21,6 @@ class CollegesCubit extends Cubit<CollegesState> {
       var response = await DioService.getDate(
         query: query,
         url: '/pharmacy/inventory/college',
-        token: token,
       );
       for (Map<String, dynamic> element in response.data) {
         collegesList.add(CollegesListModel.fromJson(json: element));
