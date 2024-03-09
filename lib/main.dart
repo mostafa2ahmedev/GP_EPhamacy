@@ -14,6 +14,7 @@ import 'package:gppharmacy/Utils/Themes.dart';
 
 import 'package:gppharmacy/generated/l10n.dart';
 
+// MOSTAFA
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
