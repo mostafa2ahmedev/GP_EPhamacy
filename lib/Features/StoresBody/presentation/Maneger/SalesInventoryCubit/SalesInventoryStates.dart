@@ -1,14 +1,11 @@
-part of 'SalesInventoryCubit.dart';
+abstract class SalesInventoryStates {}
 
-@immutable
-sealed class SalesInventoryStates {}
+class StoresCubitInitial extends SalesInventoryStates {}
 
-final class StoresCubitInitial extends SalesInventoryStates {}
+class GetSalesInventoryLoadingState extends SalesInventoryStates {}
 
-final class getSalesInventoryLoadingState extends SalesInventoryStates {}
+class GetDetailsSalesInventoryLoadingState extends SalesInventoryStates {}
 
-final class getDetailsSalesInventoryLoadingState extends SalesInventoryStates {}
+class GetSalesInventorySuccessState extends SalesInventoryStates {}
 
-final class getSalesInventorySuccessState extends SalesInventoryStates {}
-
-final class getSalesInventoryFailureState extends SalesInventoryStates {}
+class GetSalesInventoryFailureState extends SalesInventoryStates {}
