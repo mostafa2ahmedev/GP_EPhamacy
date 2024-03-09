@@ -1,7 +1,7 @@
 class SalesInventoryModel {
   final String name;
-  final String barcode;
-  final String amount;
+  final int barcode;
+  final int amount;
   // final String? strength;
 
   SalesInventoryModel({

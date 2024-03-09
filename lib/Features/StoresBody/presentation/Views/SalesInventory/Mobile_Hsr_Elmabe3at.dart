@@ -1,17 +1,12 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
-import 'package:gppharmacy/Features/StoresBody/data/Sales%20inventory.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/cubit/stores_cubit_cubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/widgets/CustomListViewForView.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/widgets/Custom_Bottom_Sheet.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/widgets/ListViewForView.dart';
+
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomListViewForView.dart';
+
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
@@ -26,17 +21,36 @@ class MobileHsrElmabe3at extends StatefulWidget {
 
 class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
   String? monthValue;
+  int? intMonthValue;
   String? yearValue;
   Color buttonColor = Colors.blueGrey;
+  List<String> items = const [
+    'يناير',
+    'فبراير',
+    'مارس',
+    'ابريل',
+    'مايو',
+    'يونيو',
+    'يوليو',
+    'اغسطس',
+    'سبتمبر',
+    'اكتوبر',
+    'نوفمبر',
+    'ديسمبر'
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<StoresCubit, StoresCubitState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+    return BlocConsumer<SalesInventoryCubit, SalesInventoryStates>(
+      listener: (context, state) {},
       builder: (context, state) {
-        var cubit = BlocProvider.of<StoresCubit>(context);
+        var storCubit = BlocProvider.of<SalesInventoryCubit>(context);
         var authCubit = BlocProvider.of<AuthCubit>(context);
+        if (state is getSalesInventoryLoadingState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           child: Column(
@@ -54,24 +68,13 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
                   Expanded(
                     child: CustomDropDownButton(
                       isExpanded: true,
-                      items: const [
-                        'يناير',
-                        'فبراير',
-                        'مارس',
-                        'ابريل',
-                        'مايو',
-                        'يونيو',
-                        'يوليو',
-                        'اغسطس',
-                        'سبتمبر',
-                        'اكتوبر',
-                        'نوفمبر',
-                        'ديسمبر'
-                      ],
+                      items: items,
                       hint: 'اختر الشهر',
                       onChanged: (value) {
                         setState(() {
                           monthValue = value;
+                          intMonthValue = items.indexOf(value!) + 1;
+                          print(intMonthValue);
                         });
                       },
                       value: monthValue,
@@ -117,15 +120,9 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
                       : ColorManeger.colorDisabled,
                   ontap: () {
                     if (monthValue != null && yearValue != null) {
-                      log(monthValue.toString());
-                      log(authCubit.user.token.toString());
-
-                      cubit.getSalesInventory(
-                        month: monthValue!,
-                        year: yearValue!,
-                        query: {'month': monthValue, 'year': yearValue},
-                        token: authCubit.user.token,
-                      );
+                      storCubit.getSalesInventory(
+                          query: {"month": intMonthValue, "year": yearValue},
+                          token: authCubit.user.token);
                     }
                   },
                   text: S.of(context).Search,
@@ -134,28 +131,24 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
               const SizedBox(
                 height: 24,
               ),
-              Visibility(
-                visible: false,
-                child: Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 24),
-                    decoration: BoxDecoration(
-                      color: ColorManeger.colorDisabled,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'عذرا حدث خطا ما يرجي المحاوله لاحقا',
-                        style: AppStyles.styleBold16(context),
+              storCubit.salesInventoryList.isEmpty
+                  ? Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 24),
+                        decoration: BoxDecoration(
+                          color: ColorManeger.colorDisabled,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'عذرا حدث خطا ما يرجي المحاوله لاحقا',
+                            style: AppStyles.styleBold16(context),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              const Expanded(
-                child: ListViewOfSalesInventory(),
-              ),
+                    )
+                  : const ListViewOfSalesInventory(),
             ],
           ),
         );

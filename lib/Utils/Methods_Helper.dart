@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
+import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 abstract class MethodHelper {
@@ -147,6 +149,100 @@ abstract class MethodHelper {
       initialDate: DateTime.now(),
       firstDate: dateTime ?? DateTime.now(),
       lastDate: DateTime(2030),
+    );
+  }
+
+  static showDetailsItem(BuildContext context,
+      {required SalesInventoryModelDetails salesInventoryModelDetails}) {
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+      showDragHandle: true,
+      isScrollControlled: true,
+      isDismissible: false,
+      elevation: 5,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.7,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                // singlechild
+                CustomDetailsItem(
+                  note: 'كود الدواء',
+                  data: salesInventoryModelDetails.barcode.toString(),
+                  icon: Icons.window,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'الاسم العربي',
+                  data: salesInventoryModelDetails.arabicname,
+                  icon: Icons.ac_unit_rounded,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'الاسم الانجليزي',
+                  data: salesInventoryModelDetails.englishname,
+                  icon: Icons.abc,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'الماده الفعاله',
+                  data: salesInventoryModelDetails.dosageform ?? 'null',
+                  icon: Icons.not_accessible,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'الشركه المصنعه',
+                  data: salesInventoryModelDetails.manufacturer,
+                  icon: Icons.compare,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'نوع الدواء',
+                  data: salesInventoryModelDetails.mediniceCategory.name,
+                  icon: Icons.type_specimen,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'تركيز الدواء',
+                  data: salesInventoryModelDetails.strength,
+                  icon: Icons.type_specimen,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'التنبيه قبل',
+                  data: salesInventoryModelDetails.alertexpired,
+                  icon: Icons.type_specimen,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'التنبيه قبل',
+                  data: salesInventoryModelDetails.alertamount.toString(),
+                  icon: Icons.type_specimen,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
