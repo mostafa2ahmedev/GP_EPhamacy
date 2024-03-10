@@ -13,7 +13,7 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Views/CollegesList/M
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileImports.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileSrfEladwya.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/Mobile_Hsr_Elmabe3at.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/Mobile_Medicines.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Mobile_Medicines.dart';
 import 'package:gppharmacy/Utils/Custom_Bottom_Sheet.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 

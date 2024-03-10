@@ -162,7 +162,7 @@ abstract class MethodHelper {
   }
 
   static showDetailsItem(BuildContext context,
-      {required SalesInventoryModelDetails salesInventoryModelDetails}) {
+      {required MedicineModel salesInventoryModelDetails}) {
     showModalBottomSheet(
       backgroundColor: Colors.white,
       showDragHandle: true,

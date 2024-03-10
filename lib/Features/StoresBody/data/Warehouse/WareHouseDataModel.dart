@@ -2,7 +2,7 @@ import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSal
 
 class WarehouseDataModel {
   final int amount;
-  final SalesInventoryModelDetails salesInventoryModelDetails;
+  final MedicineModel salesInventoryModelDetails;
 
   WarehouseDataModel(
       {required this.amount, required this.salesInventoryModelDetails});
@@ -10,7 +10,7 @@ class WarehouseDataModel {
   factory WarehouseDataModel.fromJson({required Map<String, dynamic> json}) {
     return WarehouseDataModel(
       amount: json['amount'],
-      salesInventoryModelDetails: SalesInventoryModelDetails.fromjson(
+      salesInventoryModelDetails: MedicineModel.fromjson(
         json: json['medicine'],
       ),
     );

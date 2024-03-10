@@ -7,7 +7,7 @@ import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/Sales%20inven
 class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
   SalesInventoryCubit() : super(StoresCubitInitial());
   List<SalesInventoryModel> salesInventoryList = [];
-  SalesInventoryModelDetails? salesInventoryModelDetails;
+  MedicineModel? salesInventoryModelDetails;
 
 // get salesInventoryList
   void getSalesInventory({
@@ -43,8 +43,7 @@ class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
       var response = await DioService.getDate(
           url: '/pharmacy/medicines/$barcode', token: token);
 
-      salesInventoryModelDetails =
-          SalesInventoryModelDetails.fromjson(json: response.data);
+      salesInventoryModelDetails = MedicineModel.fromjson(json: response.data);
 
       emit(GetSalesInventorySuccessState());
     } catch (e) {

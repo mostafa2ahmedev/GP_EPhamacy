@@ -1,6 +1,6 @@
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/medicineCategoryModel.dart';
 
-class SalesInventoryModelDetails {
+class MedicineModel {
   final int id;
   final int barcode;
   final String englishname;
@@ -13,7 +13,7 @@ class SalesInventoryModelDetails {
   final String alertexpired;
   final MediniceCategory mediniceCategory;
 
-  SalesInventoryModelDetails({
+  MedicineModel({
     required this.id,
     required this.barcode,
     required this.englishname,
@@ -27,9 +27,8 @@ class SalesInventoryModelDetails {
     required this.mediniceCategory,
   });
 
-  factory SalesInventoryModelDetails.fromjson(
-      {required Map<String, dynamic> json}) {
-    return SalesInventoryModelDetails(
+  factory MedicineModel.fromjson({required Map<String, dynamic> json}) {
+    return MedicineModel(
       id: json['id'],
       barcode: json['barcode'],
       englishname: json['name'],
