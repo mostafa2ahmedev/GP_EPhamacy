@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
+import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
+import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit_State.dart';
+import 'package:gppharmacy/Features/Patients/Presentation/widgets/ListViewOfPatient.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
@@ -15,13 +19,14 @@ class PatientView extends StatefulWidget {
 
 class _PatientViewState extends State<PatientView> {
   String wayOfSearch = 'الرقم القومي للطالب';
-  String? typeOfDisease;
+  String typeOfDisease = 'الكل';
   late TextEditingController controller;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    BlocProvider.of<PateintCubit>(context).fetchAllPateint();
     controller = TextEditingController();
     controller.addListener(() {
       setState(() {});
@@ -66,11 +71,11 @@ class _PatientViewState extends State<PatientView> {
               Expanded(
                 child: CustomDropDownButton(
                   isExpanded: true,
-                  items: const ['مرض مزمن', 'مرض غير مزمن'],
-                  hint: 'اختر نوع المرض',
+                  items: const ['الكل', 'مريض مزمن', 'مريض غير مزمن'],
+                  hint: 'اختر نوع المريض',
                   onChanged: (value) {
                     setState(() {
-                      typeOfDisease = value;
+                      typeOfDisease = value!;
                     });
                   },
                   value: typeOfDisease,
@@ -84,6 +89,8 @@ class _PatientViewState extends State<PatientView> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: AuthTextField(
+                onChanged: (value) => BlocProvider.of<PateintCubit>(context)
+                    .searchByName(value, wayOfSearch, typeOfDisease),
                 controller: controller,
                 hintText: 'ادخل $wayOfSearch',
                 hintStyle: AppStyles.styleRegular16(context)
@@ -92,34 +99,45 @@ class _PatientViewState extends State<PatientView> {
           const SizedBox(
             height: 24,
           ),
-          Center(
-            child: CustomButton(
-              buttonColor: (typeOfDisease != null && controller.text.isNotEmpty)
-                  ? Theme.of(context).drawerTheme.backgroundColor!
-                  : ColorManeger.colorDisabled,
-              ontap: () {
-                if (controller.text.isNotEmpty && typeOfDisease != null) {}
-              },
-              text: S.of(context).Search,
-            ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-              decoration: BoxDecoration(
-                color: ColorManeger.lightPrimaryColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(
-                child: Text(
-                  'عذرا حدث خطا ما يرجي المحاوله لاحقا',
-                  style: AppStyles.styleBold16(context),
-                ),
-              ),
-            ),
+          BlocBuilder<PateintCubit, PateintCubitState>(
+            builder: (context, state) {
+              if (state is PatientFaliureState) {
+                return Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 24),
+                    decoration: BoxDecoration(
+                      color: ColorManeger.lightPrimaryColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Text(
+                        state.errMsq,
+                        style: AppStyles.styleBold16(context),
+                      ),
+                    ),
+                  ),
+                );
+              } else if (state is PatientSuccessState) {
+                return ListViewOfPatient(
+                  patients: BlocProvider.of<PateintCubit>(context).searched,
+                );
+              } else {
+                return Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 24),
+                    decoration: BoxDecoration(
+                      color: ColorManeger.lightPrimaryColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              }
+            },
           )
         ],
       ),

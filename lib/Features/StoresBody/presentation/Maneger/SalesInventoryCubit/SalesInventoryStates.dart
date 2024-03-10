@@ -4,7 +4,7 @@ class StoresCubitInitial extends SalesInventoryStates {}
 
 class GetSalesInventoryLoadingState extends SalesInventoryStates {}
 
-class GetDetailsSalesInventoryLoadingState extends SalesInventoryStates {}
+class GetCollegesListLoadingState extends SalesInventoryStates {}
 
 class GetSalesInventorySuccessState extends SalesInventoryStates {}
 

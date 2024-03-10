@@ -23,7 +23,6 @@ class WarehouseCubit extends Cubit<WarehouseState> {
       var response = await DioService.getDate(
         query: query,
         url: '/pharmacy/inventory/all',
-        token: token,
       );
       for (Map<String, dynamic> element in response.data) {
         warehouseList.add(WarehouseDataModel.fromJson(json: element));
