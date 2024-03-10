@@ -37,7 +37,7 @@ class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
     required String token,
   }) async {
     try {
-      emit(getDetailsSalesInventoryLoadingState());
+      emit(GetSalesInventoryLoadingState());
       var response =
           await DioService.getDate(url: '/pharmacy/medicines/$barcode');
 

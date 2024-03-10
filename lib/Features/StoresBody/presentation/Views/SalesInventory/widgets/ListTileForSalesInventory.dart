@@ -20,7 +20,7 @@ class ListTileForSalesInventory extends StatelessWidget {
         var storeCubit = BlocProvider.of<SalesInventoryCubit>(context);
         var authCubit = BlocProvider.of<AuthCubit>(context);
 
-        if (state is GetDetailsSalesInventoryLoadingState) {
+        if (state is GetSalesInventoryLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }
         return GestureDetector(
