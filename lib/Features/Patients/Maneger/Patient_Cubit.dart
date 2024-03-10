@@ -27,11 +27,51 @@ class PateintCubit extends Cubit<PateintCubitState> {
     }
   }
 
-  searchByName(String name) {
+  searchByName(String value, String searchtype, String isChronic) {
     searched = [];
-    for (var element in pateints) {
-      if (element.name.toLowerCase().contains(name.toLowerCase())) {
-        searched.add(element);
+    if (isChronic == 'الكل') {
+      if (searchtype == 'الرقم القومي للطالب') {
+        for (var element in pateints) {
+          if ('${element.national_id}'.contains(value)) {
+            searched.add(element);
+          }
+        }
+      } else {
+        for (var element in pateints) {
+          if (element.name.toLowerCase().contains(value.toLowerCase())) {
+            searched.add(element);
+          }
+        }
+      }
+    } else if (isChronic == 'مريض مزمن') {
+      if (searchtype == 'الرقم القومي للطالب') {
+        for (var element in pateints) {
+          if ('${element.national_id}'.contains(value) && element.chronic) {
+            searched.add(element);
+          }
+        }
+      } else {
+        for (var element in pateints) {
+          if (element.name.toLowerCase().contains(value.toLowerCase()) &&
+              element.chronic) {
+            searched.add(element);
+          }
+        }
+      }
+    } else {
+      if (searchtype == 'الرقم القومي للطالب') {
+        for (var element in pateints) {
+          if ('${element.national_id}'.contains(value) && !element.chronic) {
+            searched.add(element);
+          }
+        }
+      } else {
+        for (var element in pateints) {
+          if (element.name.toLowerCase().contains(value.toLowerCase()) &&
+              !element.chronic) {
+            searched.add(element);
+          }
+        }
       }
     }
 

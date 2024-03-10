@@ -19,7 +19,7 @@ class PatientView extends StatefulWidget {
 
 class _PatientViewState extends State<PatientView> {
   String wayOfSearch = 'الرقم القومي للطالب';
-  String? typeOfDisease;
+  String typeOfDisease = 'الكل';
   late TextEditingController controller;
 
   @override
@@ -71,11 +71,11 @@ class _PatientViewState extends State<PatientView> {
               Expanded(
                 child: CustomDropDownButton(
                   isExpanded: true,
-                  items: const ['مرض مزمن', 'مرض غير مزمن'],
-                  hint: 'اختر نوع المرض',
+                  items: const ['الكل', 'مريض مزمن', 'مريض غير مزمن'],
+                  hint: 'اختر نوع المريض',
                   onChanged: (value) {
                     setState(() {
-                      typeOfDisease = value;
+                      typeOfDisease = value!;
                     });
                   },
                   value: typeOfDisease,
@@ -89,8 +89,8 @@ class _PatientViewState extends State<PatientView> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: AuthTextField(
-                onChanged: (value) =>
-                    BlocProvider.of<PateintCubit>(context).searchByName(value),
+                onChanged: (value) => BlocProvider.of<PateintCubit>(context)
+                    .searchByName(value, wayOfSearch, typeOfDisease),
                 controller: controller,
                 hintText: 'ادخل $wayOfSearch',
                 hintStyle: AppStyles.styleRegular16(context)
@@ -99,22 +99,7 @@ class _PatientViewState extends State<PatientView> {
           const SizedBox(
             height: 24,
           ),
-          Center(
-            child: CustomButton(
-              buttonColor: (typeOfDisease != null && controller.text.isNotEmpty)
-                  ? Theme.of(context).drawerTheme.backgroundColor!
-                  : ColorManeger.colorDisabled,
-              ontap: () {
-                if (controller.text.isNotEmpty && typeOfDisease != null) {}
-              },
-              text: S.of(context).Search,
-            ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          BlocConsumer<PateintCubit, PateintCubitState>(
-            listener: (context, state) {},
+          BlocBuilder<PateintCubit, PateintCubitState>(
             builder: (context, state) {
               if (state is PatientFaliureState) {
                 return Expanded(
