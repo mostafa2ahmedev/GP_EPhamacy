@@ -15,7 +15,7 @@ class MedicineCubit extends Cubit<MedicineState> {
 
     try {
       var response = await DioService.getDate(
-          url: '/pharmacy/medicines/category/$typeOfSearch', token: token);
+          url: '/pharmacy/medicines/category/$typeOfSearch');
 
       medicinesList.add(MedicineModel.fromjson(json: response.data));
       searchedList = medicinesList;
