@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
 
 class ListTileForPatient extends StatelessWidget {
   final PatientModel patientModel;
@@ -8,7 +9,9 @@ class ListTileForPatient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {},
+      onTap: () {
+        MethodHelper.ShowPatientDetails(context, patientModel: patientModel);
+      },
       child: ListTile(
         title: Text(patientModel.name),
         subtitle: Text('${patientModel.national_id}'),

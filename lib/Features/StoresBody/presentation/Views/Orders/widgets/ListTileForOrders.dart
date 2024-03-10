@@ -8,7 +8,7 @@ class ListTileForOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {},
+      onTap: () {},
       child: ListTile(
         title: Text(orderModel.supplier.name),
         subtitle: Text(orderModel.dateofsupply),

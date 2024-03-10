@@ -7,6 +7,7 @@ import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
+import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/WareHouse/cubit/warehouse_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
@@ -248,6 +249,91 @@ abstract class MethodHelper {
                   icon: Icons.type_specimen,
                 ),
               ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  static ShowPatientDetails(BuildContext context,
+      {required PatientModel patientModel}) {
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+      showDragHandle: true,
+      isScrollControlled: true,
+      isDismissible: false,
+      elevation: 5,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.7,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomDetailsItem(
+                    note: 'اسم المريض',
+                    data: patientModel.name,
+                    icon: Icons.abc,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'الرقم القومي',
+                    data: patientModel.national_id.toString(),
+                    icon: Icons.type_specimen,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'الكلية',
+                    data: patientModel.collegeName,
+                    icon: Icons.calendar_view_week_rounded,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'الفرقة',
+                    data: patientModel.level,
+                    icon: Icons.unarchive,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'النوع',
+                    data: patientModel.gender,
+                    icon: Icons.man,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'رقم التليفون',
+                    data: patientModel.phone_number,
+                    icon: Icons.phone,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  patientModel.chronic
+                      ? CustomDetailsItem(
+                          note: 'الامراض',
+                          data: patientModel.diseases
+                              .map((disease) => disease.name)
+                              .join(', '),
+                          icon: Icons.coronavirus_rounded,
+                        )
+                      : const SizedBox(
+                          height: 8,
+                        ),
+                ],
+              ),
             ),
           ),
         );
