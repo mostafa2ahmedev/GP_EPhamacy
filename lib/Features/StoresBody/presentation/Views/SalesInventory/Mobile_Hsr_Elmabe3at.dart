@@ -5,6 +5,7 @@ import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryStates.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/ListViewOfSalesInventory.dart';
 
 import 'package:gppharmacy/Utils/AppStyles.dart';
@@ -46,7 +47,7 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
       builder: (context, state) {
         var storCubit = BlocProvider.of<SalesInventoryCubit>(context);
         var authCubit = BlocProvider.of<AuthCubit>(context);
-        if (state is getSalesInventoryLoadingState) {
+        if (state is GetSalesInventoryLoadingState) {
           return const Center(
             child: CircularProgressIndicator(),
           );

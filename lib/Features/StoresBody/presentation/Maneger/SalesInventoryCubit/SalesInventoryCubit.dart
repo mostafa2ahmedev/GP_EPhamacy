@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryStates.dart';
 import 'package:gppharmacy/Utils/DioService.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/Sales%20inventoryModel.dart';
-import 'package:meta/meta.dart';
-
-part 'SalesInventoryStates.dart';
 
 class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
   SalesInventoryCubit() : super(StoresCubitInitial());
@@ -16,7 +14,7 @@ class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
     required Map<String, dynamic> query,
   }) async {
     //
-    emit(getSalesInventoryLoadingState());
+    emit(GetSalesInventoryLoadingState());
 
     try {
       salesInventoryList = [];
@@ -27,9 +25,9 @@ class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
       for (Map<String, dynamic> element in response.data) {
         salesInventoryList.add(SalesInventoryModel.fromJson(json: element));
       }
-      emit(getSalesInventorySuccessState());
+      emit(GetSalesInventorySuccessState());
     } catch (e) {
-      emit(getSalesInventoryFailureState());
+      emit(GetSalesInventoryFailureState());
       print(e.toString());
     }
   }
@@ -46,9 +44,9 @@ class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
       salesInventoryModelDetails =
           SalesInventoryModelDetails.fromjson(json: response.data);
 
-      emit(getSalesInventorySuccessState());
+      emit(GetSalesInventorySuccessState());
     } catch (e) {
-      emit(getSalesInventoryFailureState());
+      emit(GetSalesInventoryFailureState());
     }
   }
 }

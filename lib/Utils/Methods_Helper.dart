@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
+
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/WareHouse/cubit/warehouse_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
+
 import 'package:gppharmacy/generated/l10n.dart';
 
 abstract class MethodHelper {
@@ -59,6 +64,10 @@ abstract class MethodHelper {
         case "عهدة المخزن" || "3ohdeElm5zn":
           cubit.innerFirstSelectedIndex = 2;
           cubit.data1 = S.of(context).H3ohdeElm5zn;
+
+          BlocProvider.of<WarehouseCubit>(context).getWarehouseData(
+            token: BlocProvider.of<AuthCubit>(context).user!.token,
+          );
           break;
         case "الواردات" || "Imports":
           cubit.innerFirstSelectedIndex = 3;

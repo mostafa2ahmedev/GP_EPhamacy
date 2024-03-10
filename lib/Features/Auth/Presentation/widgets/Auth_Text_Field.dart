@@ -29,23 +29,26 @@ class AuthTextField extends StatelessWidget {
   final String? label;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: keyboardType,
-      onChanged: onChanged,
-      controller: controller,
-      validator: validator,
-      onFieldSubmitted: onSubmitted,
-      onSaved: onSaved,
-      decoration: InputDecoration(
-        label: Text(
-          label ?? '',
-          style: AppStyles.styleMeduim16(context),
+    return SizedBox(
+      height: 50,
+      child: TextFormField(
+        keyboardType: keyboardType,
+        onChanged: onChanged,
+        controller: controller,
+        validator: validator,
+        onFieldSubmitted: onSubmitted,
+        onSaved: onSaved,
+        decoration: InputDecoration(
+          label: Text(
+            label ?? '',
+            style:
+                AppStyles.styleMeduim16(context).copyWith(color: Colors.grey),
+          ),
+          suffixIcon: suffixIcon,
+          hintStyle: const TextStyle(color: Colors.grey),
+          enabledBorder: BuildBorder(true),
+          focusedBorder: BuildBorder(false),
         ),
-        suffixIcon: suffixIcon,
-        hintText: hintText,
-        hintStyle: hintStyle,
-        enabledBorder: BuildBorder(true),
-        focusedBorder: BuildBorder(false),
       ),
     );
   }

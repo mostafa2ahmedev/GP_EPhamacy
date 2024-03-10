@@ -4,6 +4,7 @@ import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_Mobile_
 import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/CollegesListCubit/colleges_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/WareHouse/cubit/warehouse_cubit.dart';
 import 'package:gppharmacy/Utils/AdaptiveLayout.dart';
 
 class HomeView extends StatelessWidget {
@@ -21,6 +22,9 @@ class HomeView extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => PateintCubit(),
+        ),
+        BlocProvider(
+          create: (context) => WarehouseCubit(),
         )
       ],
       child: AdaptiveLayout(

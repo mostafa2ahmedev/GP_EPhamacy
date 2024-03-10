@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/Sales%20inventoryModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryStates.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
 
 class ListTileForSalesInventory extends StatelessWidget {
@@ -19,7 +20,7 @@ class ListTileForSalesInventory extends StatelessWidget {
         var storeCubit = BlocProvider.of<SalesInventoryCubit>(context);
         var authCubit = BlocProvider.of<AuthCubit>(context);
 
-        if (state is getDetailsSalesInventoryLoadingState) {
+        if (state is GetDetailsSalesInventoryLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }
         return GestureDetector(
