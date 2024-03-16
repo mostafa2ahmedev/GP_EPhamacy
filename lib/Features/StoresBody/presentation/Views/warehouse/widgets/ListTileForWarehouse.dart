@@ -19,8 +19,7 @@ class ListTileForWarehouse extends StatelessWidget {
         return GestureDetector(
           onTap: () async {
             MethodHelper.showDetailsItem(context,
-                salesInventoryModelDetails:
-                    warehouseDataModel.salesInventoryModelDetails);
+                medicineModel: warehouseDataModel.salesInventoryModelDetails);
           },
           child: ListTile(
             title:

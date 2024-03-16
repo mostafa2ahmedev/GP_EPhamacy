@@ -62,3 +62,56 @@ class AuthTextField extends StatelessWidget {
     );
   }
 }
+
+class TextFieldForEditData extends StatefulWidget {
+  const TextFieldForEditData(
+      {super.key,
+      required this.label,
+      this.editedDataStr,
+      this.edidtedDataInt,
+      this.suffixIcon});
+  final String label;
+  final String? editedDataStr;
+  final int? edidtedDataInt;
+  final Widget? suffixIcon;
+
+  @override
+  State<TextFieldForEditData> createState() => _TextFieldForEditDataState();
+}
+
+class _TextFieldForEditDataState extends State<TextFieldForEditData> {
+  @override
+  late TextEditingController textEditingController;
+  @override
+  void initState() {
+    super.initState();
+    textEditingController = TextEditingController(
+        text: widget.editedDataStr ?? widget.edidtedDataInt.toString());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: textEditingController,
+      decoration: InputDecoration(
+        label: Text(
+          widget.label ?? '',
+          style: AppStyles.styleMeduim16(context).copyWith(color: Colors.grey),
+        ),
+        suffixIcon: widget.suffixIcon,
+        hintStyle: const TextStyle(color: Colors.grey),
+        enabledBorder: BuildBorder(true),
+        focusedBorder: BuildBorder(false),
+      ),
+    );
+  }
+
+  OutlineInputBorder BuildBorder(bool isEnabled) {
+    return OutlineInputBorder(
+      borderSide: isEnabled
+          ? const BorderSide(color: Colors.grey)
+          : const BorderSide(color: ColorManeger.lightPrimaryColor),
+      borderRadius: BorderRadius.circular(12),
+    );
+  }
+}

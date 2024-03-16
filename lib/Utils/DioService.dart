@@ -34,4 +34,15 @@ class DioService {
       {required String url, required Map<String, dynamic> data}) async {
     return await dio.post(url, data: data);
   }
+
+  static Future updateData(
+      {required String url, required Map<String, dynamic> query}) async {
+    await dio.put(url,
+        options: Options(
+          headers: {
+            "authorization": 'Bearer ${SharedPref.getString(key: 'token')}'
+          },
+        ),
+        data: query);
+  }
 }

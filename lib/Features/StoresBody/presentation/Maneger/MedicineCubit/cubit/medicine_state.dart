@@ -6,6 +6,10 @@ class MedicineInitial extends MedicineState {}
 
 class GetMedicineDataLoadingState extends MedicineState {}
 
-class GetMedicineDataFailureState extends MedicineState {}
-
 class GetMedicineDataSuccessState extends MedicineState {}
+
+class SearchinMedicineDataSuccessState extends MedicineState {}
+
+class UpdateMedicineDataSuccessState extends MedicineState {}
+
+class UpdateMedicineDataLoadingState extends MedicineState {}

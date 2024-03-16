@@ -30,8 +30,7 @@ class ListTileForSalesInventory extends StatelessWidget {
               token: authCubit.user!.token,
             );
             MethodHelper.showDetailsItem(context,
-                salesInventoryModelDetails:
-                    storeCubit.salesInventoryModelDetails!);
+                medicineModel: storeCubit.salesInventoryModelDetails!);
           },
           child: ListTile(
             title: Text(salesInventoryModel.name),

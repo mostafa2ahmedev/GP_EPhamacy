@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.da
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/WareHouse/cubit/warehouse_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
 
@@ -162,7 +164,7 @@ abstract class MethodHelper {
   }
 
   static showDetailsItem(BuildContext context,
-      {required MedicineModel salesInventoryModelDetails}) {
+      {required MedicineModel medicineModel}) {
     showModalBottomSheet(
       backgroundColor: Colors.white,
       showDragHandle: true,
@@ -180,7 +182,7 @@ abstract class MethodHelper {
                 // singlechild
                 CustomDetailsItem(
                   note: 'كود الدواء',
-                  data: salesInventoryModelDetails.barcode.toString(),
+                  data: medicineModel.barcode.toString(),
                   icon: Icons.window,
                 ),
                 const SizedBox(
@@ -188,7 +190,7 @@ abstract class MethodHelper {
                 ),
                 CustomDetailsItem(
                   note: 'الاسم العربي',
-                  data: salesInventoryModelDetails.arabicname,
+                  data: medicineModel.arabicname,
                   icon: Icons.ac_unit_rounded,
                 ),
                 const SizedBox(
@@ -196,7 +198,7 @@ abstract class MethodHelper {
                 ),
                 CustomDetailsItem(
                   note: 'الاسم الانجليزي',
-                  data: salesInventoryModelDetails.englishname,
+                  data: medicineModel.englishname,
                   icon: Icons.abc,
                 ),
                 const SizedBox(
@@ -204,7 +206,7 @@ abstract class MethodHelper {
                 ),
                 CustomDetailsItem(
                   note: 'الماده الفعاله',
-                  data: salesInventoryModelDetails.dosageform ?? 'null',
+                  data: medicineModel.dosageform ?? 'null',
                   icon: Icons.not_accessible,
                 ),
                 const SizedBox(
@@ -212,7 +214,7 @@ abstract class MethodHelper {
                 ),
                 CustomDetailsItem(
                   note: 'الشركه المصنعه',
-                  data: salesInventoryModelDetails.manufacturer,
+                  data: medicineModel.manufacturer,
                   icon: Icons.compare,
                 ),
                 const SizedBox(
@@ -220,7 +222,7 @@ abstract class MethodHelper {
                 ),
                 CustomDetailsItem(
                   note: 'نوع الدواء',
-                  data: salesInventoryModelDetails.mediniceCategory.name,
+                  data: medicineModel.mediniceCategory.name,
                   icon: Icons.type_specimen,
                 ),
                 const SizedBox(
@@ -228,7 +230,7 @@ abstract class MethodHelper {
                 ),
                 CustomDetailsItem(
                   note: 'تركيز الدواء',
-                  data: salesInventoryModelDetails.strength,
+                  data: medicineModel.strength ?? '',
                   icon: Icons.type_specimen,
                 ),
                 const SizedBox(
@@ -236,7 +238,7 @@ abstract class MethodHelper {
                 ),
                 CustomDetailsItem(
                   note: 'التنبيه قبل',
-                  data: salesInventoryModelDetails.alertexpired,
+                  data: medicineModel.alertexpired,
                   icon: Icons.type_specimen,
                 ),
                 const SizedBox(
@@ -244,7 +246,7 @@ abstract class MethodHelper {
                 ),
                 CustomDetailsItem(
                   note: 'التنبيه قبل',
-                  data: salesInventoryModelDetails.alertamount.toString(),
+                  data: medicineModel.alertamount.toString(),
                   icon: Icons.type_specimen,
                 ),
               ],
@@ -254,4 +256,101 @@ abstract class MethodHelper {
       },
     );
   }
+
+  // static EditDetialsItem(BuildContext context,
+  //     {required MedicineModel medicineModel}) {
+  //   showModalBottomSheet(
+  //     backgroundColor: Colors.white,
+  //     showDragHandle: true,
+  //     isScrollControlled: true,
+  //     isDismissible: false,
+  //     elevation: 5,
+  //     context: context,
+  //     builder: (context) {
+  //       return SizedBox(
+  //         height: MediaQuery.sizeOf(context).height * 0.7,
+  //         child: Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: SingleChildScrollView(
+  //             child: Column(
+  //               children: [
+  //                 TextFieldForEditData(
+  //                   label: 'الاسم بالانجليزي',
+  //                   editedDataStr: medicineModel.englishname,
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 TextFieldForEditData(
+  //                   label: 'الاسم بالعربي',
+  //                   editedDataStr: medicineModel.arabicname,
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 TextFieldForEditData(
+  //                   label: 'الماده الفعاله',
+  //                   editedDataStr: medicineModel.dosageform,
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 TextFieldForEditData(
+  //                   label: 'نوع العنصر ',
+  //                   editedDataStr: medicineModel.mediniceCategory.name,
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 TextFieldForEditData(
+  //                   label: 'الشركه المصنعه',
+  //                   editedDataStr: medicineModel.manufacturer,
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 TextFieldForEditData(
+  //                   label: 'كود العنصر ',
+  //                   edidtedDataInt: medicineModel.barcode,
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 TextFieldForEditData(
+  //                   label: 'التنيه قبل',
+  //                   editedDataStr: medicineModel.alertexpired,
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 TextFieldForEditData(
+  //                   label: 'التنيه قبل',
+  //                   edidtedDataInt: medicineModel.alertamount,
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 TextFieldForEditData(
+  //                   label: 'التركيز',
+  //                   editedDataStr: medicineModel.strength,
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 8,
+  //                 ),
+  //                 CustomButton(
+  //                     text: 'حفظ التعديلات',
+  //                     ontap: () {
+  //                       BlocProvider.of<MedicineCubit>(context)
+  //                           .updateMedicineData(medicineModel: medicineModel);
+  //                     },
+  //                     buttonColor:
+  //                         Theme.of(context).drawerTheme.backgroundColor!)
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }

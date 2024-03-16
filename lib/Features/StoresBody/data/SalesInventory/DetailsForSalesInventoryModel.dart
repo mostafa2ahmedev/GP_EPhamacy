@@ -6,7 +6,7 @@ class MedicineModel {
   final String englishname;
   final String arabicname;
   final String? dosageform;
-  final String strength;
+  final String? strength;
   final String activeingredient;
   final String manufacturer;
   final int alertamount;
@@ -33,8 +33,8 @@ class MedicineModel {
       barcode: json['barcode'],
       englishname: json['name'],
       arabicname: json['arabicname'],
-      dosageform: json['dosageform'],
-      strength: json['strength'],
+      dosageform: json['dosageform'] ?? '',
+      strength: json['strength'] ?? '',
       activeingredient: json['activeingredient'],
       manufacturer: json['manufacturer'],
       alertamount: json['alertamount'],
