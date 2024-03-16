@@ -11,7 +11,7 @@ import 'package:gppharmacy/Features/Patients/Presentation/Views/Patient_View.dar
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/warehouse/warehouse.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/CollegesList/MobileHsrElkolyat.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileImports.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/MobileSrfEladwya.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/MobileSrfEladwya.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/Mobile_Hsr_Elmabe3at.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Mobile_Medicines.dart';
 import 'package:gppharmacy/Utils/Custom_Bottom_Sheet.dart';

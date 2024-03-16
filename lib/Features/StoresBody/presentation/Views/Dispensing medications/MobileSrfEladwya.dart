@@ -73,7 +73,7 @@ class _MobileSrfEladwyaState extends State<MobileSrfEladwya> {
                     'جميع الروشتات',
                     'الروشتات المصروفه',
                   ],
-                  hint: 'اختر نوع الدواء',
+                  hint: 'اختر نوع الروشته',
                   onChanged: (value) {
                     setState(() {
                       typeOfRosheta = value;
