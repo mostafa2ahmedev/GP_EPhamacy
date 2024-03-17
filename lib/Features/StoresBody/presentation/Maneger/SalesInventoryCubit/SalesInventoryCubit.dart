@@ -34,18 +34,14 @@ class SalesInventoryCubit extends Cubit<SalesInventoryStates> {
 
   Future getSalesInventoryItemDetails({
     required String barcode,
-    required String token,
   }) async {
     try {
-      emit(GetSalesInventoryLoadingState());
       var response =
           await DioService.getDate(url: '/pharmacy/medicines/$barcode');
 
       salesInventoryModelDetails = MedicineModel.fromjson(json: response.data);
 
-      emit(GetSalesInventorySuccessState());
-    } catch (e) {
-      emit(GetSalesInventoryFailureState());
-    }
+      emit(GetSalesInventoryItemDetailsSuccessState());
+    } catch (e) {}
   }
 }

@@ -8,13 +8,15 @@ import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Custom_Drawe
 import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_App_Bar.dart';
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Add_New_Patient.dart';
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Patient_View.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/warehouse/warehouse.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/CollegesList/MobileHsrElkolyat.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/MobileImports.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/MobileSrfEladwya.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/Mobile_Hsr_Elmabe3at.dart';
+
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Mobile_Medicines.dart';
 import 'package:gppharmacy/Utils/Custom_Bottom_Sheet.dart';
+import 'package:gppharmacy/Utils/Widgets/BlocsIntegrator.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class MobileHomeView extends StatefulWidget {
@@ -29,7 +31,7 @@ class _MobileHomeViewState extends State<MobileHomeView> {
 
   static const List<List<Widget>> bodyWidgets = [
     [
-      MobileHsrElmabe3at(),
+      SalesBlocIntegrator(),
       MobileMedicines(),
       Warehouse(),
       MobileImports(),

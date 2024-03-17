@@ -104,10 +104,10 @@ abstract class AppStyles {
 
   static TextStyle styleBold28(BuildContext context) {
     return TextStyle(
-      color: const Color(0xff064060),
-      fontSize: getResponsiveFontSize(context, fontSize: 28),
-      fontFamily: 'Montserrat',
-      fontWeight: FontWeight.w700,
-    );
+        color: const Color(0xff064060),
+        fontSize: getResponsiveFontSize(context, fontSize: 28),
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.w800,
+        fontStyle: FontStyle.italic);
   }
 }

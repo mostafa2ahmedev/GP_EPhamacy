@@ -178,79 +178,88 @@ abstract class MethodHelper {
           height: MediaQuery.sizeOf(context).height * 0.7,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                // singlechild
-                CustomDetailsItem(
-                  note: 'كود الدواء',
-                  data: medicineModel.barcode.toString(),
-                  icon: Icons.window,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CustomDetailsItem(
-                  note: 'الاسم العربي',
-                  data: medicineModel.arabicname,
-                  icon: Icons.ac_unit_rounded,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CustomDetailsItem(
-                  note: 'الاسم الانجليزي',
-                  data: medicineModel.englishname,
-                  icon: Icons.abc,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CustomDetailsItem(
-                  note: 'الماده الفعاله',
-                  data: medicineModel.dosageform ?? 'null',
-                  icon: Icons.not_accessible,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CustomDetailsItem(
-                  note: 'الشركه المصنعه',
-                  data: medicineModel.manufacturer,
-                  icon: Icons.compare,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CustomDetailsItem(
-                  note: 'نوع الدواء',
-                  data: medicineModel.mediniceCategory.name,
-                  icon: Icons.type_specimen,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CustomDetailsItem(
-                  note: 'تركيز الدواء',
-                  data: medicineModel.strength ?? '',
-                  icon: Icons.type_specimen,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CustomDetailsItem(
-                  note: 'التنبيه قبل',
-                  data: medicineModel.alertexpired,
-                  icon: Icons.type_specimen,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                CustomDetailsItem(
-                  note: 'التنبيه قبل',
-                  data: medicineModel.alertamount.toString(),
-                  icon: Icons.type_specimen,
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // singlechild
+                  CustomDetailsItem(
+                    note: 'كود الدواء',
+                    data: medicineModel.barcode.toString(),
+                    icon: Icons.window,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'الاسم العربي',
+                    data: medicineModel.arabicname,
+                    icon: Icons.ac_unit_rounded,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'الاسم الانجليزي',
+                    data: medicineModel.englishname,
+                    icon: Icons.abc,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'الماده الفعاله',
+                    data: medicineModel.dosageform == ''
+                        ? 'لا يوجد'
+                        : medicineModel.dosageform!,
+                    icon: Icons.not_accessible,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'الشركه المصنعه',
+                    data: medicineModel.manufacturer,
+                    icon: Icons.compare,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'نوع الدواء',
+                    data: medicineModel.mediniceCategory.name,
+                    icon: Icons.type_specimen,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'تركيز الدواء',
+                    data: medicineModel.strength == ''
+                        ? 'لا يوجد'
+                        : medicineModel.strength!,
+                    icon: Icons.type_specimen,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'التنبيه قبل',
+                    data: medicineModel.alertexpired,
+                    icon: Icons.type_specimen,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'التنبيه قبل',
+                    data: medicineModel.alertamount.toString(),
+                    icon: Icons.type_specimen,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
           ),
         );

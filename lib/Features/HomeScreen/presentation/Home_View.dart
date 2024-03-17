@@ -16,9 +16,9 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => SalesInventoryCubit(),
-        ),
+        // BlocProvider(
+        //   create: (context) => SalesInventoryCubit(),
+        // ),
         BlocProvider(
           create: (context) => CollegesCubit(),
         ),
