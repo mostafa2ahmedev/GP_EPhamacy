@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
-import 'package:gppharmacy/Utils/Methods_Helper.dart';
+import 'package:gppharmacy/Features/StoresBody/data/Orders/Order_Model.dart';
 
-class ListTileForPatient extends StatelessWidget {
-  final PatientModel patientModel;
-  const ListTileForPatient({super.key, required this.patientModel});
+class ListTileForOrders extends StatelessWidget {
+  final OrderModel orderModel;
+  const ListTileForOrders({super.key, required this.orderModel});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        MethodHelper.ShowPatientDetails(context, patientModel: patientModel);
-      },
+      onTap: () {},
       child: ListTile(
-        title: Text(patientModel.name),
-        subtitle: Text('${patientModel.national_id}'),
+        title: Text(orderModel.supplier.name),
+        subtitle: Text(orderModel.dateofsupply),
         trailing: Container(
           height: 40,
           width: 40,
@@ -24,7 +21,7 @@ class ListTileForPatient extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              '${patientModel.age}',
+              '${orderModel.orderMedicines.length}',
               style: const TextStyle(color: Colors.white),
             ),
           ),
