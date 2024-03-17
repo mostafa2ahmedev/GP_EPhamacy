@@ -38,7 +38,6 @@ class MedicineCubit extends Cubit<MedicineState> {
       {required String typeOfSearch, required String searchedText}) {
     searchedList = [];
     if (typeOfSearch == 'اسم الدواء') {
-      print(medicinesList.toString());
       for (var element in medicinesList) {
         if (element.englishname
             .toLowerCase()

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_Mobile_View.dart';
 import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/CollegesListCubit/colleges_cubit.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/Dispensing%20medicationsCubit/dispensing_medications_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/WareHouse/cubit/warehouse_cubit.dart';
 import 'package:gppharmacy/Utils/AdaptiveLayout.dart';
@@ -27,6 +27,12 @@ class HomeView extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => WarehouseCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DispensingMedicationsCubit(),
+        ),
+        BlocProvider(
+          create: (context) => OrdersCubit(),
         )
       ],
       child: AdaptiveLayout(
