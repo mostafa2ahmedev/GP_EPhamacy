@@ -1,16 +1,51 @@
 # gppharmacy
 
-A new Flutter project.
+##Aim
 
-## Getting Started
+The aim of the proposed web and mobile application for the university pharmacy is to revolutionize and modernize the current operational framework, addressing a range of challenges and inefficiencies and enhancing the overall healthcare experience for both the pharmacy staff and the students served by the university
 
-This project is a starting point for a Flutter application.
+##Objectives
 
-A few resources to get you started if this is your first Flutter project:
+The proposed application will be designed to support the following key features:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+Authentication: Implement secure user authentication to ensure only authorized personnel can access the system .
+
+
+
+Privilege Levels: Define and implement different privilege levels, allowing administrators to control access and permissions based on user roles.
+
+
+
+Barcode Scanner Integration:
+
+Integrate a barcode scanning feature to facilitate the quick and accurate addition of medicines to the system.
+
+
+
+Stock Management (CRUD Operations):
+
+Enable comprehensive stock management with Create, Read, Update, and Delete (CRUD) operations to efficiently handle inventory.
+
+
+
+Reports Generation:
+
+Implement a reporting system that allows users to generate various reports, providing insights into stock levels, sales, and other relevant data.
+
+
+
+Order Management:
+
+Develop a module for managing orders, including order placement, tracking, and fulfillment.
+
+Alert System:
+
+Integrate a robust alert system to notify users about critical events, such as:
+
+Out-of-stock medicines
+
+Expiry of medicines
+
+Medicines about to expire
