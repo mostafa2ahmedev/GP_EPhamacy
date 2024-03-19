@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
-import 'package:gppharmacy/Utils/Methods_Helper.dart';
+import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/PrescriptionModel.dart';
 
-class ListTileForPatient extends StatelessWidget {
-  final PatientModel patientModel;
-  const ListTileForPatient({super.key, required this.patientModel});
-
+class ListTileForDispensingMedications extends StatelessWidget {
+  const ListTileForDispensingMedications({
+    super.key,
+    required this.prescriptionModel,
+  });
+  final PrescriptionModel prescriptionModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        MethodHelper.ShowPatientDetails(context, patientModel: patientModel);
-      },
+      onTap: () {},
       child: ListTile(
-        title: Text(patientModel.name),
-        subtitle: Text('${patientModel.national_id}'),
+        title: Text(prescriptionModel.id.toString()),
+        subtitle: Text(prescriptionModel.patientModel.name),
         trailing: Container(
           height: 40,
           width: 40,
@@ -24,7 +23,7 @@ class ListTileForPatient extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              '${patientModel.age}',
+              prescriptionModel.diagnosis!,
               style: const TextStyle(color: Colors.white),
             ),
           ),

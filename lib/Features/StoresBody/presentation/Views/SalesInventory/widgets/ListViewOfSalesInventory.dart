@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryStates.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/ListTileForSalesInventory.dart';
 
 class ListViewOfSalesInventory extends StatelessWidget {
@@ -10,24 +9,16 @@ class ListViewOfSalesInventory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SalesInventoryCubit, SalesInventoryStates>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        var storeCubit = BlocProvider.of<SalesInventoryCubit>(context);
-
-        return Expanded(
-          child: ListView.builder(
-            itemCount: storeCubit.salesInventoryList.length,
-            itemBuilder: (context, index) {
-              return ListTileForSalesInventory(
-                salesInventoryModel: storeCubit.salesInventoryList[index],
-              );
-            },
-          ),
-        );
-      },
+    var salesCubit = BlocProvider.of<SalesInventoryCubit>(context);
+    return Expanded(
+      child: ListView.builder(
+        itemCount: salesCubit.salesInventoryList.length,
+        itemBuilder: (context, index) {
+          return ListTileForSalesInventory(
+            salesInventoryModel: salesCubit.salesInventoryList[index],
+          );
+        },
+      ),
     );
   }
 }

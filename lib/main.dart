@@ -34,11 +34,6 @@ void main() async {
   );
 }
 
-// 2- themes //
-// 4- complete container ui```
-// 5- retreive data ui
-// 6- add
-
 class GP_Pharmacy extends StatelessWidget {
   const GP_Pharmacy({super.key, required this.mode, required this.lang});
   final bool? mode;
@@ -54,9 +49,6 @@ class GP_Pharmacy extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AuthCubit(),
-        ),
-        BlocProvider(
-          create: (context) => MedicineCubit(),
         ),
       ],
       child: BlocConsumer<DrawerCubit, DrawerStates>(

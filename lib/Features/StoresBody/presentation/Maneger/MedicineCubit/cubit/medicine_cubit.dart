@@ -29,16 +29,13 @@ class MedicineCubit extends Cubit<MedicineState> {
 
       searchedList = medicinesList;
       emit(GetMedicineDataSuccessState());
-    } catch (e) {
-      print("sdfsdfs${e.toString()}");
-    }
+    } catch (e) {}
   }
 
   void searchingInMedicineDataList(
       {required String typeOfSearch, required String searchedText}) {
     searchedList = [];
     if (typeOfSearch == 'اسم الدواء') {
-      print(medicinesList.toString());
       for (var element in medicinesList) {
         if (element.englishname
             .toLowerCase()
@@ -56,6 +53,9 @@ class MedicineCubit extends Cubit<MedicineState> {
     emit(GetMedicineDataSuccessState());
   }
 
+//
+//
+//
   void updateMedicineData({required MedicineModel medicineModel}) {
     emit(UpdateMedicineDataLoadingState());
     try {

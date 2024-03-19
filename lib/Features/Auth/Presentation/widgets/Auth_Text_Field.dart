@@ -39,25 +39,27 @@ class AuthTextField extends StatelessWidget {
         onFieldSubmitted: onSubmitted,
         onSaved: onSaved,
         decoration: InputDecoration(
-          label: Text(
-            label ?? '',
-            style:
-                AppStyles.styleMeduim16(context).copyWith(color: Colors.grey),
-          ),
+          label: Text(label ?? ''),
           suffixIcon: suffixIcon,
           hintStyle: const TextStyle(color: Colors.grey),
-          enabledBorder: BuildBorder(true),
-          focusedBorder: BuildBorder(false),
+          enabledBorder: BuildBorder(1),
+          focusedBorder: BuildBorder(2, context: context),
+          errorBorder: BuildBorder(3),
+          focusedErrorBorder: BuildBorder(4),
         ),
       ),
     );
   }
 
-  OutlineInputBorder BuildBorder(bool isEnabled) {
+  OutlineInputBorder BuildBorder(int isEnabled,
+      {@required BuildContext? context}) {
     return OutlineInputBorder(
-      borderSide: isEnabled
+      borderSide: isEnabled == 1
           ? const BorderSide(color: Colors.grey)
-          : const BorderSide(color: ColorManeger.lightPrimaryColor),
+          : isEnabled == 2
+              ? BorderSide(
+                  color: Theme.of(context!).drawerTheme.backgroundColor!)
+              : const BorderSide(color: Colors.red),
       borderRadius: BorderRadius.circular(12),
     );
   }

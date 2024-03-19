@@ -8,30 +8,26 @@ import 'package:gppharmacy/generated/l10n.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton(
       {super.key,
-      required this.text,
       required this.ontap,
-      required this.buttonColor});
-  final String text;
+      required this.buttonColor,
+      required this.child});
   final VoidCallback ontap;
   final Color buttonColor;
+  final Widget child;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 55,
       width: 200,
       child: ElevatedButton(
-        onPressed: ontap,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: buttonColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+          onPressed: ontap,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: buttonColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
-        ),
-        child: Text(
-          text,
-          style: AppStyles.styleMeduim16(context).copyWith(color: Colors.white),
-        ),
-      ),
+          child: child),
     );
   }
 }

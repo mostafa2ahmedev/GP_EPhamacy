@@ -13,6 +13,7 @@ import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class AuthMobileBody extends StatefulWidget {
@@ -41,9 +42,10 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                   borderColor: ColorManeger.lightPrimaryColor,
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 30,
                 ),
                 AuthTextField(
+                    label: 'ادخل اسم المستخدم',
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
                         return "Field is Required";
@@ -64,6 +66,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                   height: 24,
                 ),
                 AuthTextField(
+                  label: 'ادخل كلمه المرور',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
                       return "Field is Required";
@@ -90,7 +93,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                   hintStyle: AppStyles.styleMeduim16(context),
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 30,
                 ),
                 BlocConsumer<AuthCubit, AuthCubitState>(
                   listener: (context, state) {
@@ -118,9 +121,19 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                     }
                   },
                   builder: (context, state) {
+                    if (state is AuthLoadingState) {
+                      return const CustomLoadingIndicator();
+                    }
                     return CustomButton(
-                      buttonColor: Colors.red,
-                      text: S.of(context).AuthSignIn,
+                      buttonColor:
+                          Theme.of(context).drawerTheme.backgroundColor!,
+                      child: state is AuthLoadingState
+                          ? const CircularProgressIndicator()
+                          : Text(
+                              S.of(context).AuthSignIn,
+                              style: AppStyles.styleMeduim16(context)
+                                  .copyWith(color: Colors.white),
+                            ),
                       ontap: () {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
