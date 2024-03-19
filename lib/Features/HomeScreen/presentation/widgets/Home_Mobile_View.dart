@@ -32,7 +32,7 @@ class _MobileHomeViewState extends State<MobileHomeView> {
   static const List<List<Widget>> bodyWidgets = [
     [
       SalesBlocIntegrator(),
-      MobileMedicines(),
+      MedicineBlocIntegrator(),
       Warehouse(),
       MobileImports(),
       MobileHsrElkolyat(),

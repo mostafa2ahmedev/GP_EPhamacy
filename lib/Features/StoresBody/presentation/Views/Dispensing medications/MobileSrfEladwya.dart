@@ -123,7 +123,11 @@ class _MobileSrfEladwyaState extends State<MobileSrfEladwya> {
                       cubit.getPrescriptionData(indexToSearch: index);
                     }
                   },
-                  text: S.of(context).Search,
+                  child: Text(
+                    S.of(context).Search,
+                    style: AppStyles.styleMeduim16(context)
+                        .copyWith(color: Colors.white),
+                  ),
                 ),
               ),
               const SizedBox(

@@ -8,6 +8,8 @@ class SuccessAuthState extends AuthCubitState {
   SuccessAuthState({required this.user});
 }
 
+class AuthLoadingState extends AuthCubitState {}
+
 class FaulierAuthState extends AuthCubitState {
   final String errorMsg;
 

@@ -11,6 +11,7 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomNoDataContainer.dart';
@@ -124,7 +125,11 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
                   );
                 }
               },
-              text: S.of(context).Search,
+              child: Text(
+                S.of(context).Search,
+                style: AppStyles.styleMeduim16(context)
+                    .copyWith(color: Colors.white),
+              ),
             ),
           ),
           const SizedBox(
@@ -135,15 +140,11 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
               if (state is GetSalesInventoryLoadingState) {
                 return const CustomLoadingIndicator();
               }
-              if (storCubit.salesInventoryList.isEmpty &&
-                  state is! GetSalesInventoryLoadingState) {
-                return const CustomNoDataContainer();
-              }
               if (state is GetSalesInventorySuccessState ||
                   state is GetSalesInventoryItemDetailsSuccessState) {
                 return const ListViewOfSalesInventory();
               }
-              return const SizedBox();
+              return const CustomNoDataContainer();
             },
           )
         ],

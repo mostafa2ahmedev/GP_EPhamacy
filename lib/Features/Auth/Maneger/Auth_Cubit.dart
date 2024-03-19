@@ -13,6 +13,7 @@ class AuthCubit extends Cubit<AuthCubitState> {
   late UserModel? user;
 
   signIn(String username, String password) async {
+    emit(AuthLoadingState());
     try {
       Response response = await DioService.signIn(
           url: Constant.SignIn,

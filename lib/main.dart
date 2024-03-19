@@ -50,9 +50,6 @@ class GP_Pharmacy extends StatelessWidget {
         BlocProvider(
           create: (context) => AuthCubit(),
         ),
-        BlocProvider(
-          create: (context) => MedicineCubit(),
-        ),
       ],
       child: BlocConsumer<DrawerCubit, DrawerStates>(
         listener: (context, state) {},

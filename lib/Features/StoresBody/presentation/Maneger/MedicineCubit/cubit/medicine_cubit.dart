@@ -29,9 +29,7 @@ class MedicineCubit extends Cubit<MedicineState> {
 
       searchedList = medicinesList;
       emit(GetMedicineDataSuccessState());
-    } catch (e) {
-      print("sdfsdfs${e.toString()}");
-    }
+    } catch (e) {}
   }
 
   void searchingInMedicineDataList(
@@ -55,6 +53,9 @@ class MedicineCubit extends Cubit<MedicineState> {
     emit(GetMedicineDataSuccessState());
   }
 
+//
+//
+//
   void updateMedicineData({required MedicineModel medicineModel}) {
     emit(UpdateMedicineDataLoadingState());
     try {

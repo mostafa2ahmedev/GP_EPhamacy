@@ -9,23 +9,25 @@ class DispensingMedicationsCubit extends Cubit<DispensingMedicationsState> {
 
   List<PrescriptionModel> prescriptionList = [];
   List<PrescriptionModel> searchedPrescriptionList = [];
-
+  String? url;
   void getPrescriptionData({@required int? indexToSearch}) async {
     prescriptionList = [];
-    print('getData');
-    String url;
+
     emit(GetPrescriptionDataLoadingState());
     if (indexToSearch == 1) {
       url = '/pharmacy/prescriptions/type?isChronic=true';
+      print(indexToSearch);
     } else if (indexToSearch == 2) {
       url = '/pharmacy/prescriptions/type?isChronic=false';
-    } else if (indexToSearch == 4) {
-      url = '/pharmacy/useages';
-    } else {
+      print(indexToSearch);
+    } else if (indexToSearch == 3) {
       url = '/pharmacy/prescriptions';
+      print(indexToSearch);
+    } else {
+      getPrescriptionDataForSrf();
     }
     try {
-      var response = await DioService.getDate(url: url);
+      var response = await DioService.getDate(url: url!);
 
       for (var element in response.data) {
         prescriptionList.add(PrescriptionModel.fromJson(json: element));
@@ -35,6 +37,7 @@ class DispensingMedicationsCubit extends Cubit<DispensingMedicationsState> {
 
       emit(GetPrescriptionDataSuccessState());
     } catch (e) {
+      print(e.toString());
       emit(GetPrescriptionDataFailureState());
     }
   }
@@ -65,5 +68,23 @@ class DispensingMedicationsCubit extends Cubit<DispensingMedicationsState> {
       }
     }
     emit(GetPrescriptionDataSuccessState());
+  }
+
+  void getPrescriptionDataForSrf() async {
+    url = '/pharmacy/useages';
+    try {
+      emit(GetPrescriptionDataForSaleLoadingState());
+      var response = await DioService.getDate(url: url!);
+
+      for (var element in response.data) {
+        prescriptionList.add(PrescriptionModel.fromJson(json: element));
+      }
+
+      searchedPrescriptionList = prescriptionList;
+      emit(GetPrescriptionDataForSaleSuccessState());
+    } catch (e) {
+      print(e.toString());
+      emit(GetPrescriptionDataForSaleFailureState());
+    }
   }
 }

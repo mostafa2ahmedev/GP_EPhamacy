@@ -124,7 +124,11 @@ class _MobileHsrElkolyatState extends State<MobileHsrElkolyat> {
                           token: authCubit.user!.token);
                     }
                   },
-                  text: S.of(context).Search,
+                  child: Text(
+                    S.of(context).Search,
+                    style: AppStyles.styleMeduim16(context)
+                        .copyWith(color: Colors.white),
+                  ),
                 ),
               ),
               const SizedBox(

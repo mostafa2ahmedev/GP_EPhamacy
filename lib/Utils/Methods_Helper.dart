@@ -13,6 +13,7 @@ import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSal
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/WareHouse/cubit/warehouse_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
+import 'package:gppharmacy/Utils/AppStyles.dart';
 
 import 'package:gppharmacy/generated/l10n.dart';
 
@@ -125,11 +126,15 @@ abstract class MethodHelper {
                   children: [
                     Expanded(
                       child: CustomButton(
-                        text: 'اغلاق',
                         ontap: () {
                           Navigator.pop(context);
                         },
                         buttonColor: Colors.red,
+                        child: Text(
+                          'اغلاق',
+                          style: AppStyles.styleMeduim16(context)
+                              .copyWith(color: Colors.white),
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -137,11 +142,15 @@ abstract class MethodHelper {
                     ),
                     Expanded(
                       child: CustomButton(
-                        text: 'موافق',
                         ontap: () {
                           Navigator.pop(context);
                         },
                         buttonColor: Colors.red,
+                        child: Text(
+                          'موافق',
+                          style: AppStyles.styleMeduim16(context)
+                              .copyWith(color: Colors.white),
+                        ),
                       ),
                     ),
                   ],
