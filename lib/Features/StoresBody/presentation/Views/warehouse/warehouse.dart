@@ -5,8 +5,10 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.da
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/WareHouse/cubit/warehouse_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/warehouse/widgets/ListViewForWarehouse.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomFailureWidget.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomNoDataContainer.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class Warehouse extends StatefulWidget {
@@ -22,12 +24,13 @@ class _WarehouseState extends State<Warehouse> {
   bool toggler = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller = TextEditingController();
     controller.addListener(() {
       setState(() {});
     });
+
+    BlocProvider.of<WarehouseCubit>(context).getWarehouseData();
   }
 
   @override
@@ -75,6 +78,8 @@ class _WarehouseState extends State<Warehouse> {
                       wayOfSearch = value!;
                       if (value == 'اسم الدواء') {
                         toggler = true;
+                      } else {
+                        toggler = false;
                       }
                     });
                   },
@@ -92,29 +97,15 @@ class _WarehouseState extends State<Warehouse> {
           BlocBuilder<WarehouseCubit, WarehouseState>(
             builder: (context, state) {
               if (state is GetWarehouseDataFailureState) {
-                return Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 24),
-                    decoration: BoxDecoration(
-                      color: ColorManeger.lightPrimaryColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'عذرا حدث خطا ما يرجي المحاوله لاحقا',
-                        style: AppStyles.styleBold16(context),
-                      ),
-                    ),
-                  ),
-                );
+                return const CustomFailureWidget();
+              } else if (state is GetWarehouseDataLoadingState) {
+                return const CustomLoadingIndicator();
               } else if (state is GetWarehouseDataSuccessState) {
                 return ListViewOfWareHouse(
-                  searchedList:
-                      BlocProvider.of<WarehouseCubit>(context).searchedList,
-                );
+                    searchedList:
+                        BlocProvider.of<WarehouseCubit>(context).searchedList);
               } else {
-                return const CircularProgressIndicator();
+                return const CustomNoDataContainer();
               }
             },
           )

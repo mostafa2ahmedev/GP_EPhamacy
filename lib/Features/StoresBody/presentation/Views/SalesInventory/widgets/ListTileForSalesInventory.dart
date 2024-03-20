@@ -25,10 +25,11 @@ class ListTileForSalesInventory extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: Theme.of(context).drawerTheme.backgroundColor!,
-            )),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: Theme.of(context).drawerTheme.backgroundColor!,
+          ),
+        ),
         child: ListTile(
           title: Text(salesInventoryModel.name),
           titleTextStyle: AppStyles.styleSemiBold20(context)

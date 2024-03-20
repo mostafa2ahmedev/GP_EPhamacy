@@ -8,23 +8,20 @@ class ListViewOfCollegesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CollegesCubit, CollegesState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        var collegesCubit = BlocProvider.of<CollegesCubit>(context);
-
-        return Expanded(
-          child: ListView.builder(
-            itemCount: collegesCubit.collegesList.length,
-            itemBuilder: (context, index) {
-              return ListTileForCollegesList(
-                  collegesListModel: collegesCubit.collegesList[index]);
-            },
-          ),
-        );
-      },
+    var collegesList = BlocProvider.of<CollegesCubit>(context).collegesList;
+    return Expanded(
+      child: ListView.separated(
+        separatorBuilder: (context, index) {
+          return const SizedBox(
+            height: 12,
+          );
+        },
+        itemCount: collegesList.length,
+        itemBuilder: (context, index) {
+          return ListTileForCollegesList(
+              collegesListModel: collegesList[index]);
+        },
+      ),
     );
   }
 }

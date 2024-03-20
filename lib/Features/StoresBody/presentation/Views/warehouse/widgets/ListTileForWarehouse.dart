@@ -4,6 +4,7 @@ import 'package:gppharmacy/Features/StoresBody/data/Warehouse/WareHouseDataModel
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/WareHouse/cubit/warehouse_cubit.dart';
 
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomBorderForItems.dart';
 
 class ListTileForWarehouse extends StatelessWidget {
   const ListTileForWarehouse({
@@ -21,22 +22,25 @@ class ListTileForWarehouse extends StatelessWidget {
             MethodHelper.showDetailsItem(context,
                 medicineModel: warehouseDataModel.salesInventoryModelDetails);
           },
-          child: ListTile(
-            title:
-                Text(warehouseDataModel.salesInventoryModelDetails.englishname),
-            subtitle: Text(warehouseDataModel.salesInventoryModelDetails.barcode
-                .toString()),
-            trailing: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).drawerTheme.backgroundColor,
-              ),
-              child: Center(
-                child: Text(
-                  warehouseDataModel.amount.toString(),
-                  style: const TextStyle(color: Colors.white),
+          child: CustomBorderForItems(
+            child: ListTile(
+              title: Text(
+                  warehouseDataModel.salesInventoryModelDetails.englishname),
+              subtitle: Text(warehouseDataModel
+                  .salesInventoryModelDetails.barcode
+                  .toString()),
+              trailing: Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).drawerTheme.backgroundColor,
+                ),
+                child: Center(
+                  child: Text(
+                    warehouseDataModel.amount.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ),
