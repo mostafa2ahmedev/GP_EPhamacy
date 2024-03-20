@@ -13,3 +13,9 @@ class SearchinMedicineDataSuccessState extends MedicineState {}
 class UpdateMedicineDataSuccessState extends MedicineState {}
 
 class UpdateMedicineDataLoadingState extends MedicineState {}
+
+class AddNewMedicineLoadingState extends MedicineState {}
+
+class AddNewMedicineSuccessState extends MedicineState {}
+
+class AddNewMedicineFailureState extends MedicineState {}

@@ -1,4 +1,4 @@
-import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 
 class WarehouseDataModel {
   final int amount;

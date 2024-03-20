@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Widgets/ListTileForMedicineList.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomNoMatchingData.dart';
 

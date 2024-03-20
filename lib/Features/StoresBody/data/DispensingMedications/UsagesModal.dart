@@ -1,5 +1,5 @@
 import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/InventoryModel.dart';
-import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 
 class Usages {
   final int id;

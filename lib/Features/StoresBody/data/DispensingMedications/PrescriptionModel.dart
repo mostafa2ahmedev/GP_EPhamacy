@@ -1,6 +1,6 @@
 import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/UsagesModal.dart';
-import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 
 class PrescriptionModel {
   final int id;

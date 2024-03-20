@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/DetailsForSalesInventoryModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 import 'package:gppharmacy/Utils/DioService.dart';
 
 part 'medicine_state.dart';
@@ -55,7 +55,27 @@ class MedicineCubit extends Cubit<MedicineState> {
 
 //
 //
-//
+  void addNewMedicine({required MedicineModel medicineModel}) async {
+    try {
+      emit(AddNewMedicineLoadingState());
+      await DioService.postData(url: '/pharmacy/medicines', query: {
+        'name': medicineModel.englishname,
+        'arabicname': medicineModel.arabicname,
+        'activeingredient': medicineModel.activeingredient,
+        'alertamount': medicineModel.alertamount,
+        'alertexpired': medicineModel.alertexpired,
+        'barcode': medicineModel.barcode,
+        'manufacturer': medicineModel.manufacturer,
+        'strength': medicineModel.strength,
+        'medicineCategory': medicineModel.mediniceCategory
+      });
+      emit(AddNewMedicineSuccessState());
+    } catch (e) {
+      print(e.toString());
+      emit(AddNewMedicineFailureState());
+    }
+  }
+
   void updateMedicineData({required MedicineModel medicineModel}) {
     emit(UpdateMedicineDataLoadingState());
     try {
@@ -75,6 +95,7 @@ class MedicineCubit extends Cubit<MedicineState> {
           },
         },
       );
+
       emit(UpdateMedicineDataSuccessState());
     } catch (e) {}
   }

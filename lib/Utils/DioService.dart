@@ -30,6 +30,21 @@ class DioService {
     );
   }
 
+  static Future<Response> postData({
+    required String url,
+    Map<String, dynamic>? query,
+  }) async {
+    return await dio.post(
+      url,
+      queryParameters: query,
+      options: Options(
+        headers: {
+          "authorization": 'Bearer ${SharedPref.getString(key: 'token')}'
+        },
+      ),
+    );
+  }
+
   static Future<Response> signIn(
       {required String url, required Map<String, dynamic> data}) async {
     return await dio.post(url, data: data);
