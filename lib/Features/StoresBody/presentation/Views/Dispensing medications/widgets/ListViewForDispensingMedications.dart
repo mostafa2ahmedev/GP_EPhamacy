@@ -13,7 +13,10 @@ class ListViewOfDispensingMedications extends StatelessWidget {
   Widget build(BuildContext context) {
     return presriptionList.isNotEmpty
         ? Expanded(
-            child: ListView.builder(
+            child: ListView.separated(
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 12,
+              ),
               itemCount: presriptionList.length,
               itemBuilder: (context, index) {
                 return ListTileForDispensingMedications(

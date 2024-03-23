@@ -50,7 +50,7 @@ class _MobileSrfEladwyaState extends State<MobileSrfEladwya> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            S.of(context).Medicines,
+            S.of(context).SrfEladwya,
             style: AppStyles.styleBold28(context),
           ),
           const SizedBox(

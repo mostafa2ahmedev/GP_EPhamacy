@@ -7,6 +7,9 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomFailureWidget.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomNoDataContainer.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class MobileImports extends StatefulWidget {
@@ -52,9 +55,7 @@ class _MobileImportsState extends State<MobileImports> {
                     orderCubit.searchOrders(value, wayOfSearch);
                   },
                   controller: controller,
-                  hintText: 'ادخل $wayOfSearch',
-                  hintStyle: AppStyles.styleRegular16(context)
-                      .copyWith(color: Colors.grey),
+                  label: 'ادخل $wayOfSearch',
                 ),
               ),
               const SizedBox(
@@ -84,40 +85,15 @@ class _MobileImportsState extends State<MobileImports> {
           BlocBuilder<OrdersCubit, OrdersCubitStates>(
             builder: (context, state) {
               if (state is OrdersCubitFaulierStates) {
-                return Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 24),
-                    decoration: BoxDecoration(
-                      color: ColorManeger.lightPrimaryColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        state.errorMsg,
-                        style: AppStyles.styleBold16(context),
-                      ),
-                    ),
-                  ),
-                );
+                return const CustomFailureWidget();
               } else if (state is OrdersCubitSuccessStates) {
                 return ListViewOfOrders(
                   orders: orderCubit.searchedOrder,
                 );
+              } else if (state is OrdersCubitLoadingStates) {
+                return const CustomLoadingIndicator();
               } else {
-                return Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 24),
-                    decoration: BoxDecoration(
-                      color: ColorManeger.lightPrimaryColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                );
+                return const CustomNoDataContainer();
               }
             },
           )

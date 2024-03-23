@@ -31,7 +31,7 @@ class _MobileMedicinesState extends State<MobileMedicines> {
   ];
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
 
     controller = TextEditingController();
@@ -83,6 +83,7 @@ class _MobileMedicinesState extends State<MobileMedicines> {
                     setState(() {
                       typeValue = value;
                     });
+  
                     selectedItem = items.indexOf(value!) + 1;
                   },
                   value: typeValue,
