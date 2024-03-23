@@ -1,7 +1,7 @@
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/medicineCategoryModel.dart';
 
 class MedicineModel {
-  final int id;
+  final int? id;
   final int barcode;
   final String englishname;
   final String arabicname;
@@ -14,12 +14,12 @@ class MedicineModel {
   final MediniceCategory mediniceCategory;
 
   MedicineModel({
-    required this.id,
+    this.id,
     required this.barcode,
     required this.englishname,
     required this.arabicname,
-    required this.dosageform,
-    required this.strength,
+    this.dosageform,
+    this.strength,
     required this.activeingredient,
     required this.manufacturer,
     required this.alertamount,

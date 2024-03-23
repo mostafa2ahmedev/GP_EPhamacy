@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/Dispensing%20medicationsCubit/dispensing_medications_cubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/Dispensing%20medicationsCubit/dispensing_medications_state.dart';
+
+import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/PrescriptionModel.dart';
 
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/ListTileForDispensingMedications.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomNoMatchingData.dart';
 
 class ListViewOfDispensingMedications extends StatelessWidget {
-  const ListViewOfDispensingMedications({super.key});
-
+  const ListViewOfDispensingMedications(
+      {super.key, required this.presriptionList});
+  final List<PrescriptionModel> presriptionList;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<DispensingMedicationsCubit, DispensingMedicationsState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        var cubit = BlocProvider.of<DispensingMedicationsCubit>(context);
-
-        return Expanded(
-          child: ListView.builder(
-            itemCount: cubit.searchedPrescriptionList.length,
-            itemBuilder: (context, index) {
-              return ListTileForDispensingMedications(
-                prescriptionModel: cubit.searchedPrescriptionList[index],
-              );
-            },
-          ),
-        );
-      },
-    );
+    return presriptionList.isNotEmpty
+        ? Expanded(
+            child: ListView.separated(
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 12,
+              ),
+              itemCount: presriptionList.length,
+              itemBuilder: (context, index) {
+                return ListTileForDispensingMedications(
+                  prescriptionModel: presriptionList[index],
+                );
+              },
+            ),
+          )
+        : const CustomNoMatchingData();
   }
 }

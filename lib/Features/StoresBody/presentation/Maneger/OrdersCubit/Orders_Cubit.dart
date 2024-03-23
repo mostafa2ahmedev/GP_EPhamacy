@@ -12,6 +12,7 @@ class OrdersCubit extends Cubit<OrdersCubitStates> {
 
   fetchAllOrders() async {
     orders = [];
+    emit(OrdersCubitLoadingStates());
     try {
       var response = await DioService.getDate(url: '/pharmacy/orders');
 

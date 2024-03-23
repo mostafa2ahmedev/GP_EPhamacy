@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gppharmacy/Utils/Themes.dart';
 
 class CustomLoadingIndicator extends StatelessWidget {
   const CustomLoadingIndicator({

@@ -11,7 +11,12 @@ class ListViewOfSalesInventory extends StatelessWidget {
   Widget build(BuildContext context) {
     var salesCubit = BlocProvider.of<SalesInventoryCubit>(context);
     return Expanded(
-      child: ListView.builder(
+      child: ListView.separated(
+        separatorBuilder: (context, index) {
+          return const SizedBox(
+            height: 12,
+          );
+        },
         itemCount: salesCubit.salesInventoryList.length,
         itemBuilder: (context, index) {
           return ListTileForSalesInventory(

@@ -1,12 +1,9 @@
-part of 'colleges_cubit.dart';
-
-@immutable
-sealed class CollegesState {}
+abstract class CollegesState {}
 
 final class CollegesInitial extends CollegesState {}
 
-final class getCollegesListLoadingState extends CollegesState {}
+final class GetCollegesListLoadingState extends CollegesState {}
 
-final class getCollegesListSuccessState extends CollegesState {}
+final class GetCollegesListSuccessState extends CollegesState {}
 
-final class getCollegesListFailureState extends CollegesState {}
+final class GetCollegesListFailureState extends CollegesState {}

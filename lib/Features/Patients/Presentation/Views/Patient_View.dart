@@ -8,6 +8,9 @@ import 'package:gppharmacy/Features/Patients/Presentation/widgets/ListViewOfPati
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomFailureWidget.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
+import 'package:gppharmacy/Utils/Widgets/CustomNoDataContainer.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class PatientView extends StatefulWidget {
@@ -87,14 +90,13 @@ class _PatientViewState extends State<PatientView> {
             height: 24,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 60),
             child: AuthTextField(
-                onChanged: (value) => BlocProvider.of<PateintCubit>(context)
-                    .searchByName(value, wayOfSearch, typeOfDisease),
-                controller: controller,
-                hintText: 'ادخل $wayOfSearch',
-                hintStyle: AppStyles.styleRegular16(context)
-                    .copyWith(color: Colors.grey)),
+              onChanged: (value) => BlocProvider.of<PateintCubit>(context)
+                  .searchByName(value, wayOfSearch, typeOfDisease),
+              controller: controller,
+              label: 'ادخل $wayOfSearch',
+            ),
           ),
           const SizedBox(
             height: 24,
@@ -102,40 +104,15 @@ class _PatientViewState extends State<PatientView> {
           BlocBuilder<PateintCubit, PateintCubitState>(
             builder: (context, state) {
               if (state is PatientFaliureState) {
-                return Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 24),
-                    decoration: BoxDecoration(
-                      color: ColorManeger.lightPrimaryColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        state.errMsq,
-                        style: AppStyles.styleBold16(context),
-                      ),
-                    ),
-                  ),
-                );
+                return const CustomFailureWidget();
               } else if (state is PatientSuccessState) {
                 return ListViewOfPatient(
                   patients: BlocProvider.of<PateintCubit>(context).searched,
                 );
+              } else if (state is PatientLoadingState) {
+                return const CustomLoadingIndicator();
               } else {
-                return Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 24),
-                    decoration: BoxDecoration(
-                      color: ColorManeger.lightPrimaryColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                );
+                return const CustomNoDataContainer();
               }
             },
           )

@@ -12,7 +12,6 @@ class WarehouseCubit extends Cubit<WarehouseState> {
   List<WarehouseDataModel> searchedList = [];
 
   void getWarehouseData({
-    required String token,
     Map<String, dynamic>? query,
   }) async {
     //
@@ -39,6 +38,7 @@ class WarehouseCubit extends Cubit<WarehouseState> {
     searchedList = [];
     if (toggler) {
       //اسم الدواء
+
       for (var element in warehouseList) {
         if (element.salesInventoryModelDetails.englishname
             .toLowerCase()

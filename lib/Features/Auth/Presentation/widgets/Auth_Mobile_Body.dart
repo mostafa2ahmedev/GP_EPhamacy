@@ -8,12 +8,14 @@ import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit_State.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Background.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
+import 'package:gppharmacy/Features/ChoosenPage.dart';
 import 'package:gppharmacy/Features/HomeScreen/presentation/Home_View.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
+import 'package:gppharmacy/Utils/toastMessageMethod.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class AuthMobileBody extends StatefulWidget {
@@ -107,14 +109,15 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                         textColor: Colors.white,
                         fontSize: 16.0,
                       );
-                      MethodHelper.navigateTo(context, const HomeView());
+                      MethodHelper.navigateToWithRep(
+                          context, const ChoosenView());
                     } else if (state is FaulierAuthState) {
                       Fluttertoast.showToast(
                         msg: state.errorMsg,
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.BOTTOM,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
+                        backgroundColor: Colors.blue,
                         textColor: Colors.white,
                         fontSize: 16.0,
                       );
