@@ -13,6 +13,7 @@ import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
+import 'package:gppharmacy/Utils/Notification_Services.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class AuthMobileBody extends StatefulWidget {
@@ -122,6 +123,10 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                       buttonColor: Colors.red,
                       text: S.of(context).AuthSignIn,
                       ontap: () {
+                        NotificationService().showNotification(
+                          title: 'Welcome',
+                          body: 'It is Working',
+                        );
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
                           BlocProvider.of<AuthCubit>(context)
