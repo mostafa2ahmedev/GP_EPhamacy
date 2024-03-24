@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/CustomChoosenContainer.dart';
 import 'package:gppharmacy/Features/HomeScreen/presentation/Home_View.dart';
+import 'package:gppharmacy/Features/Notifications/presentation/Views/NotificationView.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
 
@@ -41,7 +44,7 @@ class ChoosenView extends StatelessWidget {
                 ),
                 CustomChoosenContainer(
                   ontap: () {
-                    MethodHelper.navigateTo(context, const HomeView());
+                    MethodHelper.navigateToWithRep(context, const HomeView());
                   },
                   text: 'الاداره',
                 ),
@@ -49,7 +52,10 @@ class ChoosenView extends StatelessWidget {
                   width: 2,
                 ),
                 CustomChoosenContainer(
-                  ontap: () {},
+                  ontap: () {
+                    MethodHelper.navigateToWithRep(
+                        context, const NotificationView());
+                  },
                   text: 'الاشعارات',
                 ),
               ],

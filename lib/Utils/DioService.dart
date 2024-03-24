@@ -32,11 +32,12 @@ class DioService {
 
   static Future<Response> postData({
     required String url,
-    Map<String, dynamic>? query,
+    Map<String, dynamic>? data,
   }) async {
     return await dio.post(
       url,
-      queryParameters: query,
+      data: data, //query parameter
+
       options: Options(
         headers: {
           "authorization": 'Bearer ${SharedPref.getString(key: 'token')}'

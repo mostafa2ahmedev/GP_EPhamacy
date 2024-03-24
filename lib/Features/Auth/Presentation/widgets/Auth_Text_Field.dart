@@ -15,7 +15,8 @@ class AuthTextField extends StatelessWidget {
       this.onChanged,
       this.keyboardType,
       this.label,
-      this.onSaved});
+      this.onSaved,
+      this.autovalidateMode});
   final String? hintText;
   final TextStyle? hintStyle;
   final Function(String)? onSubmitted;
@@ -27,11 +28,13 @@ class AuthTextField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextInputType? keyboardType;
   final String? label;
+  final AutovalidateMode? autovalidateMode;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50,
       child: TextFormField(
+        autovalidateMode: autovalidateMode,
         keyboardType: keyboardType,
         onChanged: onChanged,
         controller: controller,

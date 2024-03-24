@@ -52,6 +52,7 @@ class _MobileHomeViewState extends State<MobileHomeView> {
       builder: (context, state) {
         var cubit = BlocProvider.of<DrawerCubit>(context);
         return Scaffold(
+            resizeToAvoidBottomInset: true,
             key: scafoldKey,
             drawer: const CustomMobileDrawer(),
             appBar: HomeAppBar(scafoldKey: scafoldKey),
