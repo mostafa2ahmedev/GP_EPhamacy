@@ -69,7 +69,7 @@ class LowerPartOfDrawer extends StatelessWidget {
                                 backgroundColor: Colors.white),
                             onPressed: () {
                               BlocProvider.of<AuthCubit>(context).signOut();
-                              MethodHelper.navigateTo(
+                              MethodHelper.navigateToWithRep(
                                   context, const AuthView());
                             },
                             icon: const Icon(

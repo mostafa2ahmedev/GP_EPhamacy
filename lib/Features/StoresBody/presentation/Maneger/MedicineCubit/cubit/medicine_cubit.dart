@@ -61,17 +61,20 @@ class MedicineCubit extends Cubit<MedicineState> {
     try {
       emit(AddNewMedicineLoadingState());
       Map<String, dynamic> medicine = {
-        'name': medicineModel.englishname,
-        'arabicname': medicineModel.arabicname,
-        'activeingredient': medicineModel.activeingredient,
-        'alertamount': medicineModel.alertamount,
-        'alertexpired': medicineModel.alertexpired,
-        'barcode': medicineModel.barcode,
-        'manufacturer': medicineModel.manufacturer,
-        'strength': medicineModel.strength,
-        'medicineCategory': medicineModel.mediniceCategory
+        'name': 'sssss',
+        'arabicname': 'ايوه',
+        'activeingredient': 'medicineModel.activeingredient',
+        'alertamount': 123,
+        'alertexpired': "0022-02-22",
+        'barcode': 123,
+        'manufacturer': 'medicineModel.manufacturer',
+        'strength': '34 ',
+        'medicineCategory': {
+          'id': 33,
+          'name': 'medicineModel.mediniceCategory.name',
+        }
       };
-      await DioService.postData(url: '/pharmacy/medicines', query: medicine);
+      await DioService.postData(url: '/pharmacy/medicines', data: medicine);
       emit(AddNewMedicineSuccessState());
     } catch (e) {
       print(e.toString());
@@ -79,34 +82,50 @@ class MedicineCubit extends Cubit<MedicineState> {
     }
   }
 
+//
+//
+//
+//
   void addNewCategory({required String category}) async {
     try {
-      await DioService.postData(url: '/pharmacy/medicinecategories', query: {
+      emit(GetCategoriesLoadingState());
+      await DioService.postData(url: '/pharmacy/medicinecategories', data: {
         'name': category,
       });
       print('CategoryAddedSuccessfuly');
+      getCatagoryData();
     } catch (e) {
       print(e.toString());
     }
   }
 
+//
+//
+//
+//
   void getCatagoryData() async {
     try {
+      categories = [];
       emit(GetCategoriesLoadingState());
       var catList = await DioService.getDate(
         url: '/pharmacy/medicinecategories',
       );
       for (var element in catList.data) {
-        categories.add(element);
+        categories.add(MediniceCategory.fromjson(json: element));
       }
-      print(categories[0]);
+
       emit(GetCategoriesSuccessState());
       print('CategoryArrivedSuccessfuly');
     } catch (e) {
-      print('CategoryNotAdded');
+      print(e.toString());
+      print('CategoryNotArrived');
     }
   }
 
+//
+//
+//
+//
   void updateMedicineData({required MedicineModel medicineModel}) {
     emit(UpdateMedicineDataLoadingState());
     try {
