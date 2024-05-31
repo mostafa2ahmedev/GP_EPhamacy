@@ -16,7 +16,8 @@ class AuthTextField extends StatelessWidget {
       this.keyboardType,
       this.label,
       this.onSaved,
-      this.autovalidateMode});
+      this.autovalidateMode,
+      this.obscureText});
   final String? hintText;
   final TextStyle? hintStyle;
   final Function(String)? onSubmitted;
@@ -29,11 +30,12 @@ class AuthTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? label;
   final AutovalidateMode? autovalidateMode;
+  final bool? obscureText;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
       child: TextFormField(
+        obscureText: obscureText ?? false,
         autovalidateMode: autovalidateMode,
         keyboardType: keyboardType,
         onChanged: onChanged,
@@ -62,7 +64,9 @@ class AuthTextField extends StatelessWidget {
           : isEnabled == 2
               ? BorderSide(
                   color: Theme.of(context!).drawerTheme.backgroundColor!)
-              : const BorderSide(color: Colors.red),
+              : const BorderSide(
+                  color: Colors.red,
+                ),
       borderRadius: BorderRadius.circular(12),
     );
   }

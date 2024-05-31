@@ -53,8 +53,7 @@ class ChoosenView extends StatelessWidget {
                 ),
                 CustomChoosenContainer(
                   ontap: () {
-                    MethodHelper.navigateToWithRep(
-                        context, const NotificationView());
+                    MethodHelper.navigateTo(context, const NotificationView());
                   },
                   text: 'الاشعارات',
                 ),

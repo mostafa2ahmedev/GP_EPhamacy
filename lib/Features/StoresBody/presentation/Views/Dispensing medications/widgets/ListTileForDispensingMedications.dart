@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/PrescriptionModel.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/InnerDispense.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomBorderForItems.dart';
 
 class ListTileForDispensingMedications extends StatelessWidget {
@@ -11,25 +14,17 @@ class ListTileForDispensingMedications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        MethodHelper.navigateTo(
+            context,
+            InnerDispense(
+              prescriptionModel: prescriptionModel,
+            ));
+      },
       child: CustomBorderForItems(
         child: ListTile(
-          title: Text(prescriptionModel.id.toString()),
-          subtitle: Text(prescriptionModel.patientModel.name),
-          trailing: Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Theme.of(context).drawerTheme.backgroundColor,
-            ),
-            child: Center(
-              child: Text(
-                prescriptionModel.diagnosis!,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
+          title: Text(prescriptionModel.patientModel.name),
+          subtitle: Text(prescriptionModel.patientModel.studentId.toString()),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Orders/Order_Model.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomBorderForItems.dart';
 
 class ListTileForOrders extends StatelessWidget {
@@ -9,7 +10,9 @@ class ListTileForOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        MethodHelper.ShowOrderDetails(context, ordermodel: orderModel);
+      },
       child: CustomBorderForItems(
         child: ListTile(
           title: Text(orderModel.supplier.name),

@@ -1,21 +1,23 @@
 import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/UsagesModal.dart';
+import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/prsPrescriptionCategory.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 
 class PrescriptionModel {
   final int id;
   final String? diagnosis;
+  final PrsPrescriptionCategory prescriptionCategory;
   final PatientModel patientModel;
   final List<MedicineModel> medicineModel;
   final List<Usages>? usageMedicine;
 
-  PrescriptionModel({
-    required this.id,
-    required this.diagnosis,
-    required this.patientModel,
-    required this.medicineModel,
-    required this.usageMedicine,
-  });
+  PrescriptionModel(
+      {required this.id,
+      required this.diagnosis,
+      required this.patientModel,
+      required this.medicineModel,
+      required this.usageMedicine,
+      required this.prescriptionCategory});
 
   factory PrescriptionModel.fromJson({required Map<String, dynamic> json}) {
     List<MedicineModel> listOfMedicines = [];
@@ -30,10 +32,13 @@ class PrescriptionModel {
     }
 
     return PrescriptionModel(
-        id: json['id'],
-        diagnosis: json['diagnosis'] ?? '',
-        patientModel: PatientModel.fromJson(json['patient']),
-        medicineModel: listOfMedicines,
-        usageMedicine: usages);
+      id: json['id'],
+      diagnosis: json['diagnosis'] ?? '',
+      patientModel: PatientModel.fromJson(json['patient']),
+      medicineModel: listOfMedicines,
+      usageMedicine: usages,
+      prescriptionCategory: PrsPrescriptionCategory.fromJson(
+          json: json['prsPrescriptionCategory']),
+    );
   }
 }

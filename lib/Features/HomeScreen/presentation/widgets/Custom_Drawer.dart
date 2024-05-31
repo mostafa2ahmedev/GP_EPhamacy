@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/AddAccount/Presentation/Views/AddAccountView.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Background.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
@@ -10,6 +13,7 @@ import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Lower_Part_O
 import 'package:gppharmacy/Utils/AppStyles.dart';
 
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
 
 import 'package:gppharmacy/generated/l10n.dart';
 

@@ -4,6 +4,8 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.da
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
+import 'package:gppharmacy/Features/StoresBody/data/Orders/OrderMedicine_Model.dart';
+import 'package:gppharmacy/Features/StoresBody/data/Orders/Order_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
@@ -217,7 +219,9 @@ abstract class MethodHelper {
                   ),
                   CustomDetailsItem(
                     note: 'الشركه المصنعه',
-                    data: medicineModel.manufacturer,
+                    data: medicineModel.manufacturer == ""
+                        ? "لايوجد"
+                        : medicineModel.manufacturer!,
                     icon: Icons.compare,
                   ),
                   const SizedBox(
@@ -243,7 +247,7 @@ abstract class MethodHelper {
                   ),
                   CustomDetailsItem(
                     note: 'التنبيه قبل',
-                    data: medicineModel.alertexpired,
+                    data: medicineModel.alertexpired.toString(),
                     icon: Icons.type_specimen,
                   ),
                   const SizedBox(
@@ -293,8 +297,16 @@ abstract class MethodHelper {
                   ),
                   CustomDetailsItem(
                     note: 'الرقم القومي',
-                    data: patientModel.national_id.toString(),
+                    data: patientModel.nationalId.toString(),
                     icon: Icons.type_specimen,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'الرقم الجامعي',
+                    data: patientModel.studentId.toString(),
+                    icon: Icons.phone,
                   ),
                   const SizedBox(
                     height: 8,
@@ -325,7 +337,23 @@ abstract class MethodHelper {
                   ),
                   CustomDetailsItem(
                     note: 'رقم التليفون',
-                    data: patientModel.phone_number,
+                    data: patientModel.phoneNumber,
+                    icon: Icons.phone,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'السن',
+                    data: patientModel.age.toString(),
+                    icon: Icons.phone,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'نوع المرض',
+                    data: patientModel.chronic ? "مزمن" : "غير مزمن",
                     icon: Icons.phone,
                   ),
                   const SizedBox(
@@ -344,6 +372,116 @@ abstract class MethodHelper {
                         ),
                 ],
               ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  static ShowOrderDetails(BuildContext context,
+      {required OrderModel ordermodel}) {
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+      showDragHandle: true,
+      isScrollControlled: true,
+      isDismissible: false,
+      elevation: 5,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.7,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                CustomDetailsItem(
+                  note: 'طلب الامداد',
+                  data: ordermodel.supplyrequest.toString(),
+                  icon: Icons.abc,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'اذن التسليم',
+                  data: ordermodel.deliveryrequest.toString(),
+                  icon: Icons.type_specimen,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'تاريخ التوريد',
+                  data: ordermodel.dateofsupply,
+                  icon: Icons.abc,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                CustomDetailsItem(
+                  note: 'اسم المورد',
+                  data: ordermodel.supplier.name,
+                  icon: Icons.type_specimen,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: ordermodel.orderMedicines.length,
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 8,
+                      );
+                    },
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.grey[200],
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              "${index + 1}",
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                            CustomDetailsItem(
+                              note: 'الدواء',
+                              data: ordermodel
+                                  .orderMedicines[index].medicine.englishname,
+                              icon: Icons.type_specimen,
+                            ),
+                            CustomDetailsItem(
+                              note: 'الكميه',
+                              data: ordermodel.orderMedicines[index].amount
+                                  .toString(),
+                              icon: Icons.type_specimen,
+                            ),
+                            CustomDetailsItem(
+                              note: 'الصلاحيه',
+                              data: ordermodel.orderMedicines[index].expirydate,
+                              icon: Icons.type_specimen,
+                            ),
+                            CustomDetailsItem(
+                              note: 'اسم المورد',
+                              data: ordermodel.supplier.name,
+                              icon: Icons.type_specimen,
+                            ),
+                            CustomDetailsItem(
+                              note: 'السعر',
+                              data: ordermodel.orderMedicines[index].price
+                                  .toString(),
+                              icon: Icons.type_specimen,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         );

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:gppharmacy/Features/Notifications/data/NotificationModel.dart';
 import 'package:gppharmacy/Features/Notifications/presentation/Maneger/cubit/notificaiton_state.dart';
@@ -17,6 +19,7 @@ class NotificationCubit extends Cubit<NotificationState> {
       }
       emit(GetNotificaitonSuccessState());
     } catch (e) {
+      print(e.toString());
       emit(GetNotificaitonFailureState());
     }
   }

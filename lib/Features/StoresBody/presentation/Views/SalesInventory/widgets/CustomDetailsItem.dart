@@ -33,3 +33,14 @@ class CustomDetailsItem extends StatelessWidget {
     );
   }
 }
+
+class CustomRowItem extends StatelessWidget {
+  const CustomRowItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [],
+    );
+  }
+}

@@ -26,7 +26,7 @@ class AuthMobileBody extends StatefulWidget {
 }
 
 class _AuthMobileBodyState extends State<AuthMobileBody> {
-  bool isSelected = false;
+  bool isSelected = true;
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? username, password;
@@ -68,6 +68,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                   height: 24,
                 ),
                 AuthTextField(
+                  obscureText: isSelected,
                   label: 'ادخل كلمه المرور',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
@@ -87,7 +88,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                         });
                       },
                       child: SvgPicture.asset(
-                        isSelected ? Assets.imagesEye : Assets.imagesEyeCrossed,
+                        isSelected ? Assets.imagesEyeCrossed : Assets.imagesEye,
                       ),
                     ),
                   ),
@@ -127,16 +128,8 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                     if (state is AuthLoadingState) {
                       return const CustomLoadingIndicator();
                     }
-                    return CustomButton(
-                      buttonColor:
-                          Theme.of(context).drawerTheme.backgroundColor!,
-                      child: state is AuthLoadingState
-                          ? const CircularProgressIndicator()
-                          : Text(
-                              S.of(context).AuthSignIn,
-                              style: AppStyles.styleMeduim16(context)
-                                  .copyWith(color: Colors.white),
-                            ),
+                    return LoginButton(
+                      state: state,
                       ontap: () {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();

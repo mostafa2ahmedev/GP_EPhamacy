@@ -164,8 +164,8 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                                 activeIngNameController.text,
                                             manufacturer: manufController.text,
                                             alertamount: 10,
-                                            alertexpired:
-                                                alertDaysController.text,
+                                            unit: "jjj",
+                                            alertexpired: 10,
                                             mediniceCategory: MediniceCategory(
                                                 id: 5, name: value!),
                                           );

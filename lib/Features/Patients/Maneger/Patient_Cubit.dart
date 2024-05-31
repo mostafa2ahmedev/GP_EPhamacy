@@ -32,7 +32,7 @@ class PateintCubit extends Cubit<PateintCubitState> {
     if (isChronic == 'الكل') {
       if (searchtype == 'الرقم القومي للطالب') {
         for (var element in pateints) {
-          if ('${element.national_id}'.contains(value)) {
+          if ('${element.nationalId}'.contains(value)) {
             searched.add(element);
           }
         }
@@ -46,7 +46,7 @@ class PateintCubit extends Cubit<PateintCubitState> {
     } else if (isChronic == 'مريض مزمن') {
       if (searchtype == 'الرقم القومي للطالب') {
         for (var element in pateints) {
-          if ('${element.national_id}'.contains(value) && element.chronic) {
+          if ('${element.nationalId}'.contains(value) && element.chronic) {
             searched.add(element);
           }
         }
@@ -61,7 +61,7 @@ class PateintCubit extends Cubit<PateintCubitState> {
     } else {
       if (searchtype == 'الرقم القومي للطالب') {
         for (var element in pateints) {
-          if ('${element.national_id}'.contains(value) && !element.chronic) {
+          if ('${element.nationalId}'.contains(value) && !element.chronic) {
             searched.add(element);
           }
         }
