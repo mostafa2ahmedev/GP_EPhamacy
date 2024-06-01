@@ -17,9 +17,6 @@ class HomeView extends StatelessWidget {
         BlocProvider(
           create: (context) => PateintCubit(),
         ),
-        BlocProvider(
-          create: (context) => OrdersCubit(),
-        ),
       ],
       child: AdaptiveLayout(
           mobileDashboard: (context) => const MobileHomeView(),

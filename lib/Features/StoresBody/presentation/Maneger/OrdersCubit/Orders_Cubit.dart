@@ -4,11 +4,14 @@ import 'package:gppharmacy/Features/StoresBody/data/Orders/Order_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/OrdersCubitStates.dart';
 import 'package:gppharmacy/Utils/DioService.dart';
 
+import '../../../data/Orders/Supplier_Model.dart';
+
 class OrdersCubit extends Cubit<OrdersCubitStates> {
   OrdersCubit() : super(OrdersCubitLoadingStates());
 
   List<OrderModel> orders = [];
   List<OrderModel> searchedOrder = [];
+  List<SupplierModel> suppliers = [];
 
   fetchAllOrders() async {
     orders = [];
@@ -47,5 +50,35 @@ class OrdersCubit extends Cubit<OrdersCubitStates> {
       }
     }
     emit(OrdersCubitSuccessStates());
+  }
+
+  void addNewSupplier({required String name}) async {
+    try {
+      emit(GetSupplierDataLoading());
+      await DioService.postData(url: '/pharmacy/suppliers', data: {
+        'name': name,
+      });
+
+      getSupplierData();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void getSupplierData() async {
+    emit(GetSupplierDataLoading());
+    try {
+      suppliers = [];
+
+      var supData = await DioService.getDate(
+        url: '/pharmacy/suppliers',
+      );
+      for (var element in supData.data) {
+        suppliers.add(SupplierModel.fromjson(json: element));
+      }
+      emit(GetSupplierDataSuccess());
+    } catch (e) {
+      emit(GetSupplierDataFailure());
+    }
   }
 }

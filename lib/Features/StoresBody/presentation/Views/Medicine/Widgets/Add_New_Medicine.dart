@@ -4,6 +4,7 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/AddNewCategoryMethod.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/CustomAreaData.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/CustomCircleAdd.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomFailureWidget.dart';
@@ -45,10 +46,15 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
     alertAmountController = TextEditingController();
     formKey = GlobalKey();
     var cubit = BlocProvider.of<MedicineCubit>(context);
-    cubit.getCatagoryData();
+
+    cubit.getUnitData();
   }
 
-  String? value;
+  String? typeValue;
+  String? largeUnit;
+
+  String? smallUnit;
+  bool isAllowed = false;
   @override
   void dispose() {
     arbNameController.dispose();
@@ -59,7 +65,7 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
     codeController.dispose();
     alertDaysController.dispose();
     alertAmountController.dispose();
-    value = null;
+    typeValue = null;
     super.dispose();
   }
 
@@ -74,23 +80,29 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
           showDragHandle: true,
           context: context,
           builder: (c) {
+            BlocProvider.of<MedicineCubit>(context).getCatagoryData();
             return StatefulBuilder(
               builder: (context, setStateB) {
-                return SingleChildScrollView(
-                  child: Padding(
-                    padding: MediaQuery.of(context).viewInsets,
-                    child: Container(
-                      height: MediaQuery.sizeOf(context).height * .9,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 30, horizontal: 20),
-                      child: BlocBuilder<MedicineCubit, MedicineState>(
-                          builder: (context, state) {
-                        var list =
-                            BlocProvider.of<MedicineCubit>(context).categories;
-                        if (state is GetCategoriesLoadingState) {
-                          return const CustomLoadingIndicator();
-                        } else if (state is GetCategoriesSuccessState) {
-                          return Column(
+                return Padding(
+                  padding: MediaQuery.of(context).viewInsets,
+                  child: Container(
+                    height: MediaQuery.sizeOf(context).height * .9,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 30, horizontal: 20),
+                    child: BlocBuilder<MedicineCubit, MedicineState>(
+                        builder: (context, state) {
+                      var typeList =
+                          BlocProvider.of<MedicineCubit>(context).categories;
+                      var unitLargeList =
+                          BlocProvider.of<MedicineCubit>(context).LargeUnits;
+                      var unitSmallList =
+                          BlocProvider.of<MedicineCubit>(context).smallUnits;
+
+                      if (state is GetCategoriesLoadingState) {
+                        return const CustomLoadingIndicator();
+                      } else if (state is GetCategoriesSuccessState) {
+                        return SingleChildScrollView(
+                          child: Column(
                             children: [
                               Row(
                                 children: [
@@ -99,32 +111,94 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                     child: CustomDropDownButton(
                                       isExpanded: true,
                                       onChanged: (newValue) {
-                                        value = newValue;
+                                        typeValue = newValue;
                                         setStateB(() {
-                                          value = newValue;
+                                          typeValue = newValue;
                                         });
                                       },
-                                      value: value,
-                                      items: list.map((e) => e.name).toList(),
+                                      value: typeValue,
+                                      items:
+                                          typeList.map((e) => e.name).toList(),
+                                      hint: 'اختر نوع العنصر',
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: InkWell(
+                                        onTap: () {
+                                          addNewCategory(context,
+                                              text1: "اضافه دواء جديد",
+                                              text2: "اسم النوع",
+                                              index: 3);
+                                        },
+                                        child: const CustomCircleAdd()),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: CustomDropDownButton(
+                                      isExpanded: true,
+                                      onChanged: (newValue) {
+                                        largeUnit = newValue;
+                                        setStateB(() {
+                                          largeUnit = newValue;
+                                        });
+                                      },
+                                      value: largeUnit,
+                                      items: unitLargeList
+                                          .map((e) => e.name)
+                                          .toList(),
+                                      hint: 'اختر نوع العنصر',
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: InkWell(
+                                        onTap: () {
+                                          addNewCategory(context,
+                                              text1: "اضافه وحده كبيره",
+                                              text2: "اسم الوحده",
+                                              index: 1);
+                                        },
+                                        child: const CustomCircleAdd()),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: CustomDropDownButton(
+                                      isExpanded: true,
+                                      onChanged: (newValue) {
+                                        smallUnit = newValue;
+                                        setStateB(() {
+                                          smallUnit = newValue;
+                                        });
+                                      },
+                                      value: smallUnit,
+                                      items: unitSmallList
+                                          .map((e) => e.name)
+                                          .toList(),
                                       hint: 'اختر نوع العنصر',
                                     ),
                                   ),
                                   Expanded(
                                     child: InkWell(
                                       onTap: () {
-                                        addNewCategory(context);
+                                        addNewCategory(context,
+                                            text1: "اضافه وحده صغيره",
+                                            text2: "اسم الوحده",
+                                            index: 2);
                                       },
-                                      child: Container(
-                                        padding: const EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.grey.shade300,
-                                        ),
-                                        child: const Icon(
-                                          Icons.add,
-                                          color: Colors.green,
-                                        ),
-                                      ),
+                                      child: const CustomCircleAdd(),
                                     ),
                                   )
                                 ],
@@ -167,7 +241,7 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                             unit: "jjj",
                                             alertexpired: 10,
                                             mediniceCategory: MediniceCategory(
-                                                id: 5, name: value!),
+                                                id: 5, name: typeValue!),
                                           );
                                           BlocProvider.of<MedicineCubit>(
                                                   context)
@@ -204,7 +278,7 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                         codeController.text = '';
                                         alertDaysController.text = '';
                                         alertAmountController.text = '';
-                                        value = null;
+                                        typeValue = null;
                                         setStateB(() {});
                                       },
                                       buttonColor: Colors.red,
@@ -218,12 +292,12 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                 ],
                               )
                             ],
-                          );
-                        } else {
-                          return const CustomFailureWidget();
-                        }
-                      }),
-                    ),
+                          ),
+                        );
+                      } else {
+                        return const CustomFailureWidget();
+                      }
+                    }),
                   ),
                 );
               },

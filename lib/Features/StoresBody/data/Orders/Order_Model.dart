@@ -27,7 +27,7 @@ class OrderModel {
         supplyrequest: json['supplyrequest'],
         deliveryrequest: json['deliveryrequest'],
         dateofsupply: json['dateofsupply'],
-        supplier: SupplierModel.fromjson(json['supplier']),
+        supplier: SupplierModel.fromjson(json: json['supplier']),
         orderMedicines: x);
   }
 }

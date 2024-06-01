@@ -9,12 +9,17 @@ import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_App_Bar
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Add_New_Patient.dart';
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Patient_View.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/Add_New_Medicine.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/AddNewPrescription.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Widgets/Add_New_Medicine.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Mobile_Medicines.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/MobileImports.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/FloatingNavigate.dart';
 
 import 'package:gppharmacy/Utils/Widgets/BlocsIntegrator.dart';
 import 'package:gppharmacy/generated/l10n.dart';
+
+import '../../../../Utils/Methods_Helper.dart';
+import '../../../StoresBody/presentation/Views/Orders/widgets/AddNewImports.dart';
 
 class MobileHomeView extends StatefulWidget {
   const MobileHomeView({super.key});
@@ -63,7 +68,17 @@ class _MobileHomeViewState extends State<MobileHomeView> {
                     [cubit.innerFirstSelectedIndex],
             floatingActionButton: cubit.data1 == S.of(context).Medicines
                 ? const AddNewMedicine()
-                : null);
+                : cubit.data1 == S.of(context).Imports
+                    ? FloatingNavigate(
+                        ontap: () => MethodHelper.navigateTo(
+                            context, const AddNewImports()),
+                      )
+                    : cubit.data1 == S.of(context).SrfEladwya
+                        ? FloatingNavigate(
+                            ontap: () => MethodHelper.navigateTo(
+                                context, const AddNewPrescription()),
+                          )
+                        : null);
       },
     );
   }

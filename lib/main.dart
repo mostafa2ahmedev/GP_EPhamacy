@@ -7,6 +7,7 @@ import 'package:gppharmacy/Features/Auth/Presentation/Auth_View.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
 import 'package:gppharmacy/Utils/DioService.dart';
 import 'package:gppharmacy/Utils/Constant.dart';
 import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
@@ -52,6 +53,9 @@ class GP_Pharmacy extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MedicineCubit(),
+        ),
+        BlocProvider(
+          create: (context) => OrdersCubit(),
         ),
       ],
       child: BlocConsumer<DrawerCubit, DrawerStates>(

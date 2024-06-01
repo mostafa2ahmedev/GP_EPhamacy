@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:bloc/bloc.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/UnitModel.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/medicineCategoryModel.dart';
 import 'package:gppharmacy/Utils/DioService.dart';
 
@@ -11,6 +14,8 @@ class MedicineCubit extends Cubit<MedicineState> {
   List<MedicineModel> medicinesList = [];
   List<MedicineModel> searchedList = [];
   List<MediniceCategory> categories = [];
+  List<UnitModel> LargeUnits = [];
+  List<UnitModel> smallUnits = [];
   void getMedicineData({required int typeOfSearch}) async {
     medicinesList = [];
     emit(GetMedicineDataLoadingState());
@@ -86,6 +91,51 @@ class MedicineCubit extends Cubit<MedicineState> {
 //
 //
 //
+
+  void addUnit({required bool isLarge, required String unitValue}) async {
+    try {
+      emit(GetCategoriesLoadingState());
+      await DioService.postData(
+        url: '/pharmacy/unit/${isLarge ? "max" : "min"}',
+        query: {"name": unitValue},
+      );
+      print('CategoryAddedSuccessfuly');
+      getUnitData();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void getUnitData() async {
+    try {
+      smallUnits = [];
+      LargeUnits = [];
+
+      var unitList = await DioService.getDate(
+        url: '/pharmacy/unit/min',
+      );
+      var unitList2 = await DioService.getDate(
+        url: '/pharmacy/unit/max',
+      );
+      for (var element in unitList.data) {
+        smallUnits.add(UnitModel.fromjson(json: element));
+      }
+      for (var element in unitList2.data) {
+        LargeUnits.add(UnitModel.fromjson(json: element));
+      }
+
+      emit(GetCategoriesSuccessState());
+      print('UnitsArrived');
+    } catch (e) {
+      print(e.toString());
+      print('UnitNotArrived');
+    }
+  }
+
+//
+//
+//
+//
   void addNewCategory({required String category}) async {
     try {
       emit(GetCategoriesLoadingState());
@@ -99,10 +149,6 @@ class MedicineCubit extends Cubit<MedicineState> {
     }
   }
 
-//
-//
-//
-//
   void getCatagoryData() async {
     try {
       categories = [];

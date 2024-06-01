@@ -84,7 +84,7 @@ class LoginButton extends StatelessWidget {
         child: state is AddAccountLoading
             ? const CircularProgressIndicator()
             : Text(
-                S.of(context).AddAccount,
+                S.of(context).AuthSignIn,
                 style: AppStyles.styleMeduim16(context)
                     .copyWith(color: Colors.white),
               ),
