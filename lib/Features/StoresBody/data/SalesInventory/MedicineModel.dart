@@ -46,4 +46,21 @@ class MedicineModel {
       ),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'unit': unit,
+      'id': id,
+      'barcode': barcode,
+      'name': englishname,
+      'arabicname': arabicname,
+      'dosageform': dosageform,
+      'strength': strength,
+      'activeingredient': activeingredient,
+      'manufacturer': manufacturer,
+      'alertamount': alertamount,
+      'alertexpired': alertexpired,
+      'medicineCategory': mediniceCategory.toJson(),
+    };
+  }
 }

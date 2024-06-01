@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Mobile_Body.dart';
+import 'package:gppharmacy/Features/ChoosenPage.dart';
+import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
 import 'package:gppharmacy/Utils/AdaptiveLayout.dart';
 
 class AuthView extends StatelessWidget {

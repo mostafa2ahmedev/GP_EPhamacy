@@ -10,8 +10,8 @@ import 'package:gppharmacy/Features/Patients/Presentation/Views/Add_New_Patient.
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Patient_View.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/AddNewPrescription.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Widgets/Add_New_Medicine.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Mobile_Medicines.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Widgets/AddNewMedicine.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/MobileImports.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/FloatingNavigate.dart';
 
@@ -67,7 +67,10 @@ class _MobileHomeViewState extends State<MobileHomeView> {
                 : bodyWidgets[cubit.outerSelectedIndex]
                     [cubit.innerFirstSelectedIndex],
             floatingActionButton: cubit.data1 == S.of(context).Medicines
-                ? const AddNewMedicine()
+                ? FloatingNavigate(
+                    ontap: () => MethodHelper.navigateTo(
+                        context, const AddNewMedicine()),
+                  )
                 : cubit.data1 == S.of(context).Imports
                     ? FloatingNavigate(
                         ontap: () => MethodHelper.navigateTo(

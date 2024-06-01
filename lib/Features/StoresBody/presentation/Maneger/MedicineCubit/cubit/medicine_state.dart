@@ -9,6 +9,8 @@ class GetMedicineDataLoadingState extends MedicineState {}
 
 class GetMedicineDataSuccessState extends MedicineState {}
 
+class GetMedicineDataFailureState extends MedicineState {}
+
 class SearchinMedicineDataSuccessState extends MedicineState {}
 
 //

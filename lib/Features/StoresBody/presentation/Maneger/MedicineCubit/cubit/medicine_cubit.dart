@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/UnitModel.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/medicineCategoryModel.dart';
@@ -16,6 +15,7 @@ class MedicineCubit extends Cubit<MedicineState> {
   List<MediniceCategory> categories = [];
   List<UnitModel> LargeUnits = [];
   List<UnitModel> smallUnits = [];
+
   void getMedicineData({required int typeOfSearch}) async {
     medicinesList = [];
     emit(GetMedicineDataLoadingState());
@@ -36,7 +36,9 @@ class MedicineCubit extends Cubit<MedicineState> {
 
       searchedList = medicinesList;
       emit(GetMedicineDataSuccessState());
-    } catch (e) {}
+    } catch (e) {
+      emit(GetMedicineDataFailureState());
+    }
   }
 
   void searchingInMedicineDataList(
@@ -63,26 +65,16 @@ class MedicineCubit extends Cubit<MedicineState> {
 //
 //
   void addNewMedicine({required MedicineModel medicineModel}) async {
+    Response? response;
     try {
       emit(AddNewMedicineLoadingState());
-      Map<String, dynamic> medicine = {
-        'name': 'sssss',
-        'arabicname': 'ايوه',
-        'activeingredient': 'medicineModel.activeingredient',
-        'alertamount': 123,
-        'alertexpired': "0022-02-22",
-        'barcode': 123,
-        'manufacturer': 'medicineModel.manufacturer',
-        'strength': '34 ',
-        'medicineCategory': {
-          'id': 33,
-          'name': 'medicineModel.mediniceCategory.name',
-        }
-      };
-      await DioService.postData(url: '/pharmacy/medicines', data: medicine);
+
+      response = await DioService.postData(
+          url: '/pharmacy/medicines', data: medicineModel.toJson());
       emit(AddNewMedicineSuccessState());
     } catch (e) {
       print(e.toString());
+      print(response!.data);
       emit(AddNewMedicineFailureState());
     }
   }
@@ -107,6 +99,7 @@ class MedicineCubit extends Cubit<MedicineState> {
   }
 
   void getUnitData() async {
+    emit(GetCategoriesLoadingState());
     try {
       smallUnits = [];
       LargeUnits = [];
@@ -150,9 +143,10 @@ class MedicineCubit extends Cubit<MedicineState> {
   }
 
   void getCatagoryData() async {
+    emit(GetCategoriesLoadingState());
     try {
       categories = [];
-      emit(GetCategoriesLoadingState());
+
       var catList = await DioService.getDate(
         url: '/pharmacy/medicinecategories',
       );
@@ -168,7 +162,6 @@ class MedicineCubit extends Cubit<MedicineState> {
     }
   }
 
-//
 //
 //
 //
@@ -194,6 +187,17 @@ class MedicineCubit extends Cubit<MedicineState> {
 
       emit(UpdateMedicineDataSuccessState());
     } catch (e) {}
+  }
+
+  int getCategoryId({required String catName}) {
+    int catId = 0;
+    for (var element in categories) {
+      if (element.name == catName) {
+        catId = element.id;
+        break;
+      }
+    }
+    return catId;
   }
 }
 ///pharmacy/medicines/mix

@@ -14,6 +14,7 @@ import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
+import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
 import 'package:gppharmacy/Utils/toastMessageMethod.dart';
 import 'package:gppharmacy/generated/l10n.dart';
@@ -30,6 +31,12 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? username, password;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(

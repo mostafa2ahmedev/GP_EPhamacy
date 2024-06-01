@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
@@ -376,6 +377,18 @@ abstract class MethodHelper {
           ),
         );
       },
+    );
+  }
+
+  static void showToast({required String message, required bool type}) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: type ? Colors.green : Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
     );
   }
 
