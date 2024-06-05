@@ -11,9 +11,13 @@ class ListTileNotificaiton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBorderForItems(
       child: ListTile(
-        title: Text(
-          notificationModel.message,
-          style: AppStyles.styleBold20(context),
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: AlignmentDirectional.centerStart,
+          child: Text(
+            notificationModel.message,
+            style: AppStyles.styleBold20(context),
+          ),
         ),
         trailing: Text(
           'يرجي اعاده طلب كميه جديده',
