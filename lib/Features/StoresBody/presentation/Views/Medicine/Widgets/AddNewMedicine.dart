@@ -33,6 +33,7 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
   late TextEditingController codeController;
   late TextEditingController alertDaysController;
   late TextEditingController alertAmountController;
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +46,7 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
     alertDaysController = TextEditingController();
     alertAmountController = TextEditingController();
     formKey = GlobalKey();
+    autovalidateMode = AutovalidateMode.disabled;
     var cubit = BlocProvider.of<MedicineCubit>(context);
     cubit.getCatagoryData();
     cubit.getUnitData();
@@ -82,12 +84,9 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "اضافه دواء جديد",
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
+              Text("اضافه دواء جديد",
+                  style: AppStyles.styleBold32(context)
+                      .copyWith(color: Colors.black)),
               const SizedBox(
                 height: 12,
               ),
@@ -150,6 +149,12 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                     )
                                   ],
                                 ),
+                                if (typeValue == null &&
+                                    autovalidateMode == AutovalidateMode.always)
+                                  Text(
+                                    'هذا الحقل مطلوب',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
                                 const SizedBox(
                                   height: 12,
                                 ),
@@ -161,6 +166,7 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                             value: isChecked,
                                             onChanged: (data) {
                                               setState(() {
+                                                unit = null;
                                                 isChecked = data!;
                                               });
                                             })),
@@ -172,7 +178,6 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                             : null,
                                         isExpanded: true,
                                         onChanged: (newValue) {
-                                          unit = newValue;
                                           setState(() {
                                             unit = newValue;
                                             isDisabledSmall = true;
@@ -207,46 +212,12 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                     )
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                // Row(
-                                //   children: [
-                                //     Expanded(
-                                //       flex: 4,
-                                //       child: CustomDropDownButton(
-                                //         disabledHint: isDisabledSmall
-                                //             ? const Text("Disabled")
-                                //             : null,
-                                //         isExpanded: true,
-                                //         onChanged: (newValue) {
-                                //           smallUnit = newValue;
-                                //           setState(() {
-                                //             smallUnit = newValue;
-                                //             isDisabledSmall = false;
-                                //             isDisabledLarge = true;
-                                //           });
-                                //         },
-                                //         value: smallUnit,
-                                //         items: unitSmallList
-                                //             .map((e) => e.name)
-                                //             .toList(),
-                                //         hint: 'اختر نوع العنصر',
-                                //       ),
-                                //     ),
-                                //     Expanded(
-                                //       child: InkWell(
-                                //         onTap: () {
-                                //           addNewCategory(context,
-                                //               text1: "اضافه وحده صغيره",
-                                //               text2: "اسم الوحده",
-                                //               index: 2);
-                                //         },
-                                //         child: const CustomCircleAdd(),
-                                //       ),
-                                //     )
-                                //   ],
-                                // ),
+                                if (unit == null &&
+                                    autovalidateMode == AutovalidateMode.always)
+                                  Text(
+                                    'هذا الحقل مطلوب',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
                                 const SizedBox(
                                   height: 12,
                                 ),
@@ -272,7 +243,8 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                       child: CustomButton(
                                         ontap: () {
                                           if (formKey.currentState!
-                                              .validate()) {
+                                                  .validate() &&
+                                              validateDropdowns()) {
                                             MedicineModel medicineModel =
                                                 MedicineModel(
                                               barcode: int.parse(
@@ -359,6 +331,21 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
     typeValue = null;
     smallUnit = null;
     unit = null;
+    autovalidateMode = AutovalidateMode.disabled;
     setState(() {});
+  }
+
+  bool validateDropdowns() {
+    bool isValid = true;
+
+    if (typeValue == null) {
+      isValid = false;
+    }
+
+    if (unit == null) {
+      isValid = false;
+    }
+
+    return isValid;
   }
 }

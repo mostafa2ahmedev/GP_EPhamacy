@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../Auth/Presentation/widgets/Auth_Text_Field.dart';
 
@@ -33,39 +34,37 @@ class CustomAreaDataForMedicine extends StatelessWidget {
       child: Column(
         children: [
           AuthTextField(
-            validator: (v) {
-              if (v?.isEmpty ?? true) {
-                return 'ادخل اسم العربي للدواء';
-              }
-              return null;
-            },
-            autovalidateMode: autovalidateMode,
-            controller: arbNameController,
-            label: 'اسم الدواء (عربي)',
-            suffixIcon: const Icon(Icons.language),
-          ),
+              validator: (v) {
+                if (v?.isEmpty ?? true) {
+                  return 'ادخل اسم العربي للدواء';
+                }
+                return null;
+              },
+              autovalidateMode: autovalidateMode,
+              controller: arbNameController,
+              label: 'اسم الدواء (عربي)',
+              suffixIcon: const Icon(FontAwesomeIcons.pills)),
           const SizedBox(
             height: 12,
           ),
           AuthTextField(
-            validator: (v) {
-              if (v?.isEmpty ?? true) {
-                return 'ادخل اسم العربي للدواء';
-              }
-              return null;
-            },
-            autovalidateMode: autovalidateMode,
-            controller: engNameController,
-            label: 'اسم الدواء (انجليزي)',
-            suffixIcon: const Icon(Icons.abc),
-          ),
+              validator: (v) {
+                if (v?.isEmpty ?? true) {
+                  return 'ادخل اسم العربي للدواء';
+                }
+                return null;
+              },
+              autovalidateMode: autovalidateMode,
+              controller: engNameController,
+              label: 'اسم الدواء (انجليزي)',
+              suffixIcon: const Icon(FontAwesomeIcons.pills)),
           const SizedBox(
             height: 12,
           ),
           AuthTextField(
             controller: activeIngNameController,
             label: 'الماده الفعاله',
-            suffixIcon: const Icon(Icons.abc),
+            suffixIcon: const Icon(Icons.medical_information),
           ),
           const SizedBox(
             height: 12,
@@ -74,7 +73,7 @@ class CustomAreaDataForMedicine extends StatelessWidget {
             controller: strNameController,
             keyboardType: TextInputType.number,
             label: 'التركيز',
-            suffixIcon: const Icon(Icons.abc),
+            suffixIcon: const Icon(FontAwesomeIcons.zero),
           ),
           const SizedBox(
             height: 12,
@@ -89,7 +88,7 @@ class CustomAreaDataForMedicine extends StatelessWidget {
             autovalidateMode: autovalidateMode,
             controller: manufController,
             label: 'الشركه المصنعه',
-            suffixIcon: const Icon(Icons.abc),
+            suffixIcon: const Icon(Icons.apartment),
           ),
           const SizedBox(
             height: 12,
@@ -105,7 +104,7 @@ class CustomAreaDataForMedicine extends StatelessWidget {
             controller: codeController,
             keyboardType: TextInputType.number,
             label: 'كود العنصر',
-            suffixIcon: const Icon(Icons.handshake),
+            suffixIcon: const Icon(Icons.numbers),
           ),
           const SizedBox(
             height: 12,
@@ -113,7 +112,7 @@ class CustomAreaDataForMedicine extends StatelessWidget {
           AuthTextField(
             validator: (v) {
               if (v?.isEmpty ?? true) {
-                return 'ادخل التذكير قبل الكميه للدواء';
+                return 'هذا الحقل مطلوب';
               }
               return null;
             },
@@ -129,7 +128,7 @@ class CustomAreaDataForMedicine extends StatelessWidget {
           AuthTextField(
             validator: (v) {
               if (v?.isEmpty ?? true) {
-                return 'ادخل التذكير قبل موعد للدواء';
+                return 'هذا الحقل مطلوب';
               }
               return null;
             },
@@ -137,7 +136,7 @@ class CustomAreaDataForMedicine extends StatelessWidget {
             controller: alertDaysController,
             keyboardType: TextInputType.number,
             label: 'التنبيه قبل (يوم)',
-            suffixIcon: const Icon(Icons.alarm),
+            suffixIcon: const Icon(Icons.date_range),
           ),
         ],
       ),

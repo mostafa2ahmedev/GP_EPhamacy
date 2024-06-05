@@ -49,9 +49,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
     name = TextEditingController();
     nationalId = TextEditingController();
     studentId = TextEditingController();
-
     chronic = TextEditingController();
-
     age = TextEditingController();
     phoneNubmer = TextEditingController();
     formKey = GlobalKey();
@@ -72,20 +70,21 @@ class _AddNewPatientState extends State<AddNewPatient> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                S.of(context).AddNewPatient,
-                style: AppStyles.styleBold32(context),
-              ),
-              BlocConsumer<PateintCubit, PateintCubitState>(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              S.of(context).AddNewPatient,
+              style: AppStyles.styleBold32(context),
+            ),
+            Expanded(
+              child: BlocConsumer<PateintCubit, PateintCubitState>(
                 listener: (context, state) {
                   if (state is PostPatientDataSuccessState) {
                     MethodHelper.showToast(
                         message: "تم اضافه المريض بنجاح", type: true);
+                    clearAllData();
                   } else if (state is PostPatientDataFailureState) {
                     MethodHelper.showToast(
                         message: "حدثت مشكله اثناء الاضافه", type: false);
@@ -99,269 +98,369 @@ class _AddNewPatientState extends State<AddNewPatient> {
                           : Form(
                               autovalidateMode: autovalidateMode,
                               key: formKey,
-                              child: Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 24,
-                                  ),
-                                  AuthTextField(
-                                    validator: (v) {
-                                      if (v?.isEmpty ?? true) {
-                                        return 'ادخل اسم الطالب';
-                                      }
-                                      return null;
-                                    },
-                                    controller: name,
-                                    label: 'اسم الطالب (عربي)',
-                                    suffixIcon: const Icon(Icons.language),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  AuthTextField(
-                                    keyboardType: TextInputType.number,
-                                    controller: studentId,
-                                    label: 'الرقم الجامعي',
-                                    suffixIcon: const Icon(Icons.abc),
-                                    validator: (v) {
-                                      if (v?.isEmpty ?? true) {
-                                        return 'ادخل الرقم الجامعي';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  AuthTextField(
-                                    keyboardType: TextInputType.number,
-                                    validator: (v) {
-                                      if (v!.length < 11 || v.length > 11) {
-                                        return 'ادخل 11 رقم فقط';
-                                      }
-                                      return null;
-                                    },
-                                    controller: phoneNubmer,
-                                    label: 'رقم الهاتف',
-                                    suffixIcon: const Icon(Icons.abc),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  AuthTextField(
-                                    validator: (v) {
-                                      if (v!.length < 14 || v.length > 14) {
-                                        return 'ادخل 14 رقم فقط';
-                                      }
-                                      return null;
-                                    },
-                                    controller: nationalId,
-                                    keyboardType: TextInputType.number,
-                                    label: 'الرقم القومي',
-                                    suffixIcon: const Icon(Icons.abc),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  AuthTextField(
-                                    validator: (v) {
-                                      if (v?.isEmpty ?? true) {
-                                        return 'ادخل السن';
-                                      }
-                                      return null;
-                                    },
-                                    controller: age,
-                                    label: 'السن',
-                                    suffixIcon: const Icon(Icons.abc),
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  CustomDropDownButton(
-                                    items: const [
-                                      'كلية الهندسة بشيرا',
-                                      'كلية الهندسة بينها',
-                                      'كلية الحاسبات والذكاء الإصطناعي',
-                                      'كلية العلوم',
-                                      'كلية الزراعة',
-                                      'كلية الفنون التطبيقية',
-                                      'كلية التجارة',
-                                      'كلية التربية',
-                                      'كلية التربية النوعية',
-                                      'كلية التربية الرياضية',
-                                      'كلية الحقوق',
-                                      'كلية الآداب',
-                                      'كلية الطب البشري',
-                                      'كلية الطب البيطري',
-                                      'كلية التمريض',
-                                      'كلية العلاج الطبيعي',
-                                    ],
-                                    hint: 'اختر الكليه',
-                                    isExpanded: true,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        collegeValue = value;
-                                      });
-                                    },
-                                    value: collegeValue,
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  CustomDropDownButton(
-                                    items: const [
-                                      'الفرقة الأولى',
-                                      'الفرقة الثانية',
-                                      'الفرقة الثالثة',
-                                      'الفرقة الرابعة',
-                                      'الفرقة الخامسة',
-                                      'الفرقة السادسة',
-                                      'الفرقة السابعة',
-                                    ],
-                                    hint: 'اختر الفرقه',
-                                    isExpanded: true,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        rankValue = value;
-                                      });
-                                    },
-                                    value: rankValue,
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  CustomDropDownButton(
-                                    items: const ['ذكر', 'انثي'],
-                                    hint: 'اختر النوع',
-                                    isExpanded: true,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        genderValue = value;
-                                      });
-                                    },
-                                    value: genderValue,
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  CustomDropDownButton(
-                                    items: const ['نعم', 'لا'],
-                                    hint: 'مريض مزمن؟',
-                                    isExpanded: true,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        dieseaseValue = value;
-                                      });
-                                    },
-                                    value: dieseaseValue,
-                                  ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  if (dieseaseValue == "نعم")
-                                    MultiSelectDialogField(
-                                      title: const Text("الامراض المزمنه"),
-                                      buttonText: const Text(
-                                        "الامراض المزمنه",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      buttonIcon: const Icon(
-                                        Icons.arrow_drop_down_outlined,
-                                        color: Colors.grey,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.shade100,
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10)),
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      items:
-                                          BlocProvider.of<PateintCubit>(context)
-                                              .diseases
-                                              .map((e) =>
-                                                  MultiSelectItem(e, e.name))
-                                              .toList(),
-                                      listType: MultiSelectListType.CHIP,
-                                      onConfirm: (values) {
-                                        selectedDiseases = values;
-                                        print(selectedDiseases.toString());
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    const SizedBox(height: 24),
+                                    AuthTextField(
+                                      validator: (v) {
+                                        if (v?.isEmpty ?? true) {
+                                          return 'ادخل اسم الطالب';
+                                        }
+                                        return null;
+                                      },
+                                      controller: name,
+                                      label: 'اسم الطالب (عربي)',
+                                      suffixIcon: const Icon(Icons.language),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    AuthTextField(
+                                      keyboardType: TextInputType.number,
+                                      controller: studentId,
+                                      label: 'الرقم الجامعي',
+                                      suffixIcon: const Icon(Icons.abc),
+                                      validator: (v) {
+                                        if (v?.isEmpty ?? true) {
+                                          return 'ادخل الرقم الجامعي';
+                                        }
+                                        return null;
                                       },
                                     ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: CustomButton(
-                                          ontap: () {
-                                            if (formKey.currentState!
-                                                .validate()) {
-                                              BlocProvider.of<PateintCubit>(
-                                                      context)
-                                                  .postPatientData(
-                                                patientModel: PatientModel(
-                                                    age: int.parse(age.text),
-                                                    studentId: int.parse(
-                                                        studentId.text),
-                                                    phoneNumber:
-                                                        phoneNubmer.text,
-                                                    diseases: selectedDiseases,
-                                                    name: name.text,
-                                                    nationalId: int.parse(
-                                                        nationalId.text),
-                                                    gender: genderValue!,
-                                                    chronic:
-                                                        chronic.text == "نعم"
-                                                            ? true
-                                                            : false,
-                                                    level: rankValue!,
-                                                    collegeName: collegeValue!),
-                                              );
-                                              BlocProvider.of<PateintCubit>(
-                                                      context)
-                                                  .fetchAllPateint();
-                                            } else {
-                                              autovalidateMode =
-                                                  AutovalidateMode.always;
-                                            }
-                                          },
-                                          buttonColor: Colors.green,
-                                          child: Text(
-                                            'اضافه مريض',
-                                            style:
-                                                AppStyles.styleBold16(context)
-                                                    .copyWith(
-                                                        color: Colors.white),
+                                    const SizedBox(height: 12),
+                                    AuthTextField(
+                                      keyboardType: TextInputType.number,
+                                      validator: (v) {
+                                        if (v!.length < 11 || v.length > 11) {
+                                          return 'ادخل 11 رقم فقط';
+                                        }
+                                        return null;
+                                      },
+                                      controller: phoneNubmer,
+                                      label: 'رقم الهاتف',
+                                      suffixIcon: const Icon(Icons.abc),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    AuthTextField(
+                                      validator: (v) {
+                                        if (v!.length < 14 || v.length > 14) {
+                                          return 'ادخل 14 رقم فقط';
+                                        }
+                                        return null;
+                                      },
+                                      controller: nationalId,
+                                      keyboardType: TextInputType.number,
+                                      label: 'الرقم القومي',
+                                      suffixIcon: const Icon(Icons.abc),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    AuthTextField(
+                                      keyboardType: TextInputType.number,
+                                      validator: (v) {
+                                        if (v?.isEmpty ?? true) {
+                                          return 'ادخل السن';
+                                        }
+                                        return null;
+                                      },
+                                      controller: age,
+                                      label: 'السن',
+                                      suffixIcon: const Icon(Icons.abc),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    FormField<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'اختر الكليه';
+                                        }
+                                        return null;
+                                      },
+                                      builder: (FormFieldState<String> state) {
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomDropDownButton(
+                                              items: const [
+                                                'كلية الهندسة بشيرا',
+                                                'كلية الهندسة بينها',
+                                                'كلية الحاسبات والذكاء الإصطناعي',
+                                                'كلية العلوم',
+                                                'كلية الزراعة',
+                                                'كلية الفنون التطبيقية',
+                                                'كلية التجارة',
+                                                'كلية التربية',
+                                                'كلية التربية النوعية',
+                                                'كلية التربية الرياضية',
+                                                'كلية الحقوق',
+                                                'كلية الآداب',
+                                                'كلية الطب البشري',
+                                                'كلية الطب البيطري',
+                                                'كلية التمريض',
+                                                'كلية العلاج الطبيعي',
+                                              ],
+                                              hint: 'اختر الكليه',
+                                              isExpanded: true,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  collegeValue = value;
+                                                  state.didChange(value);
+                                                });
+                                              },
+                                              value: collegeValue,
+                                            ),
+                                            if (state.hasError)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15),
+                                                child: Text(
+                                                  state.errorText!,
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12),
+                                                ),
+                                              )
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(height: 12),
+                                    FormField<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'اختر الفرقه';
+                                        }
+                                        return null;
+                                      },
+                                      builder: (FormFieldState<String> state) {
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomDropDownButton(
+                                              items: const [
+                                                'الفرقة الأولى',
+                                                'الفرقة الثانية',
+                                                'الفرقة الثالثة',
+                                                'الفرقة الرابعة',
+                                                'الفرقة الخامسة',
+                                                'الفرقة السادسة',
+                                                'الفرقة السابعة',
+                                              ],
+                                              hint: 'اختر الفرقه',
+                                              isExpanded: true,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  rankValue = value;
+                                                  state.didChange(value);
+                                                });
+                                              },
+                                              value: rankValue,
+                                            ),
+                                            if (state.hasError)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15),
+                                                child: Text(
+                                                  state.errorText!,
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12),
+                                                ),
+                                              )
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(height: 12),
+                                    FormField<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'اختر النوع';
+                                        }
+                                        return null;
+                                      },
+                                      builder: (FormFieldState<String> state) {
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomDropDownButton(
+                                              items: const ['ذكر', 'انثي'],
+                                              hint: 'اختر النوع',
+                                              isExpanded: true,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  genderValue = value;
+                                                  state.didChange(value);
+                                                });
+                                              },
+                                              value: genderValue,
+                                            ),
+                                            if (state.hasError)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15),
+                                                child: Text(
+                                                  state.errorText!,
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12),
+                                                ),
+                                              )
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(height: 12),
+                                    FormField<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'مريض مزمن؟';
+                                        }
+                                        return null;
+                                      },
+                                      builder: (FormFieldState<String> state) {
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomDropDownButton(
+                                              items: const ['نعم', 'لا'],
+                                              hint: 'مريض مزمن؟',
+                                              isExpanded: true,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  dieseaseValue = value;
+                                                  state.didChange(value);
+                                                });
+                                              },
+                                              value: dieseaseValue,
+                                            ),
+                                            if (state.hasError)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15),
+                                                child: Text(
+                                                  state.errorText!,
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12),
+                                                ),
+                                              )
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(height: 12),
+                                    if (dieseaseValue == "نعم")
+                                      MultiSelectDialogField(
+                                        title: const Text("الامراض المزمنه"),
+                                        buttonText: const Text(
+                                          "الامراض المزمنه",
+                                          style: TextStyle(
+                                            fontSize: 16,
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        width: 12,
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: CustomButton(
-                                          ontap: () {},
-                                          buttonColor: Colors.red,
-                                          child: const Icon(Icons.remove),
+                                        buttonIcon: const Icon(
+                                          Icons.arrow_drop_down_outlined,
+                                          color: Colors.grey,
                                         ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey.shade100,
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10)),
+                                          border: Border.all(
+                                            color: Colors.grey,
+                                            width: 2,
+                                          ),
+                                        ),
+                                        items: BlocProvider.of<PateintCubit>(
+                                                context)
+                                            .diseases
+                                            .map((e) =>
+                                                MultiSelectItem(e, e.name))
+                                            .toList(),
+                                        listType: MultiSelectListType.CHIP,
+                                        onConfirm: (values) {
+                                          selectedDiseases = values;
+                                          print(selectedDiseases.toString());
+                                        },
                                       ),
-                                    ],
-                                  )
-                                ],
+                                    const SizedBox(height: 12),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: CustomButton(
+                                            ontap: () {
+                                              if (formKey.currentState!
+                                                  .validate()) {
+                                                BlocProvider.of<PateintCubit>(
+                                                        context)
+                                                    .postPatientData(
+                                                  patientModel: PatientModel(
+                                                      age: int.parse(age.text),
+                                                      studentId: int.parse(
+                                                          studentId.text),
+                                                      phoneNumber:
+                                                          phoneNubmer.text,
+                                                      diseases:
+                                                          selectedDiseases,
+                                                      name: name.text,
+                                                      nationalId: int.parse(
+                                                          nationalId.text),
+                                                      gender: genderValue!,
+                                                      chronic:
+                                                          chronic.text == "نعم"
+                                                              ? true
+                                                              : false,
+                                                      level: rankValue!,
+                                                      collegeName:
+                                                          collegeValue!),
+                                                );
+                                                BlocProvider.of<PateintCubit>(
+                                                        context)
+                                                    .fetchAllPateint();
+                                              } else {
+                                                autovalidateMode =
+                                                    AutovalidateMode.always;
+                                              }
+                                            },
+                                            buttonColor: Colors.green,
+                                            child: Text(
+                                              'اضافه مريض',
+                                              style:
+                                                  AppStyles.styleBold16(context)
+                                                      .copyWith(
+                                                          color: Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Expanded(
+                                          flex: 1,
+                                          child: CustomButton(
+                                            ontap: () {
+                                              clearAllData();
+                                              setState(() {});
+                                            },
+                                            buttonColor: Colors.red,
+                                            child: const Icon(Icons.remove),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -386,5 +485,6 @@ class _AddNewPatientState extends State<AddNewPatient> {
     formKey = GlobalKey<FormState>();
     selectedDiseases.clear();
     isChronic = false;
+    autovalidateMode = AutovalidateMode.disabled;
   }
 }

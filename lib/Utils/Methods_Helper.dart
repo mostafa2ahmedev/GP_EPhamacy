@@ -258,7 +258,7 @@ abstract class MethodHelper {
                   CustomDetailsItem(
                     note: 'التنبيه قبل',
                     data: medicineModel.alertexpired.toString() + " ايام",
-                    icon: Icons.date_range,
+                    icon: Icons.alarm,
                   ),
                   const SizedBox(
                     height: 8,
@@ -266,7 +266,7 @@ abstract class MethodHelper {
                   CustomDetailsItem(
                     note: 'التنبيه قبل',
                     data: medicineModel.alertamount.toString() + " مخزون",
-                    icon: Icons.numbers,
+                    icon: Icons.date_range,
                   ),
                   const SizedBox(
                     height: 20,
