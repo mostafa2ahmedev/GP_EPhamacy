@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gppharmacy/Features/Notifications/presentation/Views/NotificationView.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
@@ -14,8 +16,14 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actions: [
-        SvgPicture.asset(Assets.imagesBell,
-            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+        InkWell(
+          onTap: () {
+            MethodHelper.navigateToWithRep(context, const NotificationView());
+          },
+          child: SvgPicture.asset(Assets.imagesBell,
+              colorFilter:
+                  const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+        ),
         const SizedBox(
           width: 12,
         ),

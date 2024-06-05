@@ -2,7 +2,7 @@ import 'package:gppharmacy/Features/StoresBody/data/Orders/OrderMedicine_Model.d
 import 'package:gppharmacy/Features/StoresBody/data/Orders/Supplier_Model.dart';
 
 class OrderModel {
-  final int id;
+  final int? id;
   final int supplyrequest;
   final int deliveryrequest;
   final String dateofsupply;
@@ -10,7 +10,7 @@ class OrderModel {
   final List<OrderMedicinesModel> orderMedicines;
 
   OrderModel(
-      {required this.id,
+      {this.id,
       required this.supplyrequest,
       required this.deliveryrequest,
       required this.dateofsupply,
@@ -27,7 +27,19 @@ class OrderModel {
         supplyrequest: json['supplyrequest'],
         deliveryrequest: json['deliveryrequest'],
         dateofsupply: json['dateofsupply'],
-        supplier: SupplierModel.fromjson(json['supplier']),
+        supplier: SupplierModel.fromjson(json: json['supplier']),
         orderMedicines: x);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'supplyrequest': supplyrequest,
+      'deliveryrequest': deliveryrequest,
+      'dateofsupply': dateofsupply,
+      'supplier': supplier.toJson(),
+      'orderMedicines':
+          orderMedicines.map((medicine) => medicine.toJson()).toList(),
+    };
   }
 }

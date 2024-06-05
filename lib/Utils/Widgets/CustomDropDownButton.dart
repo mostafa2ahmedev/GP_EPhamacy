@@ -10,12 +10,14 @@ class CustomDropDownButton extends StatelessWidget {
       this.onChanged,
       required this.hint,
       this.isExpanded = false,
-      this.value});
+      this.value,
+      this.disabledHint});
   final List<String> items;
   final void Function(String?)? onChanged;
   final String hint;
   final bool isExpanded;
   final String? value;
+  final Widget? disabledHint;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,6 +26,7 @@ class CustomDropDownButton extends StatelessWidget {
         border: Border.all(width: 1, color: Colors.grey),
       ),
       child: DropdownButton(
+        disabledHint: disabledHint,
         borderRadius: BorderRadius.circular(12),
         elevation: 1,
         menuMaxHeight: 400,
@@ -36,6 +39,7 @@ class CustomDropDownButton extends StatelessWidget {
           style: AppStyles.styleRegular14(context).copyWith(color: Colors.grey),
         ),
         items: MethodHelper.getDropDownItems(items),
+        style: AppStyles.styleBold20(context).copyWith(color: Colors.blue),
         onChanged: onChanged,
       ),
     );

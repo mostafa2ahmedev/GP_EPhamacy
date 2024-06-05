@@ -1,7 +1,7 @@
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 
 class OrderMedicinesModel {
-  final int id;
+  final int? id;
   final int amount;
   final int price;
   final String expirydate;
@@ -9,7 +9,7 @@ class OrderMedicinesModel {
 
   OrderMedicinesModel(
       {required this.expirydate,
-      required this.id,
+      this.id,
       required this.amount,
       required this.price,
       required this.medicine});
@@ -22,5 +22,15 @@ class OrderMedicinesModel {
       medicine: MedicineModel.fromjson(json: json['medicine']),
       expirydate: json['expirydate'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'amount': amount,
+      'price': price,
+      'medicine': medicine.toJson(),
+      'expirydate': expirydate,
+    };
   }
 }

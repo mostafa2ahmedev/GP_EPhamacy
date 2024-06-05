@@ -6,13 +6,17 @@ import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/Auth_View.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/Dispensing%20medicationsCubit/dispensing_medications_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
 import 'package:gppharmacy/Utils/DioService.dart';
 import 'package:gppharmacy/Utils/Constant.dart';
 import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
 import 'package:gppharmacy/Utils/Themes.dart';
 
 import 'package:gppharmacy/generated/l10n.dart';
+
+import 'Features/Patients/Maneger/Patient_Cubit.dart';
 
 // MOSTAFA
 void main() async {
@@ -52,6 +56,15 @@ class GP_Pharmacy extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MedicineCubit(),
+        ),
+        BlocProvider(
+          create: (context) => OrdersCubit(),
+        ),
+        BlocProvider(
+          create: (context) => PateintCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DispensingMedicationsCubit(),
         ),
       ],
       child: BlocConsumer<DrawerCubit, DrawerStates>(

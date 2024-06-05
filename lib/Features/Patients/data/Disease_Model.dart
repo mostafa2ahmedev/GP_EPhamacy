@@ -7,4 +7,11 @@ class DiseaseModel {
   factory DiseaseModel.fromJson(json) {
     return DiseaseModel(id: json['id'], name: json['name']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
+  }
 }

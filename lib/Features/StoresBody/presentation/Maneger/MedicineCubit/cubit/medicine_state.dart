@@ -9,6 +9,8 @@ class GetMedicineDataLoadingState extends MedicineState {}
 
 class GetMedicineDataSuccessState extends MedicineState {}
 
+class GetMedicineDataFailureState extends MedicineState {}
+
 class SearchinMedicineDataSuccessState extends MedicineState {}
 
 //
@@ -27,3 +29,7 @@ class AddNewMedicineFailureState extends MedicineState {}
 class GetCategoriesLoadingState extends MedicineState {}
 
 class GetCategoriesSuccessState extends MedicineState {}
+
+class AssignMedicineToPrescriptionList extends MedicineState {}
+
+class NoDataFound extends MedicineState {}

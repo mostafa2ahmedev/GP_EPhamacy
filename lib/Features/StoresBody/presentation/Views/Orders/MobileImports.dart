@@ -5,7 +5,6 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/ListViewOfOrders.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomFailureWidget.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
@@ -42,7 +41,7 @@ class _MobileImportsState extends State<MobileImports> {
         children: [
           Text(
             S.of(context).ViewOldOrders,
-            style: AppStyles.styleBold28(context),
+            style: AppStyles.styleBold32(context),
           ),
           const SizedBox(
             height: 24,

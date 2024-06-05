@@ -8,7 +8,7 @@ class AuthBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1,
+      aspectRatio: 8 / 6,
       child: Container(
         padding: const EdgeInsets.only(left: 14, right: 14, bottom: 14),
         decoration: BoxDecoration(

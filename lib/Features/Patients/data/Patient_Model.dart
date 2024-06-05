@@ -2,25 +2,27 @@ import 'package:gppharmacy/Features/Patients/data/Disease_Model.dart';
 
 class PatientModel {
   final String name;
-  final int national_id;
+  final int nationalId;
+  final int? studentId;
   final String gender;
   final bool chronic;
   final String level;
   final String collegeName;
-  final int age;
-  final String phone_number;
+  final int? age;
+  final String? phoneNumber;
   final List<DiseaseModel> diseases;
 
   PatientModel(
       {required this.diseases,
       required this.name,
-      required this.national_id,
+      required this.nationalId,
       required this.gender,
       required this.chronic,
       required this.level,
       required this.collegeName,
-      required this.age,
-      required this.phone_number});
+      this.age,
+      this.phoneNumber,
+      this.studentId});
 
   factory PatientModel.fromJson(json) {
     List<DiseaseModel> x = [];
@@ -30,14 +32,33 @@ class PatientModel {
 
     return PatientModel(
       name: json['name'],
-      national_id: json['national_id'],
+      nationalId: json['nationalid'],
       gender: json['gender'],
       chronic: json['chronic'],
       level: json['level'],
       collegeName: json['collegeName'],
       age: json['age'],
-      phone_number: json['phone_number'],
+      phoneNumber: json['phone_number'],
       diseases: x,
+      studentId: json['student_id'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    List<Map<String, dynamic>> diseasesJson =
+        diseases.map((disease) => disease.toJson()).toList();
+
+    return {
+      'name': name,
+      'nationalid': nationalId,
+      'gender': gender,
+      'chronic': chronic,
+      'level': level,
+      'collegeName': collegeName,
+      'age': age,
+      'phone_number': phoneNumber,
+      'disease': diseasesJson,
+      'student_id': studentId,
+    };
   }
 }

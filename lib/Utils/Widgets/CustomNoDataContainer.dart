@@ -20,12 +20,12 @@ class CustomNoDataContainer extends StatelessWidget {
         AspectRatio(
           aspectRatio: 2 / 1.5,
           child: Image.asset(
-            Assets.imagesSearch,
+            Assets.imagesSearch,color: Color.fromARGB(255, 194, 190, 190),
           ),
         ),
         Text(
-          'اوووبس! لا يوجد اي معلومات',
-          style: AppStyles.styleBold28(context).copyWith(color: Colors.black),
+          ' لا يوجد اي بيانات ',
+          style: AppStyles.styleBold32(context).copyWith(color: Colors.black),
         ),
       ],
     );

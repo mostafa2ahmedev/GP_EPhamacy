@@ -9,6 +9,7 @@ class ListTileForMedicineList extends StatelessWidget {
     required this.medicineModel,
   });
   final MedicineModel medicineModel;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,9 +18,15 @@ class ListTileForMedicineList extends StatelessWidget {
       },
       child: CustomBorderForItems(
         child: ListTile(
-          title: Text(medicineModel.englishname),
+          title: Text(
+            medicineModel.englishname,
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
+          ),
           subtitle: Text(
             medicineModel.barcode.toString(),
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
           ),
           trailing: GestureDetector(
             onTap: () {
@@ -28,9 +35,12 @@ class ListTileForMedicineList extends StatelessWidget {
               //   medicineModel: medicineModel,
               // );
             },
-            child: const Icon(
-              Icons.edit,
-              color: Colors.black,
+            child: GestureDetector(
+              onTap: () {},
+              child: const Icon(
+                Icons.edit,
+                color: Colors.black,
+              ),
             ),
           ),
         ),

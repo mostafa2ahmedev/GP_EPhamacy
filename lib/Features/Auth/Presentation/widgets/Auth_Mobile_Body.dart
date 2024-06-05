@@ -9,13 +9,11 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Background.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/ChoosenPage.dart';
-import 'package:gppharmacy/Features/HomeScreen/presentation/Home_View.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
-import 'package:gppharmacy/Utils/toastMessageMethod.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class AuthMobileBody extends StatefulWidget {
@@ -26,10 +24,16 @@ class AuthMobileBody extends StatefulWidget {
 }
 
 class _AuthMobileBodyState extends State<AuthMobileBody> {
-  bool isSelected = false;
+  bool isSelected = true;
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? username, password;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,6 +42,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
         child: SingleChildScrollView(
           child: Form(
             key: formKey,
+            autovalidateMode: autovalidateMode,
             child: Column(
               children: [
                 const AuthBackground(
@@ -68,6 +73,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                   height: 24,
                 ),
                 AuthTextField(
+                  obscureText: isSelected,
                   label: 'ادخل كلمه المرور',
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
@@ -87,7 +93,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                         });
                       },
                       child: SvgPicture.asset(
-                        isSelected ? Assets.imagesEye : Assets.imagesEyeCrossed,
+                        isSelected ? Assets.imagesEyeCrossed : Assets.imagesEye,
                       ),
                     ),
                   ),
@@ -124,41 +130,25 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                     }
                   },
                   builder: (context, state) {
-                    if (state is AuthLoadingState) {
-                      return const CustomLoadingIndicator();
-                    }
-                    return CustomButton(
-                      buttonColor:
-                          Theme.of(context).drawerTheme.backgroundColor!,
-                      child: state is AuthLoadingState
-                          ? const CircularProgressIndicator()
-                          : Text(
-                              S.of(context).AuthSignIn,
-                              style: AppStyles.styleMeduim16(context)
-                                  .copyWith(color: Colors.white),
-                            ),
+                    return LoginButton(
+                      state: state,
                       ontap: () {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
                           BlocProvider.of<AuthCubit>(context)
                               .signIn(username!, password!);
                         } else {
-                          autovalidateMode = AutovalidateMode.always;
+                          setState(() {
+                            autovalidateMode = AutovalidateMode.always;
+                          });
                         }
                       },
                     );
                   },
                 ),
                 const SizedBox(
-                  height: 12,
+                  height: 6,
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    S.of(context).AuthForgotPassword,
-                    style: AppStyles.styleMeduim16(context),
-                  ),
-                )
               ],
             ),
           ),

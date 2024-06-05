@@ -7,4 +7,11 @@ class MediniceCategory {
   factory MediniceCategory.fromjson({required Map<String, dynamic> json}) {
     return MediniceCategory(id: json['id'], name: json['name']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
+  }
 }

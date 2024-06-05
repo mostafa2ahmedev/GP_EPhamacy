@@ -51,7 +51,7 @@ class _MobileSrfEladwyaState extends State<MobileSrfEladwya> {
         children: [
           Text(
             S.of(context).SrfEladwya,
-            style: AppStyles.styleBold28(context),
+            style: AppStyles.styleBold32(context),
           ),
           const SizedBox(
             height: 24,
@@ -128,13 +128,19 @@ class _MobileSrfEladwyaState extends State<MobileSrfEladwya> {
           ),
           BlocBuilder<DispensingMedicationsCubit, DispensingMedicationsState>(
             builder: (context, state) {
-              if (state is GetPrescriptionDataLoadingState) {
+              if (state is GetPrescriptionDataLoadingState ||
+                  state is GetPrescriptionDataForSaleLoadingState) {
                 return const CustomLoadingIndicator();
               } else if (state is GetPrescriptionDataSuccessState) {
                 return ListViewOfDispensingMedications(
                     presriptionList:
                         BlocProvider.of<DispensingMedicationsCubit>(context)
                             .searchedPrescriptionList);
+              } else if (state is GetPrescriptionDataForSaleLoadingState) {
+                return ListViewOfDispensingMedicationsSale(
+                    usagePrescription:
+                        BlocProvider.of<DispensingMedicationsCubit>(context)
+                            .usagePrescription);
               } else if (state is GetPrescriptionDataFailureState) {
                 return const CustomFailureWidget();
               } else {

@@ -14,15 +14,18 @@ class CustomChoosenContainer extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: ontap,
-        child: Container(
-          height: 150,
-          decoration: BoxDecoration(
-              color: Theme.of(context).drawerTheme.backgroundColor,
-              borderRadius: BorderRadius.circular(12)),
-          child: Center(
-            child: Text(
-              text,
-              style: AppStyles.styleSemiBold20(context),
+        child: AspectRatio(
+          aspectRatio: 13 / 5,
+          child: Container(
+            decoration: BoxDecoration(
+                color: Theme.of(context).drawerTheme.backgroundColor,
+                borderRadius: BorderRadius.circular(12)),
+            child: Center(
+              child: Text(
+                text,
+                style: AppStyles.styleBold28(context)
+                    .copyWith(color: Colors.white),
+              ),
             ),
           ),
         ),

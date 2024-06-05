@@ -1,6 +1,6 @@
 {
-    "name": "gppharmacy",
-    "short_name": "gppharmacy",
+    "name": "gpppharmacy",
+    "short_name": "gpppharmacy",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

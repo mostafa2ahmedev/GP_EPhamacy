@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/AddAccount/Presentation/Views/AddAccountView.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/Auth_View.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
@@ -30,6 +31,30 @@ class LowerPartOfDrawer extends StatelessWidget {
                 child: SizedBox(
                   height: 12,
                 ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 2.5),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: ListTile(
+                    title: InkWell(
+                      onTap: () {
+                        MethodHelper.navigateTo(
+                            context, const AddAccountView());
+                      },
+                      child: const Text(
+                        "اضافه حساب جديد",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -69,7 +94,7 @@ class LowerPartOfDrawer extends StatelessWidget {
                                 backgroundColor: Colors.white),
                             onPressed: () {
                               BlocProvider.of<AuthCubit>(context).signOut();
-                              MethodHelper.navigateTo(
+                              MethodHelper.navigateToWithRep(
                                   context, const AuthView());
                             },
                             icon: const Icon(

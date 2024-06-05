@@ -16,7 +16,7 @@ class ListTileForPatient extends StatelessWidget {
       child: CustomBorderForItems(
         child: ListTile(
           title: Text(patientModel.name),
-          subtitle: Text('${patientModel.national_id}'),
+          subtitle: Text('${patientModel.nationalId}'),
           trailing: Container(
             height: 40,
             width: 40,

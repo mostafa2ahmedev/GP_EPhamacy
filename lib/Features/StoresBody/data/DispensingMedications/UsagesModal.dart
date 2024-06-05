@@ -1,27 +1,45 @@
-import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/InventoryModel.dart';
-import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/PrescriptionModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/UsageMedicine.dart';
 
-class Usages {
+class UsagesPrescription {
   final int id;
-  final int amount;
-  final int price;
-  final MedicineModel medicine;
-  final InventoryModel inventoryModel;
+  final String date;
+  final PrescriptionModel prescriptionModel;
+  final List<UsageMedicine> usageMedicines;
+  final int totalPrice;
 
-  Usages(
-      {required this.id,
-      required this.amount,
-      required this.price,
-      required this.medicine,
-      required this.inventoryModel});
-  factory Usages.fromJson({required Map<String, dynamic> json}) {
-    return Usages(
-        id: json['id'],
-        amount: json['amount'],
-        price: json['price'],
-        medicine: MedicineModel.fromjson(json: json['medicine']),
-        inventoryModel: InventoryModel.fromJson(
-          json: json['inventory'],
-        ));
+  UsagesPrescription({
+    required this.id,
+    required this.date,
+    required this.prescriptionModel,
+    required this.usageMedicines,
+    required this.totalPrice,
+  });
+
+  factory UsagesPrescription.fromJson({required Map<String, dynamic> json}) {
+    List<UsageMedicine>? usages = [];
+    if (json['useageMedicines'] != null) {
+      for (var element in json['useageMedicines']) {
+        usages.add(UsageMedicine.fromJson(json: element));
+      }
+    }
+
+    return UsagesPrescription(
+      id: json['id'],
+      date: json['date'],
+      prescriptionModel: PrescriptionModel.fromJson(json: json['prescription']),
+      usageMedicines: usages,
+      totalPrice: json['totalPrice'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'date': date,
+      'prescription': prescriptionModel.toJson(),
+      'useageMedicines': [],
+      'totalPrice': totalPrice,
+    };
   }
 }

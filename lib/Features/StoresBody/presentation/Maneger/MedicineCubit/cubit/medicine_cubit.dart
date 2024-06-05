@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/UnitModel.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/medicineCategoryModel.dart';
 import 'package:gppharmacy/Utils/DioService.dart';
 
@@ -11,6 +13,12 @@ class MedicineCubit extends Cubit<MedicineState> {
   List<MedicineModel> medicinesList = [];
   List<MedicineModel> searchedList = [];
   List<MediniceCategory> categories = [];
+  List<UnitModel> LargeUnits = [];
+  List<UnitModel> smallUnits = [];
+  void resetState() {
+    emit(MedicineInitial());
+  }
+
   void getMedicineData({required int typeOfSearch}) async {
     medicinesList = [];
     emit(GetMedicineDataLoadingState());
@@ -31,7 +39,9 @@ class MedicineCubit extends Cubit<MedicineState> {
 
       searchedList = medicinesList;
       emit(GetMedicineDataSuccessState());
-    } catch (e) {}
+    } catch (e) {
+      emit(GetMedicineDataFailureState());
+    }
   }
 
   void searchingInMedicineDataList(
@@ -52,61 +62,113 @@ class MedicineCubit extends Cubit<MedicineState> {
         }
       }
     }
+
     emit(GetMedicineDataSuccessState());
   }
 
 //
 //
   void addNewMedicine({required MedicineModel medicineModel}) async {
+    Response? response;
     try {
       emit(AddNewMedicineLoadingState());
-      Map<String, dynamic> medicine = {
-        'name': medicineModel.englishname,
-        'arabicname': medicineModel.arabicname,
-        'activeingredient': medicineModel.activeingredient,
-        'alertamount': medicineModel.alertamount,
-        'alertexpired': medicineModel.alertexpired,
-        'barcode': medicineModel.barcode,
-        'manufacturer': medicineModel.manufacturer,
-        'strength': medicineModel.strength,
-        'medicineCategory': medicineModel.mediniceCategory
-      };
-      await DioService.postData(url: '/pharmacy/medicines', query: medicine);
+
+      response = await DioService.postData(
+          url: '/pharmacy/medicines', data: medicineModel.toJson());
       emit(AddNewMedicineSuccessState());
     } catch (e) {
       print(e.toString());
+      print(response!.data);
       emit(AddNewMedicineFailureState());
     }
   }
 
+//
+//
+//
+//
+
+  void addUnit({required bool isLarge, required String unitValue}) async {
+    try {
+      emit(GetCategoriesLoadingState());
+      await DioService.postData(
+        url: '/pharmacy/unit/${isLarge ? "max" : "min"}',
+        query: {"name": unitValue},
+      );
+      print('CategoryAddedSuccessfuly');
+      getUnitData();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void getUnitData() async {
+    emit(GetCategoriesLoadingState());
+    try {
+      smallUnits = [];
+      LargeUnits = [];
+
+      var unitList = await DioService.getDate(
+        url: '/pharmacy/unit/min',
+      );
+      var unitList2 = await DioService.getDate(
+        url: '/pharmacy/unit/max',
+      );
+      for (var element in unitList.data) {
+        smallUnits.add(UnitModel.fromjson(json: element));
+      }
+      for (var element in unitList2.data) {
+        LargeUnits.add(UnitModel.fromjson(json: element));
+      }
+
+      emit(GetCategoriesSuccessState());
+      print('UnitsArrived');
+    } catch (e) {
+      print(e.toString());
+      print('UnitNotArrived');
+    }
+  }
+
+//
+//
+//
+//
   void addNewCategory({required String category}) async {
     try {
-      await DioService.postData(url: '/pharmacy/medicinecategories', query: {
+      emit(GetCategoriesLoadingState());
+      await DioService.postData(url: '/pharmacy/medicinecategories', data: {
         'name': category,
       });
       print('CategoryAddedSuccessfuly');
+      getCatagoryData();
     } catch (e) {
       print(e.toString());
     }
   }
 
   void getCatagoryData() async {
+    emit(GetCategoriesLoadingState());
     try {
-      emit(GetCategoriesLoadingState());
+      categories = [];
+
       var catList = await DioService.getDate(
         url: '/pharmacy/medicinecategories',
       );
       for (var element in catList.data) {
-        categories.add(element);
+        categories.add(MediniceCategory.fromjson(json: element));
       }
-      print(categories[0]);
+
       emit(GetCategoriesSuccessState());
       print('CategoryArrivedSuccessfuly');
     } catch (e) {
-      print('CategoryNotAdded');
+      print(e.toString());
+      print('CategoryNotArrived');
     }
   }
 
+//
+//
+//
   void updateMedicineData({required MedicineModel medicineModel}) {
     emit(UpdateMedicineDataLoadingState());
     try {
@@ -129,6 +191,36 @@ class MedicineCubit extends Cubit<MedicineState> {
 
       emit(UpdateMedicineDataSuccessState());
     } catch (e) {}
+  }
+
+  int getCategoryId({required String catName}) {
+    int catId = 0;
+    for (var element in categories) {
+      if (element.name == catName) {
+        catId = element.id;
+        break;
+      }
+    }
+    return catId;
+  }
+
+  MedicineModel? getMedicineByName({required String name}) {
+    MedicineModel? medicineModel;
+    for (var element in medicinesList) {
+      if (element.englishname == name) {
+        medicineModel = element;
+        break;
+      }
+    }
+    return medicineModel;
+  }
+
+  List<MedicineModel> findMedicines(String query) {
+    return medicinesList.where((medicine) {
+      final medicineLower = medicine.englishname.toLowerCase();
+      final queryLower = query.toLowerCase();
+      return medicineLower.contains(queryLower);
+    }).toList();
   }
 }
 ///pharmacy/medicines/mix

@@ -29,16 +29,15 @@ class _MobileMedicinesState extends State<MobileMedicines> {
     'منوعات',
     'جميع الانواع',
   ];
+  String? inputText;
   @override
   void initState() {
-
     super.initState();
 
     controller = TextEditingController();
     controller.addListener(() {
       setState(() {});
     });
-    BlocProvider.of<MedicineCubit>(context).searchedList = [];
   }
 
   @override
@@ -51,7 +50,7 @@ class _MobileMedicinesState extends State<MobileMedicines> {
         children: [
           Text(
             S.of(context).Medicines,
-            style: AppStyles.styleBold28(context),
+            style: AppStyles.styleBold32(context),
           ),
           const SizedBox(
             height: 24,
@@ -83,7 +82,7 @@ class _MobileMedicinesState extends State<MobileMedicines> {
                     setState(() {
                       typeValue = value;
                     });
-  
+
                     selectedItem = items.indexOf(value!) + 1;
                   },
                   value: typeValue,
@@ -138,8 +137,9 @@ class _MobileMedicinesState extends State<MobileMedicines> {
                 return ListViewOfMedicineList(
                     searchedList:
                         BlocProvider.of<MedicineCubit>(context).searchedList);
+              } else {
+                return const CustomNoDataContainer();
               }
-              return const CustomNoDataContainer();
             },
           )
         ],

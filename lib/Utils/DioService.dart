@@ -32,10 +32,12 @@ class DioService {
 
   static Future<Response> postData({
     required String url,
+    Map<String, dynamic>? data,
     Map<String, dynamic>? query,
   }) async {
     return await dio.post(
       url,
+      data: data, //query parameter
       queryParameters: query,
       options: Options(
         headers: {

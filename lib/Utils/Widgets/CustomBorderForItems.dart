@@ -9,8 +9,7 @@ class CustomBorderForItems extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Theme.of(context).drawerTheme.backgroundColor!,
-        ),
+            color: Theme.of(context).drawerTheme.backgroundColor!, width: 2.5),
       ),
       child: child,
     );
