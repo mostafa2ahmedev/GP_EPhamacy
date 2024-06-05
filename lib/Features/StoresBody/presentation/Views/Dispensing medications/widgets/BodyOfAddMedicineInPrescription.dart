@@ -3,14 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
-import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit_State.dart';
-import 'package:gppharmacy/Features/StoresBody/data/Orders/OrderMedicine_Model.dart';
+
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/OrdersCubitStates.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 
 class BodyOfAdditionMedicineInPrescription extends StatefulWidget {
   const BodyOfAdditionMedicineInPrescription({super.key});

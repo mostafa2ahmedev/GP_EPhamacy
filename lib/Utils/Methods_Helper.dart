@@ -16,8 +16,6 @@ import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 
 import 'package:gppharmacy/generated/l10n.dart';
-import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 abstract class MethodHelper {
   static void navigateTo(BuildContext context, Widget widget) {
