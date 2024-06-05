@@ -9,7 +9,7 @@ import 'package:gppharmacy/Features/Statistics/presentation/widgets/CustomPieCha
 
 class ChoosenView extends StatelessWidget {
   ChoosenView({super.key});
-  
+
   final GlobalKey<ScaffoldState> scafoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {

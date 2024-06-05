@@ -33,8 +33,6 @@ class _PatientViewState extends State<PatientView> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
