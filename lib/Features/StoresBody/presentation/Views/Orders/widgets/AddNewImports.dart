@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/StoresBody/data/Orders/OrderMedicine_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Orders/Order_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/OrdersCubitStates.dart';
@@ -7,6 +8,7 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/AddNewCategoryMethod.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/BodyOfAddMedicineInOrder.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/CustomMedicineView.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
 
@@ -31,6 +33,8 @@ class _AddNewImportsState extends State<AddNewImports> {
   late GlobalKey<FormState> key;
   String? supplierValue;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  String? supplierErrorMessage;
+
   @override
   void initState() {
     super.initState();
@@ -92,18 +96,38 @@ class _AddNewImportsState extends State<AddNewImports> {
                                     children: [
                                       Expanded(
                                         flex: 4,
-                                        child: CustomDropDownButton(
-                                          items: supplierList
-                                              .map((e) => e.name)
-                                              .toList(),
-                                          isExpanded: true,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              supplierValue = newValue;
-                                            });
-                                          },
-                                          value: supplierValue,
-                                          hint: 'اختر اسم المورد',
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomDropDownButton(
+                                              items: supplierList
+                                                  .map((e) => e.name)
+                                                  .toList(),
+                                              isExpanded: true,
+                                              onChanged: (newValue) {
+                                                setState(() {
+                                                  supplierValue = newValue;
+                                                  supplierErrorMessage = null;
+                                                });
+                                              },
+                                              value: supplierValue,
+                                              hint: 'اختر اسم المورد',
+                                            ),
+                                            if (supplierErrorMessage != null)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 5),
+                                                child: Text(
+                                                  supplierErrorMessage!,
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ),
+                                          ],
                                         ),
                                       ),
                                       Expanded(
@@ -165,15 +189,9 @@ class _AddNewImportsState extends State<AddNewImports> {
                                   ),
                                   if (state
                                       is AssignOrderModelToImportListSuccessState)
-                                    Column(
-                                      children: List.generate(
-                                          orderCubit.orderMedicines.length,
-                                          (index) {
-                                        return CustomMedicineView(
-                                          orderMedicinesModel:
-                                              orderCubit.orderMedicines[index],
-                                        );
-                                      }),
+                                    CustomMedicineView2(
+                                      orderMedicineList:
+                                          orderCubit.orderMedicines,
                                     ),
                                   Row(
                                     children: [
@@ -226,8 +244,14 @@ class _AddNewImportsState extends State<AddNewImports> {
                                                       orderMedicines: orderCubit
                                                           .orderMedicines));
                                             } else {
-                                              autovalidateMode =
-                                                  AutovalidateMode.always;
+                                              setState(() {
+                                                autovalidateMode =
+                                                    AutovalidateMode.always;
+                                                if (supplierValue == null) {
+                                                  supplierErrorMessage =
+                                                      'هذا الحقل مطلوب';
+                                                }
+                                              });
                                             }
                                           },
                                           buttonColor: Colors.green,
@@ -267,6 +291,61 @@ class _AddNewImportsState extends State<AddNewImports> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomCustom3 extends StatelessWidget {
+  const CustomCustom3({Key? key, required this.orderMedicinesModel})
+      : super(key: key);
+
+  final OrderMedicinesModel? orderMedicinesModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 8,
+        ),
+        CustomDetailsItem(
+          note: 'الدواء',
+          data: orderMedicinesModel!.medicine.englishname,
+          icon: Icons.medication_outlined,
+        ),
+        SizedBox(
+          height: 3,
+        ),
+        CustomDetailsItem(
+          note: 'الكميه',
+          data: orderMedicinesModel!.amount.toString(),
+          icon: Icons.numbers_sharp,
+        ),
+        SizedBox(
+          height: 3,
+        ),
+        CustomDetailsItem(
+          note: 'الصلاحيه',
+          data: orderMedicinesModel!.expirydate,
+          icon: Icons.date_range,
+        ),
+        SizedBox(
+          height: 3,
+        ),
+        CustomDetailsItem(
+          note: 'اسم المورد',
+          data: orderMedicinesModel!.medicine.manufacturer ?? "",
+          icon: Icons.person_2,
+        ),
+        SizedBox(
+          height: 3,
+        ),
+        CustomDetailsItem(
+          note: 'السعر',
+          data: orderMedicinesModel!.price.toString(),
+          icon: Icons.price_change,
+        ),
+      ],
     );
   }
 }

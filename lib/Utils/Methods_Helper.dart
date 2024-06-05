@@ -523,7 +523,7 @@ class _CustomCustomState extends State<CustomCustom> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 30,
             ),
             CustomDropDownButton(

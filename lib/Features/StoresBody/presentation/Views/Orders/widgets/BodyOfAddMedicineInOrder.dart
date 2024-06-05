@@ -51,19 +51,45 @@ class _BodyOfMedicineAdditionInOrderState
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CustomDropDownButton(
-                        items: BlocProvider.of<MedicineCubit>(context)
-                            .medicinesList
-                            .map((e) => e.englishname)
-                            .toList(),
-                        isExpanded: true,
-                        onChanged: (newValue) {
-                          setState(() {
-                            medicineValue = newValue;
-                          });
+                      FormField<String>(
+                        validator: (value) {
+                          if (medicineValue == null || medicineValue!.isEmpty) {
+                            return 'هذا الحقل مطلوب';
+                          }
+                          return null;
                         },
-                        value: medicineValue,
-                        hint: 'اختر الدواء',
+                        builder: (FormFieldState<String> state) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomDropDownButton(
+                                items: BlocProvider.of<MedicineCubit>(context)
+                                    .medicinesList
+                                    .map((e) => e.englishname)
+                                    .toList(),
+                                isExpanded: true,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    medicineValue = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                value: medicineValue,
+                                hint: 'اختر الدواء',
+                              ),
+                              if (state.hasError)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Text(
+                                    state.errorText ?? '',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          );
+                        },
                       ),
                       const SizedBox(
                         height: 12,
@@ -71,10 +97,11 @@ class _BodyOfMedicineAdditionInOrderState
                       AuthTextField(
                         controller: amountController,
                         label: "الكميه",
-                        suffixIcon: const Icon(Icons.add_rounded),
+                        keyboardType: TextInputType.number,
+                        suffixIcon: const Icon(Icons.numbers),
                         validator: (data) {
                           if (data == null || data.isEmpty) {
-                            return 'This field cannot be empty';
+                            return 'هذا الحقل مطلوب';
                           }
                           return null;
                         },
@@ -85,10 +112,11 @@ class _BodyOfMedicineAdditionInOrderState
                       AuthTextField(
                         controller: dateController,
                         label: "تاريخ الصلاحيه",
-                        suffixIcon: const Icon(Icons.add_rounded),
+                        keyboardType: TextInputType.datetime,
+                        suffixIcon: const Icon(Icons.date_range),
                         validator: (data) {
                           if (data == null || data.isEmpty) {
-                            return 'This field cannot be empty';
+                            return 'هذا الحقل مطلوب';
                           }
                           return null;
                         },
@@ -99,10 +127,10 @@ class _BodyOfMedicineAdditionInOrderState
                       AuthTextField(
                         controller: manufactureController,
                         label: "الشركه المصنعه",
-                        suffixIcon: const Icon(Icons.add_rounded),
+                        suffixIcon: const Icon(Icons.apartment),
                         validator: (data) {
                           if (data == null || data.isEmpty) {
-                            return 'This field cannot be empty';
+                            return 'هذا الحقل مطلوب';
                           }
                           return null;
                         },
@@ -113,10 +141,11 @@ class _BodyOfMedicineAdditionInOrderState
                       AuthTextField(
                         controller: priceController,
                         label: "السعر",
-                        suffixIcon: const Icon(Icons.add_rounded),
+                        keyboardType: TextInputType.number,
+                        suffixIcon: const Icon(Icons.price_change),
                         validator: (data) {
                           if (data == null || data.isEmpty) {
-                            return 'This field cannot be empty';
+                            return 'هذا الحقل مطلوب';
                           }
                           return null;
                         },
@@ -129,8 +158,7 @@ class _BodyOfMedicineAdditionInOrderState
                           Expanded(
                             child: CustomButton(
                               ontap: () {
-                                if (key.currentState!.validate() &&
-                                    medicineValue != null) {
+                                if (key.currentState!.validate()) {
                                   var medicineModel =
                                       BlocProvider.of<MedicineCubit>(context)
                                           .getMedicineByName(
@@ -166,8 +194,6 @@ class _BodyOfMedicineAdditionInOrderState
                           Expanded(
                             child: CustomButton(
                               ontap: () {
-                                if (key.currentState!.validate() &&
-                                    medicineValue != null) {}
                                 Navigator.pop(context);
                               },
                               buttonColor: Colors.red,
