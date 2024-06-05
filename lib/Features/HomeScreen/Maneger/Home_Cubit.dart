@@ -9,10 +9,15 @@ class DrawerCubit extends Cubit<DrawerStates> {
   DrawerCubit() : super(DrawerStatesInitial());
   int innerFirstSelectedIndex = 0;
   int outerSelectedIndex = 0;
+  int innerSecondSelectedIndex = 0;
   String? data1;
   String? data2;
   bool selectedMode = true;
   bool selectedLang = true;
+  String? hint1 = "المخازن";
+  String? hint2 = "المرضي";
+
+  bool isClicked = false;
 
   void changeMode({bool? mode}) async {
     if (mode != null) {

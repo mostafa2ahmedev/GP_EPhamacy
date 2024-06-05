@@ -20,4 +20,11 @@ class InventoryModel {
       ),
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'amount': amount,
+      'orderMedicine': orderMedicinesModel.toJson(),
+    };
+  }
 }

@@ -29,3 +29,7 @@ class AddNewMedicineFailureState extends MedicineState {}
 class GetCategoriesLoadingState extends MedicineState {}
 
 class GetCategoriesSuccessState extends MedicineState {}
+
+class AssignMedicineToPrescriptionList extends MedicineState {}
+
+class NoDataFound extends MedicineState {}

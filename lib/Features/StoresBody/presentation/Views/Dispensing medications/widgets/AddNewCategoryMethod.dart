@@ -5,10 +5,10 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubi
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
 
 import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 
 import '../../../../../Auth/Presentation/widgets/Auth_Text_Field.dart';
 import '../../../../../Auth/Presentation/widgets/Custom_Button.dart';
+import '../../../../../Patients/Maneger/Patient_Cubit.dart';
 
 Future<dynamic> addNewCategory(BuildContext context,
     {required String text1, required String text2, required int index}) {
@@ -49,6 +49,9 @@ Future<dynamic> addNewCategory(BuildContext context,
                           } else if (index == 4) {
                             BlocProvider.of<OrdersCubit>(context)
                                 .addNewSupplier(name: controller.text);
+                          } else if (index == 5) {
+                            BlocProvider.of<PateintCubit>(context)
+                                .postNewChronicDiesease(name: controller.text);
                           }
 
                           Navigator.pop(context);

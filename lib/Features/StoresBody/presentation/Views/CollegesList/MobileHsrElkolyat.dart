@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/CollegesListCubit/colleges_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/CollegesListCubit/colleges_state.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryStates.dart';
 
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/CollegesList/widgets/ListViewOfCollegesList.dart';
 
@@ -61,7 +59,7 @@ class _MobileHsrElkolyatState extends State<MobileHsrElkolyat> {
         children: [
           Text(
             S.of(context).HsrElkolyat,
-            style: AppStyles.styleBold28(context),
+            style: AppStyles.styleBold32(context),
           ),
           const SizedBox(
             height: 24,

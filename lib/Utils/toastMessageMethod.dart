@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit_State.dart';
 
 void toastMessage(String message) {
   Fluttertoast.showToast(

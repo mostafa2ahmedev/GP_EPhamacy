@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
-import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
 import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit_State.dart';
 import 'package:gppharmacy/Features/Patients/Presentation/widgets/ListViewOfPatient.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomFailureWidget.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
@@ -45,7 +43,7 @@ class _PatientViewState extends State<PatientView> {
         children: [
           Text(
             S.of(context).AllPatient,
-            style: AppStyles.styleBold28(context),
+            style: AppStyles.styleBold32(context),
           ),
           const SizedBox(
             height: 24,

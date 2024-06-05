@@ -9,14 +9,11 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Background.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/ChoosenPage.dart';
-import 'package:gppharmacy/Features/HomeScreen/presentation/Home_View.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
-import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
-import 'package:gppharmacy/Utils/toastMessageMethod.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class AuthMobileBody extends StatefulWidget {
@@ -45,6 +42,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
         child: SingleChildScrollView(
           child: Form(
             key: formKey,
+            autovalidateMode: autovalidateMode,
             child: Column(
               children: [
                 const AuthBackground(
@@ -132,9 +130,6 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                     }
                   },
                   builder: (context, state) {
-                    if (state is AuthLoadingState) {
-                      return const CustomLoadingIndicator();
-                    }
                     return LoginButton(
                       state: state,
                       ontap: () {
@@ -143,22 +138,17 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                           BlocProvider.of<AuthCubit>(context)
                               .signIn(username!, password!);
                         } else {
-                          autovalidateMode = AutovalidateMode.always;
+                          setState(() {
+                            autovalidateMode = AutovalidateMode.always;
+                          });
                         }
                       },
                     );
                   },
                 ),
                 const SizedBox(
-                  height: 12,
+                  height: 6,
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    S.of(context).AuthForgotPassword,
-                    style: AppStyles.styleMeduim16(context),
-                  ),
-                )
               ],
             ),
           ),

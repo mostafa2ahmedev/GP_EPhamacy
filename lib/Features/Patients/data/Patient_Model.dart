@@ -3,13 +3,13 @@ import 'package:gppharmacy/Features/Patients/data/Disease_Model.dart';
 class PatientModel {
   final String name;
   final int nationalId;
-  final int studentId;
+  final int? studentId;
   final String gender;
   final bool chronic;
   final String level;
   final String collegeName;
   final int? age;
-  final String phoneNumber;
+  final String? phoneNumber;
   final List<DiseaseModel> diseases;
 
   PatientModel(
@@ -20,9 +20,9 @@ class PatientModel {
       required this.chronic,
       required this.level,
       required this.collegeName,
-      required this.age,
-      required this.phoneNumber,
-      required this.studentId});
+      this.age,
+      this.phoneNumber,
+      this.studentId});
 
   factory PatientModel.fromJson(json) {
     List<DiseaseModel> x = [];
@@ -42,5 +42,23 @@ class PatientModel {
       diseases: x,
       studentId: json['student_id'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    List<Map<String, dynamic>> diseasesJson =
+        diseases.map((disease) => disease.toJson()).toList();
+
+    return {
+      'name': name,
+      'nationalid': nationalId,
+      'gender': gender,
+      'chronic': chronic,
+      'level': level,
+      'collegeName': collegeName,
+      'age': age,
+      'phone_number': phoneNumber,
+      'disease': diseasesJson,
+      'student_id': studentId,
+    };
   }
 }

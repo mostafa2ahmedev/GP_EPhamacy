@@ -9,14 +9,14 @@ class PrescriptionModel {
   final PrsPrescriptionCategory prescriptionCategory;
   final PatientModel patientModel;
   final List<MedicineModel> medicineModel;
-  final List<Usages>? usageMedicine;
+  // final List<Usages>? usageMedicine;
 
   PrescriptionModel(
       {required this.id,
       required this.diagnosis,
       required this.patientModel,
       required this.medicineModel,
-      required this.usageMedicine,
+      // required this.usageMedicine,
       required this.prescriptionCategory});
 
   factory PrescriptionModel.fromJson({required Map<String, dynamic> json}) {
@@ -24,10 +24,10 @@ class PrescriptionModel {
     for (var element in json['medicines']) {
       listOfMedicines.add(MedicineModel.fromjson(json: element));
     }
-    List<Usages>? usages = [];
+    List<UsagesPrescription>? usages = [];
     if (json['useageMedicines'] != null) {
       for (var element in json['useageMedicines']) {
-        usages.add(Usages.fromJson(json: element));
+        usages.add(UsagesPrescription.fromJson(json: element));
       }
     }
 
@@ -36,9 +36,19 @@ class PrescriptionModel {
       diagnosis: json['diagnosis'] ?? '',
       patientModel: PatientModel.fromJson(json['patient']),
       medicineModel: listOfMedicines,
-      usageMedicine: usages,
+      // usageMedicine: usages,
       prescriptionCategory: PrsPrescriptionCategory.fromJson(
           json: json['prsPrescriptionCategory']),
     );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'diagnosis': diagnosis,
+      'prsPrescriptionCategory': prescriptionCategory.toJson(),
+      'patient': patientModel.toJson(),
+      'medicines': medicineModel.map((medicine) => medicine.toJson()).toList(),
+      // 'useageMedicines': usageMedicine?.map((usage) => usage.toJson()).toList(),
+    };
   }
 }

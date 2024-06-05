@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:gppharmacy/Features/StoresBody/data/CollegesList/CollegesListModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/CollegesListCubit/colleges_state.dart';
 import 'package:gppharmacy/Utils/DioService.dart';
-import 'package:meta/meta.dart';
 
 class CollegesCubit extends Cubit<CollegesState> {
   CollegesCubit() : super(CollegesInitial());

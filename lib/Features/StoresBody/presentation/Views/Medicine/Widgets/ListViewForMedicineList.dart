@@ -4,8 +4,12 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Widge
 import 'package:gppharmacy/Utils/Widgets/CustomNoMatchingData.dart';
 
 class ListViewOfMedicineList extends StatelessWidget {
-  const ListViewOfMedicineList({super.key, required this.searchedList});
+  const ListViewOfMedicineList({
+    super.key,
+    required this.searchedList,
+  });
   final List<MedicineModel> searchedList;
+
   @override
   Widget build(BuildContext context) {
     return searchedList.isNotEmpty

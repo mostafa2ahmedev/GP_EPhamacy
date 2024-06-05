@@ -58,7 +58,7 @@ class _MobileHsrElmabe3atState extends State<MobileHsrElmabe3at> {
         children: [
           Text(
             S.of(context).HsrElmbe3at,
-            style: AppStyles.styleBold28(context),
+            style: AppStyles.styleBold32(context),
           ),
           const SizedBox(
             height: 24,

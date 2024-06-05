@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/StoresBody/data/Orders/Order_Model.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/OrdersCubitStates.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/AddNewCategoryMethod.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/BodyOfAddMedicineInOrder.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/CustomMedicineView.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
 
 import '../../../../../../Utils/AppStyles.dart';
@@ -26,16 +30,22 @@ class _AddNewImportsState extends State<AddNewImports> {
       execuseController;
   late GlobalKey<FormState> key;
   String? supplierValue;
-
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   void initState() {
     super.initState();
-
+    BlocProvider.of<OrdersCubit>(context).orderMedicines = [];
     supplierController = TextEditingController();
     dateController = TextEditingController();
     execuseController = TextEditingController();
     key = GlobalKey();
     BlocProvider.of<OrdersCubit>(context).getSupplierData();
+    BlocProvider.of<MedicineCubit>(context).getMedicineData(typeOfSearch: 4);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -47,18 +57,26 @@ class _AddNewImportsState extends State<AddNewImports> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "اضافه طلبيه جديده",
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
+              Text("اضافه طلبيه جديده",
+                  style: AppStyles.styleBold32(context)
+                      .copyWith(color: Colors.black)),
               const SizedBox(
                 height: 12,
               ),
               BlocConsumer<OrdersCubit, OrdersCubitStates>(
-                listener: (context, state) {},
+                listener: (context, state) {
+                  if (state is PostMedicineDataLoadingState) {
+                    MethodHelper.showToast(
+                        message: "تم اضافه الطلبيه بنجاح", type: true);
+                    Navigator.pop(context);
+                    BlocProvider.of<OrdersCubit>(context).getSupplierData();
+                  } else if (state is PostMedicineDataFailureState) {
+                    MethodHelper.showToast(
+                        message: "حدث خطأ اثناء الاضافه", type: false);
+                  }
+                },
                 builder: (context, state) {
+                  var orderCubit = BlocProvider.of<OrdersCubit>(context);
                   var supplierList =
                       BlocProvider.of<OrdersCubit>(context).suppliers;
                   return state is GetSupplierDataLoading
@@ -67,6 +85,7 @@ class _AddNewImportsState extends State<AddNewImports> {
                           ? const CustomFailureWidget()
                           : Form(
                               key: key,
+                              autovalidateMode: autovalidateMode,
                               child: Column(
                                 children: [
                                   Row(
@@ -103,11 +122,12 @@ class _AddNewImportsState extends State<AddNewImports> {
                                     height: 12,
                                   ),
                                   AuthTextField(
+                                    controller: supplierController,
                                     label: 'طلب الامداد',
-                                    suffixIcon: const Icon(Icons.abc),
+                                    suffixIcon: const Icon(Icons.numbers),
                                     validator: (data) {
                                       if (data == null || data.isEmpty) {
-                                        return 'This field cannot be empty';
+                                        return 'هذا الحقل مطلوب';
                                       }
                                       return null;
                                     },
@@ -116,11 +136,12 @@ class _AddNewImportsState extends State<AddNewImports> {
                                     height: 12,
                                   ),
                                   AuthTextField(
+                                    controller: execuseController,
                                     label: 'اذن التسليم',
-                                    suffixIcon: const Icon(Icons.abc),
+                                    suffixIcon: const Icon(Icons.receipt),
                                     validator: (data) {
                                       if (data == null || data.isEmpty) {
-                                        return 'This field cannot be empty';
+                                        return 'هذا الحقل مطلوب';
                                       }
                                       return null;
                                     },
@@ -129,11 +150,12 @@ class _AddNewImportsState extends State<AddNewImports> {
                                     height: 12,
                                   ),
                                   AuthTextField(
+                                    controller: dateController,
                                     label: 'تاريخ التوريد',
-                                    suffixIcon: const Icon(Icons.abc),
+                                    suffixIcon: const Icon(Icons.date_range),
                                     validator: (data) {
                                       if (data == null || data.isEmpty) {
-                                        return 'This field cannot be empty';
+                                        return 'هذا الحقل مطلوب';
                                       }
                                       return null;
                                     },
@@ -141,13 +163,27 @@ class _AddNewImportsState extends State<AddNewImports> {
                                   const SizedBox(
                                     height: 12,
                                   ),
+                                  if (state
+                                      is AssignOrderModelToImportListSuccessState)
+                                    Column(
+                                      children: List.generate(
+                                          orderCubit.orderMedicines.length,
+                                          (index) {
+                                        return CustomMedicineView(
+                                          orderMedicinesModel:
+                                              orderCubit.orderMedicines[index],
+                                        );
+                                      }),
+                                    ),
                                   Row(
                                     children: [
                                       Expanded(
                                         flex: 2,
                                         child: CustomButton(
                                           ontap: () {
-                                            //  addMedicineInPrescription(context,child: );
+                                            addMedicineInOrder(context,
+                                                child:
+                                                    const BodyOfMedicineAdditionInOrder());
                                           },
                                           buttonColor: Theme.of(context)
                                               .drawerTheme
@@ -169,7 +205,30 @@ class _AddNewImportsState extends State<AddNewImports> {
                                         child: CustomButton(
                                           ontap: () {
                                             if (key.currentState!.validate() &&
-                                                supplierValue != null) {}
+                                                supplierValue != null &&
+                                                orderCubit.orderMedicines
+                                                    .isNotEmpty) {
+                                              orderCubit.postMedicineImportData(
+                                                  orderModel: OrderModel(
+                                                      supplyrequest: int.parse(
+                                                          supplierController
+                                                              .text),
+                                                      deliveryrequest:
+                                                          int.parse(
+                                                              execuseController
+                                                                  .text),
+                                                      dateofsupply:
+                                                          dateController.text,
+                                                      supplier: orderCubit
+                                                          .getSupplierDataByName(
+                                                              name:
+                                                                  supplierValue!)!,
+                                                      orderMedicines: orderCubit
+                                                          .orderMedicines));
+                                            } else {
+                                              autovalidateMode =
+                                                  AutovalidateMode.always;
+                                            }
                                           },
                                           buttonColor: Colors.green,
                                           child: Text(
@@ -209,14 +268,5 @@ class _AddNewImportsState extends State<AddNewImports> {
         ),
       ),
     );
-  }
-}
-
-class BodyOfAddMedicineInPresription extends StatelessWidget {
-  const BodyOfAddMedicineInPresription({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }

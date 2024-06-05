@@ -5,7 +5,6 @@ import 'package:gppharmacy/Features/Auth/data/User_Model.dart';
 import 'package:gppharmacy/Utils/DioService.dart';
 import 'package:gppharmacy/Utils/Constant.dart';
 import 'package:gppharmacy/Utils/Shared_Prefrences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthCubit extends Cubit<AuthCubitState> {
   AuthCubit() : super(InitialAuthState());

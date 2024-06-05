@@ -42,7 +42,7 @@ class _WarehouseState extends State<Warehouse> {
         children: [
           Text(
             S.of(context).H3ohdeElm5zn,
-            style: AppStyles.styleBold28(context),
+            style: AppStyles.styleBold32(context),
           ),
           const SizedBox(
             height: 24,
@@ -50,16 +50,18 @@ class _WarehouseState extends State<Warehouse> {
           Row(
             children: [
               Expanded(
-                child: AuthTextField(
-                  onChanged: (value) {
-                    BlocProvider.of<WarehouseCubit>(context)
-                        .searchingOnWarehouseList(
-                            text: value, toggler: toggler);
-                  },
-                  label: 'ادخل $wayOfSearch',
-                  controller: controller,
-                  hintStyle: AppStyles.styleRegular16(context)
-                      .copyWith(color: Colors.grey),
+                child: Container(
+                  child: AuthTextField(
+                    onChanged: (value) {
+                      BlocProvider.of<WarehouseCubit>(context)
+                          .searchingOnWarehouseList(
+                              text: value, toggler: toggler);
+                    },
+                    label: 'ادخل $wayOfSearch',
+                    controller: controller,
+                    hintStyle: AppStyles.styleRegular16(context)
+                        .copyWith(color: Colors.grey),
+                  ),
                 ),
               ),
               const SizedBox(

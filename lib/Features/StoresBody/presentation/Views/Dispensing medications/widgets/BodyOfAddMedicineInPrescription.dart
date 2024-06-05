@@ -2,36 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
+import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
+import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit_State.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Orders/OrderMedicine_Model.dart';
+import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/OrdersCubitStates.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 
-class BodyOfMedicineAdditionInOrder extends StatefulWidget {
-  const BodyOfMedicineAdditionInOrder({super.key});
+class BodyOfAdditionMedicineInPrescription extends StatefulWidget {
+  const BodyOfAdditionMedicineInPrescription({super.key});
 
   @override
-  State<BodyOfMedicineAdditionInOrder> createState() =>
-      _BodyOfMedicineAdditionInOrderState();
+  State<BodyOfAdditionMedicineInPrescription> createState() =>
+      _BodyOfAdditionMedicineInPrescriptionState();
 }
 
-class _BodyOfMedicineAdditionInOrderState
-    extends State<BodyOfMedicineAdditionInOrder> {
-  late TextEditingController amountController;
-  late TextEditingController dateController;
+class _BodyOfAdditionMedicineInPrescriptionState
+    extends State<BodyOfAdditionMedicineInPrescription> {
   late TextEditingController priceController;
   late TextEditingController manufactureController;
-  String? medicineValue;
+
   late GlobalKey<FormState> key;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  MedicineModel? medicineModel;
 
   @override
   void initState() {
     super.initState();
-    amountController = TextEditingController();
-    dateController = TextEditingController();
+
     priceController = TextEditingController();
     manufactureController = TextEditingController();
     key = GlobalKey();
@@ -40,7 +41,7 @@ class _BodyOfMedicineAdditionInOrderState
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: BlocConsumer<OrdersCubit, OrdersCubitStates>(
+      child: BlocConsumer<MedicineCubit, MedicineState>(
         listener: (context, state) {},
         builder: (context, state) {
           return state is GetMedicineDataLoadingState
@@ -51,64 +52,23 @@ class _BodyOfMedicineAdditionInOrderState
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CustomDropDownButton(
-                        items: BlocProvider.of<MedicineCubit>(context)
-                            .medicinesList
-                            .map((e) => e.englishname)
-                            .toList(),
-                        isExpanded: true,
-                        onChanged: (newValue) {
+                      Autocomplete<MedicineModel>(
+                        optionsBuilder: (textEditingValue) {
+                          if (textEditingValue.text == "") {
+                            return Iterable<MedicineModel>.empty();
+                          }
+                          return BlocProvider.of<MedicineCubit>(context)
+                              .findMedicines(textEditingValue.text);
+                          // return BlocProvider.of<PateintCubit>(context)
+                          //     .findPatients(textEditingValue.text);
+                        },
+                        displayStringForOption: (MedicineModel medicine) =>
+                            medicine.englishname,
+                        onSelected: (option) {
                           setState(() {
-                            medicineValue = newValue;
+                            medicineModel = option;
                           });
                         },
-                        value: medicineValue,
-                        hint: 'اختر الدواء',
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      AuthTextField(
-                        controller: amountController,
-                        label: "الكميه",
-                        suffixIcon: const Icon(Icons.add_rounded),
-                        validator: (data) {
-                          if (data == null || data.isEmpty) {
-                            return 'This field cannot be empty';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      AuthTextField(
-                        controller: dateController,
-                        label: "تاريخ الصلاحيه",
-                        suffixIcon: const Icon(Icons.add_rounded),
-                        validator: (data) {
-                          if (data == null || data.isEmpty) {
-                            return 'This field cannot be empty';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      AuthTextField(
-                        controller: manufactureController,
-                        label: "الشركه المصنعه",
-                        suffixIcon: const Icon(Icons.add_rounded),
-                        validator: (data) {
-                          if (data == null || data.isEmpty) {
-                            return 'This field cannot be empty';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 12,
                       ),
                       AuthTextField(
                         controller: priceController,
@@ -129,20 +89,10 @@ class _BodyOfMedicineAdditionInOrderState
                           Expanded(
                             child: CustomButton(
                               ontap: () {
-                                if (key.currentState!.validate() &&
-                                    medicineValue != null) {
-                                  var medicineModel =
-                                      BlocProvider.of<MedicineCubit>(context)
-                                          .getMedicineByName(
-                                              name: medicineValue!);
-                                  BlocProvider.of<OrdersCubit>(context)
-                                      .assignMedicineToImportList(
-                                          orderModel: OrderMedicinesModel(
-                                    expirydate: dateController.text,
-                                    amount: int.parse(amountController.text),
-                                    price: int.parse(priceController.text),
-                                    medicine: medicineModel!,
-                                  ));
+                                if (key.currentState!.validate()) {
+                                  BlocProvider.of<PateintCubit>(context)
+                                      .assignMedicineToPrescriptionList(
+                                          medicineModel: medicineModel!);
                                   Navigator.pop(context);
                                 } else {
                                   setState(() {
@@ -166,8 +116,7 @@ class _BodyOfMedicineAdditionInOrderState
                           Expanded(
                             child: CustomButton(
                               ontap: () {
-                                if (key.currentState!.validate() &&
-                                    medicineValue != null) {}
+                                if (key.currentState!.validate()) {}
                                 Navigator.pop(context);
                               },
                               buttonColor: Colors.red,

@@ -81,7 +81,7 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
                   children: [
                     Text(
                       S.of(context).AddAccount,
-                      style: AppStyles.styleBold28(context),
+                      style: AppStyles.styleBold32(context),
                     ),
                   ],
                 ),
@@ -192,17 +192,16 @@ class _MobileAddAccountViewState extends State<MobileAddAccountView> {
                     state: state,
                     ontap: () {
                       if (key.currentState!.validate()) {
-                        setState(() {
-                          autovalidateMode = AutovalidateMode.always;
-                        });
                         BlocProvider.of<AddAccountCubit>(context).addAccount(
                             user: Users(
-                                userName: userNameController.text,
+                                username: userNameController.text,
                                 password: passwordController.text,
                                 authority: RoleController.text,
-                                phone: phoneController.text,
+                                phone: int.parse(phoneController.text),
                                 name: nameController.text,
                                 nationalId: nationalIdController.text));
+                      } else {
+                        autovalidateMode = AutovalidateMode.always;
                       }
                     }),
               ],

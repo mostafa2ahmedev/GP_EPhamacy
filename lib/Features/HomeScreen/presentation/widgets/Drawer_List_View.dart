@@ -43,8 +43,8 @@ class _DrawerListViewState extends State<DrawerListView> {
             return CustomDrawerDropDownButton(
               outerIndex: index,
               hint: index == 0
-                  ? S.of(context).HomeStores
-                  : S.of(context).HomePatients,
+                  ? BlocProvider.of<DrawerCubit>(context).hint1!
+                  : BlocProvider.of<DrawerCubit>(context).hint2!,
               dropDownItems: getNames(context)[index],
             );
           },

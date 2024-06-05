@@ -52,7 +52,8 @@ class _CustomDrawerDropDownButtonState
                     style: AppStyles.styleRegular16(context),
                   ),
                   isExpanded: true,
-                  style: AppStyles.styleBold16(context),
+                  style: AppStyles.styleSemiBold18(context)
+                      .copyWith(color: Colors.cyanAccent),
                   dropdownColor: Theme.of(context).cardColor,
                   value: widget.outerIndex == 0 ? cubit.data1 : cubit.data2,
                   items: MethodHelper.getDropDownItems(widget.dropDownItems),
@@ -60,6 +61,10 @@ class _CustomDrawerDropDownButtonState
                     if (cubit.data1 != value || cubit.data2 != value) {
                       MethodHelper.checkForTheIndex(widget.outerIndex, value,
                           context.read<DrawerCubit>(), context);
+                    } else if (cubit.data1 == value) {
+                      BlocProvider.of<DrawerCubit>(context).hint2 = "المرضي";
+                    } else if (cubit.data2 == value) {
+                      BlocProvider.of<DrawerCubit>(context).hint1 = "المخازن";
                     }
                   },
                 ),

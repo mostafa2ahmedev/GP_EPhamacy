@@ -8,25 +8,42 @@ class CustomDetailsItem extends StatelessWidget {
     required this.data,
     required this.icon,
   });
+
   final String note;
   final String data;
   final IconData icon;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Theme.of(context).cardColor,
-          ),
-          borderRadius: BorderRadius.circular(12)),
-      title: Row(
+        side: BorderSide(
+          color: Theme.of(context).drawerTheme.backgroundColor!,
+          width: 1.5,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('$note: '),
-          Text(
-            data,
-            style: AppStyles.styleMeduim20(context)
-                .copyWith(color: Theme.of(context).drawerTheme.backgroundColor),
-          )
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: '$note: ',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500, color: Colors.grey.shade900),
+                ),
+                TextSpan(
+                  text: data,
+                  style: AppStyles.styleMeduim20(context).copyWith(
+                    color: Theme.of(context).drawerTheme.backgroundColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
       leading: Icon(icon),

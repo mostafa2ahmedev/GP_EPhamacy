@@ -25,6 +25,10 @@ class Assets {
   /// assets/images/menu-burger.svg
   static const String imagesMenuBurger = "assets/images/menu-burger.svg";
 
+  /// Assets for imagesNatural
+  /// assets/images/natural.png
+  static const String imagesNatural = "assets/images/natural.png";
+
   /// Assets for imagesPharmacySvgrepoCom
   /// assets/images/pharmacy-svgrepo-com.svg
   static const String imagesPharmacySvgrepoCom = "assets/images/pharmacy-svgrepo-com.svg";

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gppharmacy/Features/AddAccount/data/cubit/add_account_state.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit_State.dart';
-import 'package:gppharmacy/Features/HomeScreen/presentation/Home_View.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/Utils/Color_Maneger.dart';
-import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class CustomButton extends StatelessWidget {
@@ -65,9 +62,14 @@ class AddAccountButton extends StatelessWidget {
 }
 
 class LoginButton extends StatelessWidget {
-  const LoginButton({super.key, required this.ontap, required this.state});
+  const LoginButton({
+    super.key,
+    required this.ontap,
+    required this.state,
+  });
   final VoidCallback ontap;
   final AuthCubitState state;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -81,8 +83,10 @@ class LoginButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        child: state is AddAccountLoading
-            ? const CircularProgressIndicator()
+        child: state is AuthLoadingState
+            ? const CircularProgressIndicator(
+                color: Colors.white,
+              )
             : Text(
                 S.of(context).AuthSignIn,
                 style: AppStyles.styleMeduim16(context)

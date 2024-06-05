@@ -15,6 +15,9 @@ class MedicineCubit extends Cubit<MedicineState> {
   List<MediniceCategory> categories = [];
   List<UnitModel> LargeUnits = [];
   List<UnitModel> smallUnits = [];
+  void resetState() {
+    emit(MedicineInitial());
+  }
 
   void getMedicineData({required int typeOfSearch}) async {
     medicinesList = [];
@@ -59,6 +62,7 @@ class MedicineCubit extends Cubit<MedicineState> {
         }
       }
     }
+
     emit(GetMedicineDataSuccessState());
   }
 
@@ -198,6 +202,25 @@ class MedicineCubit extends Cubit<MedicineState> {
       }
     }
     return catId;
+  }
+
+  MedicineModel? getMedicineByName({required String name}) {
+    MedicineModel? medicineModel;
+    for (var element in medicinesList) {
+      if (element.englishname == name) {
+        medicineModel = element;
+        break;
+      }
+    }
+    return medicineModel;
+  }
+
+  List<MedicineModel> findMedicines(String query) {
+    return medicinesList.where((medicine) {
+      final medicineLower = medicine.englishname.toLowerCase();
+      final queryLower = query.toLowerCase();
+      return medicineLower.contains(queryLower);
+    }).toList();
   }
 }
 ///pharmacy/medicines/mix

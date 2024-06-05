@@ -39,6 +39,7 @@ class CustomDropDownButton extends StatelessWidget {
           style: AppStyles.styleRegular14(context).copyWith(color: Colors.grey),
         ),
         items: MethodHelper.getDropDownItems(items),
+        style: AppStyles.styleBold20(context).copyWith(color: Colors.blue),
         onChanged: onChanged,
       ),
     );

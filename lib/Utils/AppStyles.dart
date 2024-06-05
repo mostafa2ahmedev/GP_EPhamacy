@@ -30,6 +30,15 @@ abstract class AppStyles {
     );
   }
 
+  static TextStyle styleBold20(BuildContext context) {
+    return TextStyle(
+      color: Colors.red,
+      fontSize: getResponsiveFontSize(context, fontSize: 20),
+      fontFamily: 'Montserrat',
+      fontWeight: FontWeight.w700,
+    );
+  }
+
   static TextStyle styleMeduim16(BuildContext context) {
     return TextStyle(
       color: Colors.white,
@@ -102,10 +111,28 @@ abstract class AppStyles {
     );
   }
 
+  static TextStyle styleBold32(BuildContext context) {
+    return TextStyle(
+        color: const Color(0xff064060),
+        fontSize: getResponsiveFontSize(context, fontSize: 32),
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.w800,
+        fontStyle: FontStyle.italic);
+  }
+
   static TextStyle styleBold28(BuildContext context) {
     return TextStyle(
         color: const Color(0xff064060),
         fontSize: getResponsiveFontSize(context, fontSize: 28),
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.w800,
+        fontStyle: FontStyle.italic);
+  }
+
+  static TextStyle styleBold35(BuildContext context) {
+    return TextStyle(
+        color: const Color(0xff064060),
+        fontSize: getResponsiveFontSize(context, fontSize: 35),
         fontFamily: 'Montserrat',
         fontWeight: FontWeight.w800,
         fontStyle: FontStyle.italic);
