@@ -23,10 +23,7 @@ class ChoosenView extends StatelessWidget {
                   style: AppStyles.styleBold28(context)
                       .copyWith(color: Colors.black)),
             ),
-            SizedBox(height: MediaQuery.sizeOf(context).height * 0.2),
-            Text('حدد خيارا:',
-                style: AppStyles.styleBold28(context)
-                    .copyWith(color: Colors.black)),
+            SizedBox(height: MediaQuery.sizeOf(context).height * 0.25),
             const SizedBox(
               height: 2,
             ),
