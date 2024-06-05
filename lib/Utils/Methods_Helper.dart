@@ -14,7 +14,6 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubi
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
-
 import 'package:gppharmacy/generated/l10n.dart';
 
 abstract class MethodHelper {
@@ -57,31 +56,38 @@ abstract class MethodHelper {
     if (outerIndex == 0) {
       cubit.outerSelectedIndex = 0;
       switch (data) {
-        case "حصر المبيعات" || "Sales inventory":
+        case "الاحصائيات":
           cubit.innerFirstSelectedIndex = 0;
+          cubit.data1 = S.of(context).HomeDashboard;
+          break;
+        case "حصر المبيعات" || "Sales inventory":
+          cubit.innerFirstSelectedIndex = 1;
           cubit.data1 = S.of(context).HsrElmbe3at;
-
           break;
         case "الادويه" || "Medicines":
-          cubit.innerFirstSelectedIndex = 1;
+          cubit.innerFirstSelectedIndex = 2;
           cubit.data1 = S.of(context).Medicines;
           BlocProvider.of<MedicineCubit>(context).resetState();
           break;
         case "عهدة المخزن" || "3ohdeElm5zn":
-          cubit.innerFirstSelectedIndex = 2;
+          cubit.innerFirstSelectedIndex = 3;
           cubit.data1 = S.of(context).H3ohdeElm5zn;
           break;
         case "الواردات" || "Imports":
-          cubit.innerFirstSelectedIndex = 3;
+          cubit.innerFirstSelectedIndex = 4;
           cubit.data1 = S.of(context).Imports;
           break;
         case "حصر الكليات" || "Colleges inventory":
-          cubit.innerFirstSelectedIndex = 4;
+          cubit.innerFirstSelectedIndex = 5;
           cubit.data1 = S.of(context).HsrElkolyat;
           break;
         case "صرف الادويه" || "SrfEladwya":
-          cubit.innerFirstSelectedIndex = 5;
+          cubit.innerFirstSelectedIndex = 6;
           cubit.data1 = S.of(context).SrfEladwya;
+          break;
+        case "عرض الاذونات":
+          cubit.innerFirstSelectedIndex = 7;
+          cubit.data1 = S.of(context).ExecuseView;
           break;
       }
       cubit.data2 = null;

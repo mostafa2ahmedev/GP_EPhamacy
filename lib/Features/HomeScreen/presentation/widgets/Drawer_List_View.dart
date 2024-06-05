@@ -20,12 +20,14 @@ class _DrawerListViewState extends State<DrawerListView> {
       var s = S.of(context);
       return [
         [
+          "الاحصائيات",
           s.HsrElmbe3at,
           s.Medicines,
           s.H3ohdeElm5zn,
           s.Imports,
           s.HsrElkolyat,
-          s.SrfEladwya
+          s.SrfEladwya,
+          "عرض الاذونات"
         ],
         [
           s.AllPatient,

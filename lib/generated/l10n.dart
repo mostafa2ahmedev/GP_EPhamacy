@@ -289,6 +289,16 @@ class S {
       args: [],
     );
   }
+
+  /// `View old orders`
+  String get ExecuseView {
+    return Intl.message(
+      'Permission View',
+      name: 'ExecuseView',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

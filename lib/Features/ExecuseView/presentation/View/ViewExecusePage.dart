@@ -1,9 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
+import 'package:gppharmacy/Features/ExecuseView/data/cubit/execuse_colleges_cubit.dart';
+import 'package:gppharmacy/Features/ExecuseView/data/cubit/execuse_colleges_state.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Widgets/ListViewForMedicineList.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryStates.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/CollegesList/widgets/ListTileForCollegesList.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/ListViewOfSalesInventory.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
@@ -11,38 +16,25 @@ import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomNoDataContainer.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
-class MobileMedicines extends StatefulWidget {
-  const MobileMedicines({super.key});
+class ExecuseView extends StatefulWidget {
+  const ExecuseView({super.key});
 
   @override
-  State<MobileMedicines> createState() => _MobileMedicinesState();
+  State<ExecuseView> createState() => _ExecuseViewState();
 }
 
-class _MobileMedicinesState extends State<MobileMedicines> {
+class _ExecuseViewState extends State<ExecuseView> {
   String wayOfSearch = 'اسم الدواء';
   String? typeValue;
-  late TextEditingController controller;
   int selectedItem = 0;
-  List<String> items = const [
-    'الأقراص',
-    'امبولات',
-    'منوعات',
-    'جميع الانواع',
+  List<String> items = [
+    'اسم الدواء',
+    'رقم الاذن',
+    'اسم الكليه',
+    'اسم الدواء باللغه العربيه'
   ];
-  String? inputText;
-  @override
-  void initState() {
-    super.initState();
-
-    controller = TextEditingController();
-    controller.addListener(() {
-      setState(() {});
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    var cubit = BlocProvider.of<MedicineCubit>(context);
     return Container(
       color: Colors.white,
       child: Padding(
@@ -51,7 +43,7 @@ class _MobileMedicinesState extends State<MobileMedicines> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              S.of(context).Medicines,
+              S.of(context).ExecuseView,
               style: AppStyles.styleBold32(context),
             ),
             const SizedBox(
@@ -60,17 +52,14 @@ class _MobileMedicinesState extends State<MobileMedicines> {
             Row(
               children: [
                 Expanded(
-                  child: CustomDropDownButton(
-                    isExpanded: true,
-                    items: const ['اسم الدواء', 'كود الدواء'],
-                    hint: 'ادخل $wayOfSearch',
-                    onChanged: (value) {
-                      setState(() {
-                        wayOfSearch = value!;
-                      });
-                    },
-                    value: wayOfSearch,
-                  ),
+                  child: AuthTextField(
+                      label: 'ادخل $wayOfSearch',
+                      onChanged: (value) {
+                        // cubit.searchingInMedicineDataList(
+                        //     typeOfSearch: wayOfSearch, searchedText: value);
+                      },
+                      hintStyle: AppStyles.styleRegular16(context)
+                          .copyWith(color: Colors.grey)),
                 ),
                 const SizedBox(
                   width: 5,
@@ -93,21 +82,7 @@ class _MobileMedicinesState extends State<MobileMedicines> {
               ],
             ),
             const SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: AuthTextField(
-                  label: 'ادخل $wayOfSearch',
-                  onChanged: (value) {
-                    cubit.searchingInMedicineDataList(
-                        typeOfSearch: wayOfSearch, searchedText: value);
-                  },
-                  hintStyle: AppStyles.styleRegular16(context)
-                      .copyWith(color: Colors.grey)),
-            ),
-            const SizedBox(
-              height: 16,
+              height: 24,
             ),
             Center(
               child: CustomButton(
@@ -116,8 +91,8 @@ class _MobileMedicinesState extends State<MobileMedicines> {
                     : ColorManeger.colorDisabled,
                 ontap: () {
                   if (typeValue != null) {
-                    BlocProvider.of<MedicineCubit>(context)
-                        .getMedicineData(typeOfSearch: selectedItem);
+                    BlocProvider.of<ExecuseCollegesCubit>(context)
+                        .getCollegesExecuse();
                   }
                 },
                 child: Text(
@@ -128,25 +103,23 @@ class _MobileMedicinesState extends State<MobileMedicines> {
               ),
             ),
             const SizedBox(
-              height: 24,
+              height: 20,
             ),
-            BlocBuilder<MedicineCubit, MedicineState>(
+            BlocBuilder<ExecuseCollegesCubit, ExecuseCollegesState>(
               builder: (context, state) {
-                if (state is GetMedicineDataLoadingState) {
+                if (state is ExecuseCollegesLoadingState) {
                   return const CustomLoadingIndicator();
                 }
-                if (state is GetMedicineDataSuccessState) {
-                  return ListViewOfMedicineList(
-                      searchedList:
-                          BlocProvider.of<MedicineCubit>(context).searchedList);
-                } else {
-                  return const CustomNoDataContainer();
+                if (state is ExecuseCollegesSuccessState) {
+                  return const ListViewForExecuseColleges();
                 }
+                return const CustomNoDataContainer();
               },
             )
           ],
         ),
       ),
     );
+    ;
   }
 }
