@@ -33,87 +33,92 @@ class _PatientViewState extends State<PatientView> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            S.of(context).AllPatient,
-            style: AppStyles.styleBold32(context),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: CustomDropDownButton(
-                  isExpanded: true,
-                  items: const [
-                    'الرقم القومي للطالب',
-                    'اسم الطالب',
-                  ],
-                  hint: 'الرقم القومي للطالب',
-                  onChanged: (value) {
-                    setState(() {
-                      wayOfSearch = value!;
-                    });
-                  },
-                  value: wayOfSearch,
-                ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: CustomDropDownButton(
-                  isExpanded: true,
-                  items: const ['الكل', 'مريض مزمن', 'مريض غير مزمن'],
-                  hint: 'اختر نوع المريض',
-                  onChanged: (value) {
-                    setState(() {
-                      typeOfDisease = value!;
-                    });
-                  },
-                  value: typeOfDisease,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60),
-            child: AuthTextField(
-              onChanged: (value) => BlocProvider.of<PateintCubit>(context)
-                  .searchByName(value, wayOfSearch, typeOfDisease),
-              controller: controller,
-              label: 'ادخل $wayOfSearch',
+    return Container(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              S.of(context).AllPatient,
+              style: AppStyles.styleBold32(context),
             ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          BlocBuilder<PateintCubit, PateintCubitState>(
-            builder: (context, state) {
-              if (state is PatientFaliureState) {
-                return const CustomFailureWidget();
-              } else if (state is PatientSuccessState) {
-                return ListViewOfPatient(
-                  patients: BlocProvider.of<PateintCubit>(context).searched,
-                );
-              } else if (state is PatientLoadingState) {
-                return const CustomLoadingIndicator();
-              } else {
-                return const CustomNoDataContainer();
-              }
-            },
-          )
-        ],
+            const SizedBox(
+              height: 24,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: CustomDropDownButton(
+                    isExpanded: true,
+                    items: const [
+                      'الرقم القومي للطالب',
+                      'اسم الطالب',
+                    ],
+                    hint: 'الرقم القومي للطالب',
+                    onChanged: (value) {
+                      setState(() {
+                        wayOfSearch = value!;
+                      });
+                    },
+                    value: wayOfSearch,
+                  ),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                  child: CustomDropDownButton(
+                    isExpanded: true,
+                    items: const ['الكل', 'مريض مزمن', 'مريض غير مزمن'],
+                    hint: 'اختر نوع المريض',
+                    onChanged: (value) {
+                      setState(() {
+                        typeOfDisease = value!;
+                      });
+                    },
+                    value: typeOfDisease,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 60),
+              child: AuthTextField(
+                onChanged: (value) => BlocProvider.of<PateintCubit>(context)
+                    .searchByName(value, wayOfSearch, typeOfDisease),
+                controller: controller,
+                label: 'ادخل $wayOfSearch',
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            BlocBuilder<PateintCubit, PateintCubitState>(
+              builder: (context, state) {
+                if (state is PatientFaliureState) {
+                  return const CustomFailureWidget();
+                } else if (state is PatientSuccessState) {
+                  return ListViewOfPatient(
+                    patients: BlocProvider.of<PateintCubit>(context).searched,
+                  );
+                } else if (state is PatientLoadingState) {
+                  return const CustomLoadingIndicator();
+                } else {
+                  return const CustomNoDataContainer();
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }

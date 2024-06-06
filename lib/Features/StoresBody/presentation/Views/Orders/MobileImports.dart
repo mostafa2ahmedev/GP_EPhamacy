@@ -34,69 +34,72 @@ class _MobileImportsState extends State<MobileImports> {
   @override
   Widget build(BuildContext context) {
     var orderCubit = BlocProvider.of<OrdersCubit>(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            S.of(context).ViewOldOrders,
-            style: AppStyles.styleBold32(context),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: AuthTextField(
-                  onChanged: (value) {
-                    orderCubit.searchOrders(value, wayOfSearch);
-                  },
-                  controller: controller,
-                  label: 'ادخل $wayOfSearch',
+    return Container(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              S.of(context).ViewOldOrders,
+              style: AppStyles.styleBold32(context),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: AuthTextField(
+                    onChanged: (value) {
+                      orderCubit.searchOrders(value, wayOfSearch);
+                    },
+                    controller: controller,
+                    label: 'ادخل $wayOfSearch',
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 12,
-              ),
-              Expanded(
-                child: CustomDropDownButton(
-                  isExpanded: true,
-                  items: const [
-                    'طلب الامداد',
-                    'اسم الدواء',
-                  ],
-                  hint: wayOfSearch,
-                  onChanged: (value) {
-                    setState(() {
-                      wayOfSearch = value!;
-                    });
-                  },
-                  value: wayOfSearch,
+                const SizedBox(
+                  width: 12,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          BlocBuilder<OrdersCubit, OrdersCubitStates>(
-            builder: (context, state) {
-              if (state is OrdersCubitFaulierStates) {
-                return const CustomFailureWidget();
-              } else if (state is OrdersCubitSuccessStates) {
-                return ListViewOfOrders(
-                  orders: orderCubit.searchedOrder,
-                );
-              } else if (state is OrdersCubitLoadingStates) {
-                return const CustomLoadingIndicator();
-              } else {
-                return const CustomNoDataContainer();
-              }
-            },
-          )
-        ],
+                Expanded(
+                  child: CustomDropDownButton(
+                    isExpanded: true,
+                    items: const [
+                      'طلب الامداد',
+                      'اسم الدواء',
+                    ],
+                    hint: wayOfSearch,
+                    onChanged: (value) {
+                      setState(() {
+                        wayOfSearch = value!;
+                      });
+                    },
+                    value: wayOfSearch,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            BlocBuilder<OrdersCubit, OrdersCubitStates>(
+              builder: (context, state) {
+                if (state is OrdersCubitFaulierStates) {
+                  return const CustomFailureWidget();
+                } else if (state is OrdersCubitSuccessStates) {
+                  return ListViewOfOrders(
+                    orders: orderCubit.searchedOrder,
+                  );
+                } else if (state is OrdersCubitLoadingStates) {
+                  return const CustomLoadingIndicator();
+                } else {
+                  return const CustomNoDataContainer();
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }

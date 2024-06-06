@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
-import 'package:gppharmacy/Features/Statistics/presentation/widgets/Custom_Drop_Down_Button.dart';
+import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/custom_drawer_list_view.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
 class DrawerListView extends StatefulWidget {
@@ -20,12 +20,14 @@ class _DrawerListViewState extends State<DrawerListView> {
       var s = S.of(context);
       return [
         [
+          "الاحصائيات",
           s.HsrElmbe3at,
           s.Medicines,
           s.H3ohdeElm5zn,
           s.Imports,
           s.HsrElkolyat,
-          s.SrfEladwya
+          s.SrfEladwya,
+          "عرض الاذونات"
         ],
         [
           s.AllPatient,

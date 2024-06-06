@@ -22,5 +22,6 @@
 "AllPatient":"All Patient",
 "AddNewPatient":"Add New Patient",
 "LogOut":"Log Out",
-"ViewOldOrders":"View old orders"
+"ViewOldOrders":"View old orders",
+"ExecuseView":"Permission View"
 }

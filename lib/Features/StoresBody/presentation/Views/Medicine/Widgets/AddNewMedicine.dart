@@ -141,7 +141,7 @@ class _AddNewMedicineState extends State<AddNewMedicine> {
                                       child: InkWell(
                                           onTap: () {
                                             addNewCategory(context,
-                                                text1: "اضافه دواء جديد",
+                                                text1: "اضافه نوع جديد",
                                                 text2: "اسم النوع",
                                                 index: 3);
                                           },

@@ -39,7 +39,8 @@ class _MobileHomeViewState extends State<MobileHomeView> {
       WareHouseBlocIntegrator(),
       MobileImports(),
       CollegesBlocIntegrator(),
-      DispensingMedicationsBlocIntegrator()
+      DispensingMedicationsBlocIntegrator(),
+      ExecuseCollegesCubitIntegrator(),
     ],
     [
       PatientView(),

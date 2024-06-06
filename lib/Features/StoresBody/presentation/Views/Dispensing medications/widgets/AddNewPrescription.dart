@@ -7,7 +7,6 @@ import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/Prescr
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/Dispensing%20medicationsCubit/dispensing_medications_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/BodyOfAddMedicineInPrescription.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
@@ -17,9 +16,8 @@ import '../../../../../Auth/Presentation/widgets/Auth_Text_Field.dart';
 import '../../../../../Auth/Presentation/widgets/Custom_Button.dart';
 import '../../../../data/DispensingMedications/prsPrescriptionCategory.dart';
 import '../../../Maneger/OrdersCubit/Orders_Cubit.dart';
-import '../../Orders/widgets/BodyOfAddMedicineInOrder.dart';
+
 import '../../Orders/widgets/CustomMedicineView.dart';
-import 'AddNewCategoryMethod.dart';
 
 class AddNewPrescription extends StatefulWidget {
   const AddNewPrescription({super.key});

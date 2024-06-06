@@ -43,106 +43,109 @@ class _MobileMedicinesState extends State<MobileMedicines> {
   @override
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<MedicineCubit>(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            S.of(context).Medicines,
-            style: AppStyles.styleBold32(context),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: CustomDropDownButton(
-                  isExpanded: true,
-                  items: const ['اسم الدواء', 'كود الدواء'],
-                  hint: 'ادخل $wayOfSearch',
-                  onChanged: (value) {
-                    setState(() {
-                      wayOfSearch = value!;
-                    });
-                  },
-                  value: wayOfSearch,
+    return Container(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              S.of(context).Medicines,
+              style: AppStyles.styleBold32(context),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: CustomDropDownButton(
+                    isExpanded: true,
+                    items: const ['اسم الدواء', 'كود الدواء'],
+                    hint: 'ادخل $wayOfSearch',
+                    onChanged: (value) {
+                      setState(() {
+                        wayOfSearch = value!;
+                      });
+                    },
+                    value: wayOfSearch,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: CustomDropDownButton(
-                  isExpanded: true,
-                  items: items,
-                  hint: 'اختر نوع الدواء',
-                  onChanged: (value) {
-                    setState(() {
-                      typeValue = value;
-                    });
+                const SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                  child: CustomDropDownButton(
+                    isExpanded: true,
+                    items: items,
+                    hint: 'اختر نوع الدواء',
+                    onChanged: (value) {
+                      setState(() {
+                        typeValue = value;
+                      });
 
-                    selectedItem = items.indexOf(value!) + 1;
-                  },
-                  value: typeValue,
+                      selectedItem = items.indexOf(value!) + 1;
+                    },
+                    value: typeValue,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
-            child: AuthTextField(
-                label: 'ادخل $wayOfSearch',
-                onChanged: (value) {
-                  cubit.searchingInMedicineDataList(
-                      typeOfSearch: wayOfSearch, searchedText: value);
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: AuthTextField(
+                  label: 'ادخل $wayOfSearch',
+                  onChanged: (value) {
+                    cubit.searchingInMedicineDataList(
+                        typeOfSearch: wayOfSearch, searchedText: value);
+                  },
+                  hintStyle: AppStyles.styleRegular16(context)
+                      .copyWith(color: Colors.grey)),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Center(
+              child: CustomButton(
+                buttonColor: (typeValue != null)
+                    ? Theme.of(context).drawerTheme.backgroundColor!
+                    : ColorManeger.colorDisabled,
+                ontap: () {
+                  if (typeValue != null) {
+                    BlocProvider.of<MedicineCubit>(context)
+                        .getMedicineData(typeOfSearch: selectedItem);
+                  }
                 },
-                hintStyle: AppStyles.styleRegular16(context)
-                    .copyWith(color: Colors.grey)),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Center(
-            child: CustomButton(
-              buttonColor: (typeValue != null)
-                  ? Theme.of(context).drawerTheme.backgroundColor!
-                  : ColorManeger.colorDisabled,
-              ontap: () {
-                if (typeValue != null) {
-                  BlocProvider.of<MedicineCubit>(context)
-                      .getMedicineData(typeOfSearch: selectedItem);
-                }
-              },
-              child: Text(
-                S.of(context).Search,
-                style: AppStyles.styleMeduim16(context)
-                    .copyWith(color: Colors.white),
+                child: Text(
+                  S.of(context).Search,
+                  style: AppStyles.styleMeduim16(context)
+                      .copyWith(color: Colors.white),
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          BlocBuilder<MedicineCubit, MedicineState>(
-            builder: (context, state) {
-              if (state is GetMedicineDataLoadingState) {
-                return const CustomLoadingIndicator();
-              }
-              if (state is GetMedicineDataSuccessState) {
-                return ListViewOfMedicineList(
-                    searchedList:
-                        BlocProvider.of<MedicineCubit>(context).searchedList);
-              } else {
-                return const CustomNoDataContainer();
-              }
-            },
-          )
-        ],
+            const SizedBox(
+              height: 24,
+            ),
+            BlocBuilder<MedicineCubit, MedicineState>(
+              builder: (context, state) {
+                if (state is GetMedicineDataLoadingState) {
+                  return const CustomLoadingIndicator();
+                }
+                if (state is GetMedicineDataSuccessState) {
+                  return ListViewOfMedicineList(
+                      searchedList:
+                          BlocProvider.of<MedicineCubit>(context).searchedList);
+                } else {
+                  return const CustomNoDataContainer();
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }

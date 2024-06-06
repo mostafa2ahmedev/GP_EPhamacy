@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Search": MessageLookupByLibrary.simpleMessage("Search"),
         "SidalyaEltlba": MessageLookupByLibrary.simpleMessage("SidalyaEltlba"),
         "SrfEladwya": MessageLookupByLibrary.simpleMessage("SrfEladwya"),
-        "ViewOldOrders": MessageLookupByLibrary.simpleMessage("View old orders")
+        "ViewOldOrders":
+            MessageLookupByLibrary.simpleMessage("View old orders"),
+        "ExecuseView": MessageLookupByLibrary.simpleMessage("Permission View"),
       };
 }

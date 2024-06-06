@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/ExecuseView/data/cubit/execuse_colleges_cubit.dart';
+import 'package:gppharmacy/Features/ExecuseView/presentation/View/ViewExecusePage.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/CollegesListCubit/colleges_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/Dispensing%20medicationsCubit/dispensing_medications_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
@@ -21,6 +23,20 @@ class SalesBlocIntegrator extends StatelessWidget {
         return SalesInventoryCubit();
       },
       child: const MobileHsrElmabe3at(),
+    );
+  }
+}
+
+class ExecuseCollegesCubitIntegrator extends StatelessWidget {
+  const ExecuseCollegesCubitIntegrator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return ExecuseCollegesCubit();
+      },
+      child: const ExecuseView(),
     );
   }
 }
