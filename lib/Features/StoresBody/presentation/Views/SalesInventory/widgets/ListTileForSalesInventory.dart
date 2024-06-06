@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/ExecuseView/data/ExecuseModel.dart';
+import 'package:gppharmacy/Features/ExecuseView/data/cubit/execuse_colleges_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/Sales%20inventoryModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/SalesInventoryCubit/SalesInventoryCubit.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
@@ -61,21 +62,18 @@ class ListTileForExecuse extends StatelessWidget {
   const ListTileForExecuse({
     super.key,
     required this.usageColleges,
+    required this.listUsage,
   });
   final UsageColleges usageColleges;
+  final List<UsageColleges> listUsage;
 
   @override
   Widget build(BuildContext context) {
-    var salesCubit = BlocProvider.of<SalesInventoryCubit>(context);
+    var execuseCubit = BlocProvider.of<ExecuseCollegesCubit>(context);
     return GestureDetector(
       onTap: () async {
-        await salesCubit.getSalesInventoryItemDetails(
-          barcode: usageColleges.collegeName ?? "",
-        );
-        MethodHelper.showDetailsItem(
-          context,
-          medicineModel: salesCubit.salesInventoryModelDetails!,
-        );
+        MethodHelper.showDetailsPermession(context,
+            usageCollege: usageColleges, usageList: listUsage);
       },
       child: CustomBorderForItems(
         child: ListTile(
@@ -88,26 +86,26 @@ class ListTileForExecuse extends StatelessWidget {
             ),
           ),
           subtitle: Text(
-            usageColleges.id.toString(),
+            usageColleges.date.toString(),
             softWrap: true,
             overflow: TextOverflow.ellipsis,
           ),
-          // trailing: Container(
-          //   height: 40,
-          //   width: 40,
-          //   decoration: BoxDecoration(
-          //     shape: BoxShape.circle,
-          //     color: Theme.of(context).drawerTheme.backgroundColor,
-          //   ),
-          //   child: Center(
-          //     child: Text(
-          //       salesInventoryModel.amount.toString(),
-          //       style: AppStyles.styleMeduim16(context),
-          //       softWrap: true,
-          //       overflow: TextOverflow.ellipsis,
-          //     ),
-          //   ),
-          // ),
+          trailing: Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Theme.of(context).drawerTheme.backgroundColor,
+            ),
+            child: Center(
+              child: Text(
+                usageColleges.id.toString(),
+                style: AppStyles.styleMeduim16(context),
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
         ),
       ),
     );

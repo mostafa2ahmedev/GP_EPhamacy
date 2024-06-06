@@ -58,6 +58,7 @@ class _ChoosenViewState extends State<ChoosenView> {
         var cubit = BlocProvider.of<DrawerCubit>(context);
         return Scaffold(
           key: scafoldKey,
+          resizeToAvoidBottomInset: false,
           appBar: HomeAppBar(scafoldKey: scafoldKey),
           drawer: CustomMobileDrawer(),
           backgroundColor: const Color.fromARGB(255, 1, 28, 49),

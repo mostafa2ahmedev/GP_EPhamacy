@@ -5,7 +5,7 @@ class UsageColleges {
   String? date;
   String? collegeName;
   List<CollegeUseageMedicines>? collegeUseageMedicines;
-  int? totalPrice;
+  double? totalPrice;
 
   UsageColleges(
       {this.id,

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:gppharmacy/Features/ExecuseView/data/ExecuseModel.dart';
 import 'package:gppharmacy/Features/ExecuseView/data/cubit/execuse_colleges_state.dart';
 
@@ -10,11 +11,12 @@ class ExecuseCollegesCubit extends Cubit<ExecuseCollegesState> {
   List<UsageColleges> usagesColleges = [];
   List<UsageColleges> searchedColleges = [];
   void getCollegesExecuse() async {
+    Response? response;
     usagesColleges = [];
     emit(ExecuseCollegesLoadingState());
     String url = '/pharmacy/collegeuseages';
     try {
-      var response = await DioService.getDate(url: url);
+      response = await DioService.getDate(url: url);
 
       for (var element in response.data) {
         usagesColleges.add(UsageColleges.fromJson(element));
@@ -23,6 +25,9 @@ class ExecuseCollegesCubit extends Cubit<ExecuseCollegesState> {
       searchedColleges = usagesColleges;
       emit(ExecuseCollegesSuccessState());
     } catch (e) {
+      print(e.toString());
+      print(response.toString());
+
       emit(ExecuseCollegesFailure());
     }
   }
@@ -65,7 +70,6 @@ class ExecuseCollegesCubit extends Cubit<ExecuseCollegesState> {
         }
       }
     }
-
     emit(ExecuseCollegesSuccessState());
   }
 }
