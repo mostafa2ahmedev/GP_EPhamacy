@@ -60,53 +60,6 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                     const AuthBackground(
                       borderColor: ColorManeger.lightPrimaryColor,
                     ),
-<<<<<<< HEAD
-                  ),
-                  hintText: S.of(context).AuthPassword,
-                  hintStyle: AppStyles.styleMeduim16(context),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                BlocConsumer<AuthCubit, AuthCubitState>(
-                  listener: (context, state) {
-                    if (state is SuccessAuthState) {
-                      Fluttertoast.showToast(
-                        msg: 'Welcome ${state.user}',
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.greenAccent[400],
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                      MethodHelper.navigateToWithRep(
-                          context, const ChoosenView());
-                    } else if (state is FaulierAuthState) {
-                      Fluttertoast.showToast(
-                        msg: state.errorMsg,
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0,
-                      );
-                    }
-                  },
-                  builder: (context, state) {
-                    return LoginButton(
-                      state: state,
-                      ontap: () {
-                        if (formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
-                          BlocProvider.of<AuthCubit>(context)
-                              .signIn(username!, password!);
-                        } else {
-                          setState(() {
-                            autovalidateMode = AutovalidateMode.always;
-                          });
-=======
                     const SizedBox(
                       height: 30,
                     ),
@@ -188,7 +141,6 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                             textColor: Colors.white,
                             fontSize: 16.0,
                           );
->>>>>>> 2cbd8335c3f10c825348ba492bce651a62221d40
                         }
                       },
                       builder: (context, state) {

@@ -36,8 +36,9 @@ class DispensingMedicationsCubit extends Cubit<DispensingMedicationsState> {
     } else if (indexToSearch == 3) {
       url = '/pharmacy/prescriptions';
       print(indexToSearch);
-    } else {
+    } else if (indexToSearch == 4) {
       print(indexToSearch);
+      emit(GetPrescriptionDataForSaleLoadingState());
       getPrescriptionDataForSrf();
     }
     try {
@@ -52,6 +53,7 @@ class DispensingMedicationsCubit extends Cubit<DispensingMedicationsState> {
       emit(GetPrescriptionDataSuccessState());
     } catch (e) {
       print(e.toString());
+
       emit(GetPrescriptionDataFailureState());
     }
   }
@@ -91,7 +93,6 @@ class DispensingMedicationsCubit extends Cubit<DispensingMedicationsState> {
   ///
   void getPrescriptionDataForSrf() async {
     try {
-      emit(GetPrescriptionDataForSaleLoadingState());
       var response = await DioService.getDate(url: '/pharmacy/useages');
 
       for (var element in response.data) {
