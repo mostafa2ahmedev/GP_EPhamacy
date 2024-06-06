@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Search": MessageLookupByLibrary.simpleMessage("بحث"),
         "SidalyaEltlba": MessageLookupByLibrary.simpleMessage("صيدليه الطلبه"),
         "SrfEladwya": MessageLookupByLibrary.simpleMessage("صرف الادويه"),
-        "ViewOldOrders": MessageLookupByLibrary.simpleMessage("عرض الطلبيات")
+        "ViewOldOrders": MessageLookupByLibrary.simpleMessage("عرض الطلبيات"),
+        "ExecuseView": MessageLookupByLibrary.simpleMessage("عرض الاذونات"),
       };
 }

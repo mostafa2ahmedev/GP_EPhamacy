@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
-import 'package:gppharmacy/Features/Auth/Presentation/Auth_View.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
+import 'package:gppharmacy/Features/Splash/splash_screen.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/Dispensing%20medicationsCubit/dispensing_medications_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
@@ -27,7 +27,11 @@ void main() async {
   bool? lang = SharedPref.getData(key: Constant.langConst);
   runApp(
     DevicePreview(
+<<<<<<< HEAD
       enabled: 1 == 1,
+=======
+      enabled: 1 == 0,
+>>>>>>> 2cbd8335c3f10c825348ba492bce651a62221d40
       builder: (context) {
         return GP_Pharmacy(
           mode: mode,
@@ -87,7 +91,10 @@ class GP_Pharmacy extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             title: 'GP_Pharmacy',
-            home: const AuthView(),
+            home: Scaffold(
+              body: const SplashScreen(),
+              backgroundColor: Colors.white,
+            ),
           );
         },
       ),

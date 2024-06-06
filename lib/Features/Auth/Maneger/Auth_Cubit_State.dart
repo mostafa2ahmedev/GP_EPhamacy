@@ -15,3 +15,9 @@ class FaulierAuthState extends AuthCubitState {
 
   FaulierAuthState({required this.errorMsg});
 }
+
+class ValidatingTokenLoading extends AuthCubitState {}
+
+class ValidatingTokenSuccess extends AuthCubitState {}
+
+class ValidatingTokenFailed extends AuthCubitState {}

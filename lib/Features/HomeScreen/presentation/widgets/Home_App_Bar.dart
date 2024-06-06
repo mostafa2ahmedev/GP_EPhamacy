@@ -18,7 +18,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         InkWell(
           onTap: () {
-            MethodHelper.navigateToWithRep(context, const NotificationView());
+            MethodHelper.navigateTo(context, const NotificationView());
           },
           child: SvgPicture.asset(Assets.imagesBell,
               colorFilter:

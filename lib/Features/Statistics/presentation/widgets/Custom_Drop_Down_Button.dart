@@ -64,7 +64,8 @@ class _CustomDrawerDropDownButtonState
                     } else if (cubit.data1 == value) {
                       BlocProvider.of<DrawerCubit>(context).hint2 = "المرضي";
                     } else if (cubit.data2 == value) {
-                      BlocProvider.of<DrawerCubit>(context).hint1 = "المخازن";
+                      BlocProvider.of<DrawerCubit>(context).hint1 =
+                          "المخازن-الاحصائيات";
                     }
                   },
                 ),

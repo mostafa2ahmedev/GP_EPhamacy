@@ -1,67 +1,113 @@
-import 'package:flutter/cupertino.dart';
+// ChoosenView implementation
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:gppharmacy/Features/CustomChoosenContainer.dart';
-import 'package:gppharmacy/Features/HomeScreen/presentation/Home_View.dart';
-import 'package:gppharmacy/Features/Notifications/presentation/Views/NotificationView.dart';
-import 'package:gppharmacy/Utils/AppStyles.dart';
-import 'package:gppharmacy/Utils/App_Images.dart';
-import 'package:gppharmacy/Utils/Methods_Helper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChoosenView extends StatelessWidget {
-  const ChoosenView({super.key});
+import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
+import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
+import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Custom_Drawer.dart';
+import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_App_Bar.dart';
+import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
+import 'package:gppharmacy/Features/Patients/Presentation/Views/Add_New_Patient.dart';
+import 'package:gppharmacy/Features/Patients/Presentation/Views/Patient_View.dart';
+import 'package:gppharmacy/Features/Statistics/presentation/widgets/CustomStatisticsView.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/AddNewPrescription.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Mobile_Medicines.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Widgets/AddNewMedicine.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/MobileImports.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/AddNewImports.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/FloatingNavigate.dart';
+import 'package:gppharmacy/Utils/Methods_Helper.dart';
+import 'package:gppharmacy/Utils/Widgets/BlocsIntegrator.dart';
+import 'package:gppharmacy/generated/l10n.dart';
+
+class ChoosenView extends StatefulWidget {
+  ChoosenView({super.key});
 
   @override
+  State<ChoosenView> createState() => _ChoosenViewState();
+}
+
+class _ChoosenViewState extends State<ChoosenView> {
+  final GlobalKey<ScaffoldState> scafoldKey = GlobalKey();
+  static const List<List<Widget>> bodyWidgets = [
+    [
+      CustomStatisticsView(),
+      SalesBlocIntegrator(),
+      MobileMedicines(),
+      WareHouseBlocIntegrator(),
+      MobileImports(),
+      CollegesBlocIntegrator(),
+      DispensingMedicationsBlocIntegrator(),
+      ExecuseCollegesCubitIntegrator(),
+    ],
+    [
+      PatientView(),
+      AddNewPatient(),
+    ],
+  ];
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          const SizedBox(height: 100),
-          Align(
-            alignment: AlignmentDirectional.topEnd,
-            child: Container(
-                height: MediaQuery.sizeOf(context).width * 0.25,
-                width: MediaQuery.sizeOf(context).width * 0.25,
-                child: Image.asset(Assets.imagesBenhaLogo)),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Text('صيدليه الطلبه',
-                    style: AppStyles.styleBold35(context)
-                        .copyWith(color: Colors.black)),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          CustomChoosenContainer(
-            ontap: () {},
-            text: 'الاحصائيات',
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          CustomChoosenContainer(
-            ontap: () {
-              MethodHelper.navigateTo(context, const HomeView());
-            },
-            text: 'الاداره',
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          CustomChoosenContainer(
-            ontap: () {
-              MethodHelper.navigateTo(context, const NotificationView());
-            },
-            text: 'الاشعارات',
-          ),
-          Spacer()
-        ]),
-      ),
+    return BlocConsumer<DrawerCubit, DrawerStates>(
+      listener: (context, state) {
+        if (state is DrawerSelectedIndexChanged) {
+          scafoldKey.currentState!.closeDrawer();
+        }
+      },
+      builder: (context, state) {
+        var cubit = BlocProvider.of<DrawerCubit>(context);
+        return Scaffold(
+          key: scafoldKey,
+          resizeToAvoidBottomInset: false,
+          appBar: HomeAppBar(scafoldKey: scafoldKey),
+          drawer: CustomMobileDrawer(),
+          backgroundColor: const Color.fromARGB(255, 1, 28, 49),
+          body: cubit.outerSelectedIndex == 0
+              ? bodyWidgets[cubit.outerSelectedIndex]
+                  [cubit.innerFirstSelectedIndex]
+              : bodyWidgets[cubit.outerSelectedIndex]
+                  [cubit.innerSecondSelectedIndex],
+          floatingActionButton: cubit.data1 == S.of(context).Medicines
+              ? FloatingNavigate(
+                  ontap: () =>
+                      MethodHelper.navigateTo(context, const AddNewMedicine()),
+                )
+              : cubit.data1 == S.of(context).Imports
+                  ? FloatingNavigate(
+                      ontap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddNewImports(),
+                        ),
+                      ).then((result) {
+                        if (result == true) {
+                          BlocProvider.of<OrdersCubit>(context)
+                              .fetchAllOrders();
+                        }
+                      }),
+                    )
+                  : cubit.data1 == S.of(context).SrfEladwya
+                      ? FloatingNavigate(
+                          ontap: () => MethodHelper.navigateTo(
+                              context, const AddNewPrescription()),
+                        )
+                      : cubit.data2 == S.of(context).AllPatient
+                          ? FloatingNavigate(
+                              ontap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddNewPatient(),
+                                ),
+                              ).then((result) {
+                                if (result == true) {
+                                  BlocProvider.of<PateintCubit>(context)
+                                      .fetchAllPateint();
+                                }
+                              }),
+                            )
+                          : null,
+        );
+      },
     );
   }
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Methods_Helper.dart';
-import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
 
 import '../../../../data/Orders/OrderMedicine_Model.dart';
 

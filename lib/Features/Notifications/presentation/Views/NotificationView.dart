@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Notifications/presentation/Maneger/cubit/notificaiton_state.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomFailureWidget.dart';
-import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../../Utils/AppStyles.dart';
 import '../Maneger/cubit/notificaiton_cubit.dart';
 import 'NotificationItem.dart';

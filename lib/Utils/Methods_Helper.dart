@@ -5,19 +5,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
+import 'package:gppharmacy/Features/ExecuseView/data/ExecuseModel.dart';
+import 'package:gppharmacy/Features/ExecuseView/data/cubit/execuse_colleges_cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
+import 'package:gppharmacy/Features/StoresBody/data/CollegesList/CollegesListModel.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Orders/OrderMedicine_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Orders/Order_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/AddNewImports.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/CustomMedicineView.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomDropDownButton.dart';
-
 import 'package:gppharmacy/generated/l10n.dart';
-import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 abstract class MethodHelper {
   static void navigateTo(BuildContext context, Widget widget) {
@@ -59,31 +61,38 @@ abstract class MethodHelper {
     if (outerIndex == 0) {
       cubit.outerSelectedIndex = 0;
       switch (data) {
-        case "حصر المبيعات" || "Sales inventory":
+        case "الاحصائيات":
           cubit.innerFirstSelectedIndex = 0;
+          cubit.data1 = S.of(context).HomeDashboard;
+          break;
+        case "حصر المبيعات" || "Sales inventory":
+          cubit.innerFirstSelectedIndex = 1;
           cubit.data1 = S.of(context).HsrElmbe3at;
-
           break;
         case "الادويه" || "Medicines":
-          cubit.innerFirstSelectedIndex = 1;
+          cubit.innerFirstSelectedIndex = 2;
           cubit.data1 = S.of(context).Medicines;
           BlocProvider.of<MedicineCubit>(context).resetState();
           break;
         case "عهدة المخزن" || "3ohdeElm5zn":
-          cubit.innerFirstSelectedIndex = 2;
+          cubit.innerFirstSelectedIndex = 3;
           cubit.data1 = S.of(context).H3ohdeElm5zn;
           break;
         case "الواردات" || "Imports":
-          cubit.innerFirstSelectedIndex = 3;
+          cubit.innerFirstSelectedIndex = 4;
           cubit.data1 = S.of(context).Imports;
           break;
         case "حصر الكليات" || "Colleges inventory":
-          cubit.innerFirstSelectedIndex = 4;
+          cubit.innerFirstSelectedIndex = 5;
           cubit.data1 = S.of(context).HsrElkolyat;
           break;
         case "صرف الادويه" || "SrfEladwya":
-          cubit.innerFirstSelectedIndex = 5;
+          cubit.innerFirstSelectedIndex = 6;
           cubit.data1 = S.of(context).SrfEladwya;
+          break;
+        case "عرض الاذونات":
+          cubit.innerFirstSelectedIndex = 7;
+          cubit.data1 = S.of(context).ExecuseView;
           break;
       }
       cubit.data2 = null;
@@ -270,6 +279,79 @@ abstract class MethodHelper {
                   ),
                   const SizedBox(
                     height: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  static showDetailsPermession(BuildContext context,
+      {required UsageColleges usageCollege,
+      required List<UsageColleges> usageList}) {
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+      showDragHandle: true,
+      isScrollControlled: true,
+      isDismissible: false,
+      elevation: 5,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.7,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // singlechild
+                  CustomDetailsItem(
+                    note: 'رقم اذن الصرف',
+                    data: usageCollege.id.toString(),
+                    icon: Icons.qr_code,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'الاسم الكليه',
+                    data: usageCollege.collegeName.toString(),
+                    icon: Icons.medication_outlined,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'تاريخ الصرف',
+                    data: usageCollege.date.toString(),
+                    icon: Icons.medication_outlined,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomMedicineView3(
+                      usageCollege: usageCollege.collegeUseageMedicines!),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "السعر الكلي",
+                        style: AppStyles.styleBold20(context)
+                            .copyWith(color: Colors.black),
+                      ),
+                      Container(
+                        color: Theme.of(context).drawerTheme.backgroundColor,
+                        child: Text(
+                          usageCollege.totalPrice.toString(),
+                          style: AppStyles.styleBold20(context)
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -599,6 +681,118 @@ class CustomCustom2 extends StatelessWidget {
           icon: Icons.price_change,
         ),
       ],
+    );
+  }
+}
+
+class CustomMedicineView3 extends StatefulWidget {
+  const CustomMedicineView3({super.key, required this.usageCollege});
+  final List<CollegeUseageMedicines> usageCollege;
+
+  @override
+  State<CustomMedicineView3> createState() => _CustomMedicineView3State();
+}
+
+class _CustomMedicineView3State extends State<CustomMedicineView3> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> medicineNames = widget.usageCollege
+        .map((e) => e.inventory!.orderMedicinesModel.medicine.englishname)
+        .toList();
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Material(
+                  child: Text(
+                    "الادويه المضافه في الاذن",
+                    style: AppStyles.styleBold20(context)
+                        .copyWith(color: Colors.grey.shade900),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 30,
+              ),
+              Expanded(
+                child: CustomDropDownButton2(
+                  items: medicineNames,
+                  hint: "الادويه",
+                  onChanged: (value) {
+                    setState(() {
+                      selectedIndex = medicineNames.indexOf(value!);
+                    });
+                  },
+                  value: medicineNames.isNotEmpty
+                      ? medicineNames[selectedIndex]
+                      : null,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          if (widget.usageCollege.isNotEmpty)
+            Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(color: Colors.green),
+                  child: CustomDetailsItemm(
+                    note: 'الدواء',
+                    data: widget.usageCollege[selectedIndex].inventory!
+                        .orderMedicinesModel.medicine.englishname,
+                    icon: Icons.medication_outlined,
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  decoration: BoxDecoration(color: Colors.green),
+                  child: CustomDetailsItemm(
+                    note: 'كود الدواء',
+                    data: widget.usageCollege[selectedIndex].inventory!
+                        .orderMedicinesModel.medicine.barcode
+                        .toString(),
+                    icon: Icons.medication_outlined,
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  decoration: BoxDecoration(color: Colors.green),
+                  child: CustomDetailsItemm(
+                    note: 'السعر',
+                    data: widget.usageCollege[selectedIndex].inventory!
+                        .orderMedicinesModel.price
+                        .toString(),
+                    icon: Icons.medication_outlined,
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  decoration: BoxDecoration(color: Colors.green),
+                  child: CustomDetailsItemm(
+                    note: 'الكميه',
+                    data: widget.usageCollege[selectedIndex].amount.toString(),
+                    icon: Icons.medication_outlined,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            )
+        ],
+      ),
     );
   }
 }

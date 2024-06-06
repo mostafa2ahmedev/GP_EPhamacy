@@ -29,4 +29,26 @@ class AuthCubit extends Cubit<AuthCubitState> {
     user = null;
     emit(InitialAuthState());
   }
+
+  validateToken() async {
+    String? token = SharedPref.getString(key: "token");
+
+    if (token != null) {
+      emit(ValidatingTokenLoading());
+
+      try {
+        Response response =
+            await DioService.getDate(url: "/auth/validate?token=$token");
+        if (response.statusCode == 200) {
+          emit(ValidatingTokenSuccess());
+        } else {
+          throw Exception("Not valid");
+        }
+      } on Exception catch (e) {
+        emit(ValidatingTokenFailed());
+      }
+    } else {
+      emit(ValidatingTokenFailed());
+    }
+  }
 }

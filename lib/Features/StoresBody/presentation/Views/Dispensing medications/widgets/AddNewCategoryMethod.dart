@@ -92,7 +92,6 @@ Future<dynamic> addNewCategory(BuildContext context,
 
 Future<dynamic> addMedicineInOrder(BuildContext context,
     {required Widget child}) {
-  String? value;
   return showDialog(
     barrierDismissible: false,
     context: context,
@@ -107,7 +106,6 @@ Future<dynamic> addMedicineInOrder(BuildContext context,
 
 Future<dynamic> addMedicineInPrescription(BuildContext context,
     {required Widget child}) {
-  String? value;
   return showDialog(
     barrierDismissible: false,
     context: context,

@@ -6,7 +6,6 @@ import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/Dispensing%2
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/Dispensing%20medicationsCubit/dispensing_medications_state.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
 import 'package:gppharmacy/Utils/Widgets/CustomFailureWidget.dart';
-import 'package:gppharmacy/Utils/Widgets/CustomLoadingIndicator.dart';
 
 import 'package:gppharmacy/generated/l10n.dart';
 
