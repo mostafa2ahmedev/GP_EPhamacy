@@ -138,13 +138,13 @@ class _MobileSrfEladwyaState extends State<MobileSrfEladwya> {
                       presriptionList:
                           BlocProvider.of<DispensingMedicationsCubit>(context)
                               .searchedPrescriptionList);
-                } else if (state is GetPrescriptionDataForSaleLoadingState) {
+                } else if (state is GetPrescriptionDataForSaleSuccessState) {
                   return ListViewOfDispensingMedicationsSale(
                       usagePrescription:
                           BlocProvider.of<DispensingMedicationsCubit>(context)
                               .usagePrescription);
                 } else if (state is GetPrescriptionDataFailureState) {
-                  return const CustomFailureWidget();
+                  return const CustomLoadingIndicator();
                 } else {
                   return const CustomNoDataContainer();
                 }

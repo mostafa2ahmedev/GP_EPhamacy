@@ -1,6 +1,7 @@
 // ChoosenView implementation
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/Dashboard/presentation/ChoosenPage.dart';
 
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
@@ -9,7 +10,6 @@ import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_App_Bar
 import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Add_New_Patient.dart';
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Patient_View.dart';
-import 'package:gppharmacy/Features/Statistics/presentation/widgets/CustomStatisticsView.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/AddNewPrescription.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Mobile_Medicines.dart';
@@ -21,18 +21,18 @@ import 'package:gppharmacy/Utils/Methods_Helper.dart';
 import 'package:gppharmacy/Utils/Widgets/BlocsIntegrator.dart';
 import 'package:gppharmacy/generated/l10n.dart';
 
-class ChoosenView extends StatefulWidget {
-  ChoosenView({super.key});
+class DashboardVieww extends StatefulWidget {
+  DashboardVieww({super.key});
 
   @override
-  State<ChoosenView> createState() => _ChoosenViewState();
+  State<DashboardVieww> createState() => _DashboardViewwState();
 }
 
-class _ChoosenViewState extends State<ChoosenView> {
+class _DashboardViewwState extends State<DashboardVieww> {
   final GlobalKey<ScaffoldState> scafoldKey = GlobalKey();
   static const List<List<Widget>> bodyWidgets = [
     [
-      CustomStatisticsView(),
+      ChoosenView(),
       SalesBlocIntegrator(),
       MobileMedicines(),
       WareHouseBlocIntegrator(),

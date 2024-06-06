@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:gppharmacy/Features/Dashboard/data/statistics_model/prescription_per_collage.dart';
 
 class CustomBarChart extends StatefulWidget {
-  const CustomBarChart({super.key});
+  const CustomBarChart({super.key, required this.prescriptionPerCollage});
+  final List<PrescriptionPerCollage> prescriptionPerCollage;
 
   @override
   State<CustomBarChart> createState() => _CustomBarChartState();
@@ -13,10 +15,15 @@ class _CustomBarChartState extends State<CustomBarChart> {
   late double minY;
   late double maxY;
   late double interval;
+  late final List<ChartData> chartData;
 
   @override
   void initState() {
     super.initState();
+    chartData = widget.prescriptionPerCollage
+        .map((e) => ChartData(e.collegeName!, e.count!.toDouble()))
+        .toList();
+
     _tooltip = TooltipBehavior(enable: true);
 
     // Calculate the minimum and maximum values from the chart data
@@ -47,6 +54,7 @@ class _CustomBarChartState extends State<CustomBarChart> {
               labelStyle: const TextStyle(
                 color: Colors.white,
               ),
+              labelRotation: 90, // Rotate labels vertically
             ),
             primaryYAxis: NumericAxis(
               minimum: minY,
@@ -60,7 +68,8 @@ class _CustomBarChartState extends State<CustomBarChart> {
               ColumnSeries<ChartData, String>(
                 dataSource: chartData,
                 color: Colors.blue,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(5)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(5)),
                 xValueMapper: (ChartData data, _) => data.x,
                 yValueMapper: (ChartData data, _) => data.y,
               ),
@@ -70,7 +79,7 @@ class _CustomBarChartState extends State<CustomBarChart> {
         Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: Text(
-            'Half yearly sales analysis',
+            'Prescription Per Collage',
             style: TextStyle(
               color: Colors.white,
               fontSize: 16,
@@ -81,15 +90,6 @@ class _CustomBarChartState extends State<CustomBarChart> {
       ],
     );
   }
-
-  final List<ChartData> chartData = [
-    ChartData('Jan', 9000),
-    ChartData('Feb', 13000),
-    ChartData('Mar', 6800),
-    ChartData('Apr', 4341),
-    ChartData('May', 7913),
-    ChartData('Jun', 2000),
-  ];
 }
 
 class ChartData {

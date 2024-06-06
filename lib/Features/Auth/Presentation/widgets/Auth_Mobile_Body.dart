@@ -8,6 +8,7 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Background.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/ChoosenPage.dart';
+import 'package:gppharmacy/Features/Dashboard/CustomWidgets/custom_loading_indicator.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
@@ -37,12 +38,12 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthCubitState>(listener: (context, state) {
       if (state is ValidatingTokenSuccess) {
-        MethodHelper.navigateTo(context, ChoosenView());
+        MethodHelper.navigateTo(context, DashboardVieww());
       }
     }, builder: (context, state) {
       if (state is ValidatingTokenLoading) {
         return Center(
-          child: CircularProgressIndicator(),
+          child: DottedProgressBar(),
         );
       }
       if (state is ValidatingTokenSuccess) {
@@ -130,7 +131,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
                             fontSize: 16.0,
                           );
                           MethodHelper.navigateToWithRep(
-                              context, ChoosenView());
+                              context, DashboardVieww());
                         } else if (state is FaulierAuthState) {
                           Fluttertoast.showToast(
                             msg: state.errorMsg,

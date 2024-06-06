@@ -6,15 +6,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/ExecuseView/data/ExecuseModel.dart';
-import 'package:gppharmacy/Features/ExecuseView/data/cubit/execuse_colleges_cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
-import 'package:gppharmacy/Features/StoresBody/data/CollegesList/CollegesListModel.dart';
+import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/UsagesModal.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Orders/OrderMedicine_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Orders/Order_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/SalesInventory/MedicineModel.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/MedicineCubit/cubit/medicine_cubit.dart';
-import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/AddNewImports.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Orders/widgets/CustomMedicineView.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/SalesInventory/widgets/CustomDetailsItem.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
@@ -279,6 +277,65 @@ abstract class MethodHelper {
                   ),
                   const SizedBox(
                     height: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  static showDetailsPrescription(BuildContext context,
+      {required UsagesPrescription usagePrescription}) {
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+      showDragHandle: true,
+      isScrollControlled: true,
+      isDismissible: false,
+      elevation: 5,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.7,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomDetailsItem(
+                    note: 'رقم الروشته',
+                    data: usagePrescription.id.toString(),
+                    icon: Icons.qr_code,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'تاريخ الصرف',
+                    data: usagePrescription.date,
+                    icon: Icons.medication_outlined,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'اسم المريض',
+                    data: usagePrescription.prescriptionModel.patientModel.name,
+                    icon: Icons.medication,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomDetailsItem(
+                    note: 'نوع الروشته',
+                    data: usagePrescription
+                        .prescriptionModel.prescriptionCategory.name,
+                    icon: Icons.medical_information,
+                  ),
+                  const SizedBox(
+                    height: 8,
                   ),
                 ],
               ),

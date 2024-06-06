@@ -43,9 +43,29 @@ class ListTileForDispensingMedicationsSale extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomBorderForItems(
-      child: ListTile(
-        title: Text(usagesPrescription.totalPrice.toString()),
-        subtitle: Text(usagesPrescription.id.toString()),
+      child: GestureDetector(
+        onTap: () {
+          MethodHelper.showDetailsPrescription(context,
+              usagePrescription: usagesPrescription);
+        },
+        child: ListTile(
+          title: Text(usagesPrescription.prescriptionModel.patientModel.name),
+          subtitle: Text(usagesPrescription.date),
+          trailing: Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Theme.of(context).drawerTheme.backgroundColor,
+            ),
+            child: Center(
+              child: Text(
+                '${usagesPrescription.id.toString()}',
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
