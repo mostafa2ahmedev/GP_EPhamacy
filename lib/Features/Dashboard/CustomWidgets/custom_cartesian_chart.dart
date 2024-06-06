@@ -1,31 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gppharmacy/Features/Dashboard/data/statistics_model/statistics_model.dart';
+import 'package:gppharmacy/Features/Dashboard/manager/Cubit/dashboard_cubit.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CartesianChart extends StatefulWidget {
-  const CartesianChart({Key? key}) : super(key: key);
-
+  const CartesianChart({super.key, required this.statisticsModel});
+  final StatisticsModel statisticsModel;
   @override
   State<CartesianChart> createState() => _CartesianChartState();
 }
 
 class _CartesianChartState extends State<CartesianChart> {
-  List<_SalesData> data = [
-    _SalesData('Jan', 110),
-    _SalesData('Feb', 28),
-    _SalesData('Mar', 65),
-    _SalesData('Apr', 32),
-    _SalesData('May', 40),
-    _SalesData('jun', 80)
-  ];
+  late List<double?> sales;
+  late List<_SalesData> data;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    sales = widget.statisticsModel.sales!.map((e) => e.price).toList();
+    data = [
+      _SalesData('Jan', sales[0] ?? 0),
+      _SalesData('Feb', sales[1] ?? 0),
+      _SalesData('Mar', sales[2] ?? 0),
+      _SalesData('Apr', sales[3] ?? 0),
+      _SalesData('May', sales[4] ?? 0),
+      _SalesData('Jun', sales[5] ?? 0),
+      _SalesData('Jul', sales[6] ?? 0),
+      _SalesData('Aug', sales[7] ?? 0),
+      _SalesData('Sep', sales[8] ?? 0),
+      _SalesData('Oct', sales[9] ?? 0),
+      _SalesData('Nov', sales[10] ?? 0),
+      _SalesData('Dec', sales[11] ?? 0),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     // Calculate minimum and maximum values for the y-axis
-    double minY = data.map((e) => e.sales).reduce((a, b) => a < b ? a : b) * 0.85;
-    double maxY = data.map((e) => e.sales).reduce((a, b) => a > b ? a : b) * 1.1;
+    double minY =
+        data.map((e) => e.sales).reduce((a, b) => a < b ? a : b) * 0.85;
+    double maxY =
+        data.map((e) => e.sales).reduce((a, b) => a > b ? a : b) * 1.1;
 
     return Column(
-      children: [ 
+      children: [
         SfCartesianChart(
           primaryXAxis: const CategoryAxis(
             labelStyle: TextStyle(color: Colors.white),
@@ -34,11 +54,13 @@ class _CartesianChartState extends State<CartesianChart> {
             labelStyle: const TextStyle(color: Colors.white),
             minimum: minY,
             maximum: maxY,
-            interval: (maxY - minY) / 5, // Adjust interval to get 6 lines including the start and end lines
+            interval: (maxY - minY) /
+                5, // Adjust interval to get 6 lines including the start and end lines
           ),
           tooltipBehavior: TooltipBehavior(
             enable: true,
-            textStyle: const TextStyle(color: Colors.white), // Customize tooltip text color
+            textStyle: const TextStyle(
+                color: Colors.white), // Customize tooltip text color
           ),
           series: <CartesianSeries<dynamic, dynamic>>[
             LineSeries<_SalesData, String>(
@@ -56,7 +78,7 @@ class _CartesianChartState extends State<CartesianChart> {
           ],
         ),
         const Text(
-          "Half yearly prescriptions analysis",
+          "yearly Sales analysis",
           style: TextStyle(
             color: Colors.white,
             fontSize: 16,

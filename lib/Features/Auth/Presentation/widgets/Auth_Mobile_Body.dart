@@ -7,7 +7,8 @@ import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit_State.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Background.dart';
 import 'package:gppharmacy/Features/Auth/Presentation/widgets/Auth_Text_Field.dart';
-import 'package:gppharmacy/Features/ChoosenPage.dart';
+import 'package:gppharmacy/Features/Dashboard/CustomWidgets/custom_loading_indicator.dart';
+import 'package:gppharmacy/Features/Dashboard/presentation/ChoosenPage.dart';
 import 'package:gppharmacy/Utils/AppStyles.dart';
 import 'package:gppharmacy/Utils/App_Images.dart';
 import 'package:gppharmacy/Utils/Color_Maneger.dart';
@@ -42,7 +43,7 @@ class _AuthMobileBodyState extends State<AuthMobileBody> {
     }, builder: (context, state) {
       if (state is ValidatingTokenLoading) {
         return Center(
-          child: CircularProgressIndicator(),
+          child: Center(child: DottedProgressBar()),
         );
       }
       if (state is ValidatingTokenSuccess) {

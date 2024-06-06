@@ -1,8 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:gppharmacy/Features/Dashboard/data/statistics_model/student_per_collage.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'dart:math' as math;
 
-class CustomPieChart extends StatelessWidget {
-  const CustomPieChart({super.key});
+class CustomPieChart extends StatefulWidget {
+  CustomPieChart({super.key, required this.studentPerCollage});
+  final List<StudentPerCollage> studentPerCollage;
+
+  @override
+  State<CustomPieChart> createState() => _CustomPieChartState();
+}
+
+class _CustomPieChartState extends State<CustomPieChart> {
+  late final List<_PieData> pieData;
+  late List<StudentPerCollage> states;
+  @override
+  void initState() {
+    super.initState();
+    //get total count of students
+    int totalStudents =
+        widget.studentPerCollage.fold(0, (sum, e) => sum + e.count!);
+
+    //sort the list
+    widget.studentPerCollage.sort((a, b) => b.count! - a.count!);
+
+    //get top five element
+    states = widget.studentPerCollage.sublist(0, 4);
+
+    states.add(new StudentPerCollage(
+        collage: "Other(${widget.studentPerCollage.length - 4})",
+        count: widget.studentPerCollage
+            .sublist(5)
+            .fold(0, (sum, e) => sum! + e.count!)));
+
+    pieData = states.map((e) {
+      int precentage = ((e.count! / totalStudents) * 100).floor();
+      String myString = e.collage!.replaceAll("كلية", "");
+      int maxLength = 17; // Maximum allowed characters
+
+      String limitedString = myString.substring(
+          0, maxLength < myString.length ? maxLength : myString.length);
+      return _PieData(limitedString, e.count!, "$precentage %");
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +56,8 @@ class CustomPieChart extends StatelessWidget {
         toggleSeriesVisibility: false,
         orientation: LegendItemOrientation.vertical,
         position: LegendPosition.right,
-        textStyle: TextStyle(color: Colors.white , fontSize: 14 , fontWeight: FontWeight.bold),
+        textStyle: TextStyle(
+            color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
       ),
       series: <PieSeries<_PieData, String>>[
         PieSeries<_PieData, String>(
@@ -28,7 +69,8 @@ class CustomPieChart extends StatelessWidget {
           dataLabelMapper: (_PieData data, _) => data.text,
           dataLabelSettings: DataLabelSettings(
             isVisible: true,
-            textStyle: TextStyle(color: Colors.white , fontSize: 14 , fontWeight: FontWeight.bold),
+            textStyle: TextStyle(
+                color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
           ),
         ),
       ],
@@ -42,12 +84,3 @@ class _PieData {
   final num yData;
   final String text;
 }
-
-final List<_PieData> pieData = [
-  _PieData('medicine', 30, '30%'),
-  _PieData('art', 20, '20%'),
-  _PieData('engineering', 15, '15%'),
-  _PieData('agriculture', 10, '10%'),
-  _PieData('geometry', 25, '20%'),
-  _PieData('other', 10, '5%'),
-];

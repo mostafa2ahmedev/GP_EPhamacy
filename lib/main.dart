@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gppharmacy/Features/Auth/Maneger/Auth_Cubit.dart';
+import 'package:gppharmacy/Features/Dashboard/manager/Cubit/dashboard_cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
 import 'package:gppharmacy/Features/Splash/splash_screen.dart';
@@ -65,6 +66,9 @@ class GP_Pharmacy extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => DispensingMedicationsCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DashboardCubit(),
         ),
       ],
       child: BlocConsumer<DrawerCubit, DrawerStates>(
