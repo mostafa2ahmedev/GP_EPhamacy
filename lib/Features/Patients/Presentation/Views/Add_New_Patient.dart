@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
 import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit_State.dart';
+import 'package:gppharmacy/Features/Patients/Presentation/Views/Patient_View.dart';
 
 import 'package:gppharmacy/Features/Patients/data/Disease_Model.dart';
 import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
@@ -85,6 +86,8 @@ class _AddNewPatientState extends State<AddNewPatient> {
                     MethodHelper.showToast(
                         message: "تم اضافه المريض بنجاح", type: true);
                     clearAllData();
+                    Navigator.pop(
+                        context, true); // Pass true to indicate success
                   } else if (state is PostPatientDataFailureState) {
                     MethodHelper.showToast(
                         message: "حدثت مشكله اثناء الاضافه", type: false);
@@ -421,9 +424,6 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                       collegeName:
                                                           collegeValue!),
                                                 );
-                                                BlocProvider.of<PateintCubit>(
-                                                        context)
-                                                    .fetchAllPateint();
                                               } else {
                                                 autovalidateMode =
                                                     AutovalidateMode.always;

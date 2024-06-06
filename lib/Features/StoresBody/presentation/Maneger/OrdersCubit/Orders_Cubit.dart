@@ -92,11 +92,16 @@ class OrdersCubit extends Cubit<OrdersCubitStates> {
 
   void postMedicineImportData({required OrderModel orderModel}) async {
     emit(PostMedicineDataLoadingState());
+    print("Adding Data");
+    print(orderModel.toJson());
     try {
       await DioService.postData(
           url: '/pharmacy/orders', data: orderModel.toJson());
+      print(orderModel.toJson());
       emit(PostMedicineDataSuccessState());
     } catch (e) {
+      print("Error");
+      print(e.toString());
       emit(PostMedicineDataFailureState());
     }
   }

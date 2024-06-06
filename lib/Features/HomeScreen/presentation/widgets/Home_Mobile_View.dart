@@ -6,8 +6,10 @@ import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit_State.dart';
 
 import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Custom_Drawer.dart';
 import 'package:gppharmacy/Features/HomeScreen/presentation/widgets/Home_App_Bar.dart';
+import 'package:gppharmacy/Features/Patients/Maneger/Patient_Cubit.dart';
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Add_New_Patient.dart';
 import 'package:gppharmacy/Features/Patients/Presentation/Views/Patient_View.dart';
+import 'package:gppharmacy/Features/StoresBody/presentation/Maneger/OrdersCubit/Orders_Cubit.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Dispensing%20medications/widgets/AddNewPrescription.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Mobile_Medicines.dart';
 import 'package:gppharmacy/Features/StoresBody/presentation/Views/Medicine/Widgets/AddNewMedicine.dart';
@@ -72,8 +74,17 @@ class _MobileHomeViewState extends State<MobileHomeView> {
                 )
               : cubit.data1 == S.of(context).Imports
                   ? FloatingNavigate(
-                      ontap: () => MethodHelper.navigateTo(
-                          context, const AddNewImports()),
+                      ontap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddNewImports(),
+                        ),
+                      ).then((result) {
+                        if (result == true) {
+                          BlocProvider.of<OrdersCubit>(context)
+                              .fetchAllOrders();
+                        }
+                      }),
                     )
                   : cubit.data1 == S.of(context).SrfEladwya
                       ? FloatingNavigate(
@@ -82,10 +93,17 @@ class _MobileHomeViewState extends State<MobileHomeView> {
                         )
                       : cubit.data2 == S.of(context).AllPatient
                           ? FloatingNavigate(
-                              ontap: () => MethodHelper.navigateTo(
+                              ontap: () => Navigator.push(
                                 context,
-                                const AddNewPatient(),
-                              ),
+                                MaterialPageRoute(
+                                  builder: (context) => AddNewPatient(),
+                                ),
+                              ).then((result) {
+                                if (result == true) {
+                                  BlocProvider.of<PateintCubit>(context)
+                                      .fetchAllPateint();
+                                }
+                              }),
                             )
                           : null,
         );

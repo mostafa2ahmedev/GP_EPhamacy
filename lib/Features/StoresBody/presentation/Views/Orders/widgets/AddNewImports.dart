@@ -70,13 +70,14 @@ class _AddNewImportsState extends State<AddNewImports> {
               BlocConsumer<OrdersCubit, OrdersCubitStates>(
                 listener: (context, state) {
                   if (state is PostMedicineDataLoadingState) {
-                    MethodHelper.showToast(
-                        message: "تم اضافه الطلبيه بنجاح", type: true);
-                    Navigator.pop(context);
                     BlocProvider.of<OrdersCubit>(context).getSupplierData();
                   } else if (state is PostMedicineDataFailureState) {
                     MethodHelper.showToast(
                         message: "حدث خطأ اثناء الاضافه", type: false);
+                  } else if (state is PostMedicineDataSuccessState) {
+                    MethodHelper.showToast(
+                        message: "تم اضافه الطلبيه بنجاح", type: true);
+                    Navigator.pop(context, true);
                   }
                 },
                 builder: (context, state) {

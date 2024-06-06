@@ -25,7 +25,6 @@ class _PatientViewState extends State<PatientView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     BlocProvider.of<PateintCubit>(context).fetchAllPateint();
     controller = TextEditingController();
@@ -33,6 +32,8 @@ class _PatientViewState extends State<PatientView> {
       setState(() {});
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
