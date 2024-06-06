@@ -1,7 +1,12 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
+<<<<<<< HEAD
 export "FLUTTER_ROOT=C:\src\flutter"
 export "FLUTTER_APPLICATION_PATH=E:\GPPpharmcy\gpppharmacy"
+=======
+export "FLUTTER_ROOT=C:\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Users\dell\Downloads\GP_EPhamacy-main\GP_EPhamacy-main"
+>>>>>>> cf3b4f218574261886454711ee743b5332accfc3
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"

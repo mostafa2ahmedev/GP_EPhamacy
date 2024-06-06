@@ -1,6 +1,11 @@
 // This is a generated file; do not edit or check into version control.
+<<<<<<< HEAD
 FLUTTER_ROOT=C:\src\flutter
 FLUTTER_APPLICATION_PATH=E:\GPPpharmcy\gpppharmacy
+=======
+FLUTTER_ROOT=C:\flutter
+FLUTTER_APPLICATION_PATH=C:\Users\dell\Downloads\GP_EPhamacy-main\GP_EPhamacy-main
+>>>>>>> cf3b4f218574261886454711ee743b5332accfc3
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_BUILD_DIR=build
 FLUTTER_BUILD_NAME=1.0.0
