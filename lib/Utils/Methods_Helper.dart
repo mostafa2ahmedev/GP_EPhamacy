@@ -8,6 +8,7 @@ import 'package:gppharmacy/Features/Auth/Presentation/widgets/Custom_Button.dart
 import 'package:gppharmacy/Features/ExecuseView/data/ExecuseModel.dart';
 import 'package:gppharmacy/Features/HomeScreen/Maneger/Home_Cubit.dart';
 import 'package:gppharmacy/Features/Patients/data/Patient_Model.dart';
+import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/UsageMedicine.dart';
 import 'package:gppharmacy/Features/StoresBody/data/DispensingMedications/UsagesModal.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Orders/OrderMedicine_Model.dart';
 import 'package:gppharmacy/Features/StoresBody/data/Orders/Order_Model.dart';
@@ -337,6 +338,26 @@ abstract class MethodHelper {
                   const SizedBox(
                     height: 8,
                   ),
+                  CustomRowForPrescription(
+                      medicines: usagePrescription.usageMedicines),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "السعر الكلي",
+                        style: AppStyles.styleBold20(context)
+                            .copyWith(color: Colors.black),
+                      ),
+                      Container(
+                        color: Theme.of(context).drawerTheme.backgroundColor,
+                        child: Text(
+                          usagePrescription.totalPrice.toString(),
+                          style: AppStyles.styleBold20(context)
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -652,28 +673,30 @@ class _CustomCustomState extends State<CustomCustom> {
       children: [
         Row(
           children: [
-            Padding(
-              padding: EdgeInsetsDirectional.symmetric(horizontal: 12),
-              child: Material(
-                child: Text(
-                  " الادويه المضافه ف الطلبيه ",
-                  style: AppStyles.styleBold20(context)
-                      .copyWith(color: Colors.grey.shade900),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 7),
+                child: Material(
+                  child: Text(
+                    "الادويه المضافه ف الطلبيه",
+                    style: AppStyles.styleBold20(context)
+                        .copyWith(color: Colors.grey.shade900),
+                  ),
                 ),
               ),
             ),
-            const SizedBox(
-              width: 30,
-            ),
-            CustomDropDownButton(
-              items: medicineList,
-              hint: "الادويه",
-              onChanged: (value) {
-                setState(() {
-                  index = medicineList.indexOf(value!);
-                });
-              },
-              value: medicineList.isNotEmpty ? medicineList[index] : null,
+            Expanded(
+              child: CustomDropDownButtonCustom(
+                items: medicineList,
+                hint: "الادويه",
+                onChanged: (value) {
+                  setState(() {
+                    index = medicineList.indexOf(value!);
+                  });
+                },
+                value: medicineList.isNotEmpty ? medicineList[index] : null,
+                isExpanded: true,
+              ),
             ),
           ],
         ),
@@ -840,6 +863,115 @@ class _CustomMedicineView3State extends State<CustomMedicineView3> {
                   child: CustomDetailsItemm(
                     note: 'الكميه',
                     data: widget.usageCollege[selectedIndex].amount.toString(),
+                    icon: Icons.medication_outlined,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            )
+        ],
+      ),
+    );
+  }
+}
+
+class CustomRowForPrescription extends StatefulWidget {
+  const CustomRowForPrescription({super.key, required this.medicines});
+  final List<UsageMedicine> medicines;
+
+  @override
+  State<CustomRowForPrescription> createState() =>
+      _CustomRowForPrescriptionState();
+}
+
+class _CustomRowForPrescriptionState extends State<CustomRowForPrescription> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> medicineNames =
+        widget.medicines.map((e) => e.medicineModel.englishname).toList();
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Material(
+                  child: Text(
+                    "الادويه المصروفه",
+                    style: AppStyles.styleBold20(context)
+                        .copyWith(color: Colors.grey.shade900),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 30,
+              ),
+              Expanded(
+                child: CustomDropDownButton2(
+                  items: medicineNames,
+                  hint: "الادويه",
+                  onChanged: (value) {
+                    setState(() {
+                      selectedIndex = medicineNames.indexOf(value!);
+                    });
+                  },
+                  value: medicineNames.isNotEmpty
+                      ? medicineNames[selectedIndex]
+                      : null,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          if (widget.medicines.isNotEmpty)
+            Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(color: Colors.green),
+                  child: CustomDetailsItemm(
+                    note: 'الدواء',
+                    data: widget
+                        .medicines[selectedIndex].medicineModel.englishname!,
+                    icon: Icons.medication_outlined,
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  decoration: BoxDecoration(color: Colors.green),
+                  child: CustomDetailsItemm(
+                    note: 'كود الدواء',
+                    data: widget.medicines[selectedIndex].medicineModel.barcode
+                        .toString(),
+                    icon: Icons.medication_outlined,
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  decoration: BoxDecoration(color: Colors.green),
+                  child: CustomDetailsItemm(
+                    note: 'السعر',
+                    data: widget.medicines[selectedIndex].price.toString(),
+                    icon: Icons.medication_outlined,
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Container(
+                  decoration: BoxDecoration(color: Colors.green),
+                  child: CustomDetailsItemm(
+                    note: 'الكميه',
+                    data: widget.medicines[selectedIndex].amount.toString(),
                     icon: Icons.medication_outlined,
                   ),
                 ),

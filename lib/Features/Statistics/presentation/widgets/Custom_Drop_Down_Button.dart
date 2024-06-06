@@ -42,7 +42,7 @@ class _CustomDrawerDropDownButtonState
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: DropdownButton<String>(
-                  iconEnabledColor: Theme.of(context).iconTheme.color,
+                  iconEnabledColor: Colors.grey.withOpacity(0.3),
                   elevation: 0,
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   icon: const Icon(Icons.arrow_drop_down),
@@ -53,7 +53,7 @@ class _CustomDrawerDropDownButtonState
                   ),
                   isExpanded: true,
                   style: AppStyles.styleSemiBold18(context)
-                      .copyWith(color: Colors.cyanAccent),
+                      .copyWith(color: Colors.white),
                   dropdownColor: Theme.of(context).cardColor,
                   value: widget.outerIndex == 0 ? cubit.data1 : cubit.data2,
                   items: MethodHelper.getDropDownItems(widget.dropDownItems),

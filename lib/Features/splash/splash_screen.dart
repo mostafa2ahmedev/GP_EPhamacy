@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(
-          height: 60,
+          height: 80,
         ),
         Expanded(
           child: AnimatedSplashScreen(
@@ -62,6 +62,9 @@ class _SplashScreenState extends State<SplashScreen>
             nextScreen: Scaffold(body: const AuthMobileBody()),
             backgroundColor: Color.fromARGB(255, 255, 255, 255),
           ),
+        ),
+        SizedBox(
+          height: 10,
         ),
         SlideTransition(
           position: _animation,

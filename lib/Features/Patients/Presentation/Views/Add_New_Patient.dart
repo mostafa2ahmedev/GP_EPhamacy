@@ -70,6 +70,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).chipTheme.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Column(
@@ -114,14 +115,14 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                       },
                                       controller: name,
                                       label: 'اسم الطالب (عربي)',
-                                      suffixIcon: const Icon(Icons.language),
+                                      suffixIcon: const Icon(Icons.person),
                                     ),
                                     const SizedBox(height: 12),
                                     AuthTextField(
                                       keyboardType: TextInputType.number,
                                       controller: studentId,
                                       label: 'الرقم الجامعي',
-                                      suffixIcon: const Icon(Icons.abc),
+                                      suffixIcon: const Icon(Icons.numbers),
                                       validator: (v) {
                                         if (v?.isEmpty ?? true) {
                                           return 'ادخل الرقم الجامعي';
@@ -140,7 +141,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                       },
                                       controller: phoneNubmer,
                                       label: 'رقم الهاتف',
-                                      suffixIcon: const Icon(Icons.abc),
+                                      suffixIcon: const Icon(Icons.numbers),
                                     ),
                                     const SizedBox(height: 12),
                                     AuthTextField(
@@ -153,7 +154,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                       controller: nationalId,
                                       keyboardType: TextInputType.number,
                                       label: 'الرقم القومي',
-                                      suffixIcon: const Icon(Icons.abc),
+                                      suffixIcon: const Icon(Icons.numbers),
                                     ),
                                     const SizedBox(height: 12),
                                     AuthTextField(
@@ -166,7 +167,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                       },
                                       controller: age,
                                       label: 'السن',
-                                      suffixIcon: const Icon(Icons.abc),
+                                      suffixIcon: const Icon(Icons.numbers),
                                     ),
                                     const SizedBox(height: 12),
                                     FormField<String>(
